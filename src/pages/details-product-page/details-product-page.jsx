@@ -1,5 +1,5 @@
-import DetailsProductMobilePage from "./details-product-mobile-page";
-import DetailsProductDekstopPage from "./details-product-dekstop-page";
+import DetailsProductDekstopPage from "../../features/details-product/details-product-dekstop-page";
+import DetailsProductMobilePage from "../../features/details-product/details-product-mobile-page";
 import { isMobile } from "react-device-detect";
 
 const DetailsProductPage = () => {

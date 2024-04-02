@@ -16,9 +16,7 @@ const HomePageMainCategoriesTab = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          import.meta.env.VITE_API_URL + `products?limit=${limitValue}`
-        );
+        const { data } = await axios.get(import.meta.env.VITE_API_URL + `products?limit=${limitValue}`);
         setProductData(data.data);
       } catch (error) {
         console.log(error);
@@ -33,11 +31,7 @@ const HomePageMainCategoriesTab = () => {
       <NavigationCategoriesTabComponent currCategory={setCurrCategory} />
       <div className="w-[90%]  mx-auto   mt-5  flex flex-col items-center gap-y-10">
         {/* card product display */}
-        <div
-          className={`flex flex-wrap w-full gap-5 ${
-            isMobile <= 1024 && "justify-center"
-          } `}
-        >
+        <div className={`flex flex-wrap w-full gap-5 ${isMobile <= 1024 && "justify-center"} `}>
           {productData &&
             productData.map((item) => (
               <CardProductDisplay
@@ -46,8 +40,7 @@ const HomePageMainCategoriesTab = () => {
                 productTitle={item.name}
                 price={item.price}
                 rating={(
-                  item.review.reduce((acc, curr) => acc + curr.rating, 0) /
-                  item.review.length
+                  item.review.reduce((acc, curr) => acc + curr.rating, 0) / item.review.length
                 ).toFixed(1)}
                 totalSold={item.total_sold}
                 imageUrl={item.images[0].img_url}

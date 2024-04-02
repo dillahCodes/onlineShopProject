@@ -7,7 +7,7 @@ import DetailsProductDekstopInfo from "./details-product-desktop-info";
 import DetailsProductDekstopProductCountAndMessage from "./details-product-dekstop-product-count-and-message";
 import DetailsProductDekstopRatingThisProduct from "./details-product-desktop-rating-this-product";
 import DetailsProductRecomendedProducts from "./details-product-recomended-products";
-import PageLoader from "./page-loader";
+import PageLoader from "../../pages/details-product-page/page-loader";
 
 const DetailsProductDekstopPage = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -39,21 +39,15 @@ const DetailsProductDekstopPage = () => {
           <div className="flex gap-x-5">
             <DetailsProductDekstopPhoto photoData={currentProduct?.images} />
             <div className="flex flex-col gap-5">
-              <DetailsProductDekstopInfo
-                currentProductData={currentProduct ? currentProduct : null}
-              />
+              <DetailsProductDekstopInfo currentProductData={currentProduct ? currentProduct : null} />
             </div>
           </div>
           <div className="flex flex-col w-full gap-y-5">
-            <DetailsProductDekstopRatingThisProduct
-              currentProductData={currentProduct}
-            />
+            <DetailsProductDekstopRatingThisProduct currentProductData={currentProduct} />
           </div>
         </div>
         <div className="sticky top-5 h-fit border-[2px] rounded-md p-5">
-          <DetailsProductDekstopProductCountAndMessage
-            currentProductData={currentProduct}
-          />
+          <DetailsProductDekstopProductCountAndMessage currentProductData={currentProduct} />
         </div>
       </div>
       <div className="w-full rounded-md h-fit">

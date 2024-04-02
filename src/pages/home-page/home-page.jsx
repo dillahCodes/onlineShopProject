@@ -1,8 +1,8 @@
-import HeroPageSelider from "./home-page-hero-slider";
-import HomePageMainCategoriesTab from "./home-page-main-categories-tab";
-import HomePageTopUpTabs from "./home-page-top-up-tabs";
-import HomePageProdutcsCategories from "./home-page-products-categories";
 import { isMobile } from "react-device-detect";
+import HeroPageSelider from "../../features/home/home-page-hero-slider";
+import HomePageMainCategoriesTab from "../../features/home/home-page-main-categories-tab";
+import HomePageTopUpTabs from "../../features/home/home-page-top-up-tabs";
+import HomePageProdutcsCategories from "../../features/home/home-page-products-categories";
 
 const HomePage = () => {
   return (

@@ -1,9 +1,9 @@
 import { isMobile } from "react-device-detect";
-import AllProductReviewsMobile from "./all-product-reviews-mobile";
-import AllProductReviewsDesktop from "./all-product-reviews-desktop";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AllProductReviewsMobile from "../../features/all-product-reviews/all-product-reviews-mobile";
+import AllProductReviewsDesktop from "../../features/all-product-reviews/all-product-reviews-desktop";
 
 const AllProductReviewsPage = () => {
   const [currentProductData, setCurrentProductData] = useState(null);

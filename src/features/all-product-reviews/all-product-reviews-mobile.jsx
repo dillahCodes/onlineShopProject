@@ -5,12 +5,12 @@ import { IoIosArrowRoundBack, IoIosStar } from "react-icons/io";
 import PropTypes from "prop-types";
 import ButtonComponent from "../../components/ui/button-component";
 import BottomDrawer from "../../components/ui/bottom-drawer";
-import RatingStatistics from "../../components/ui/rating-statistics";
 import { IoClose } from "react-icons/io5";
-import "./style/all-product-reviews-mobile.css";
 import { isMobile } from "react-device-detect";
 import { IoIosArrowDown } from "react-icons/io";
 import CommnetsComponent from "../../components/ui/comments-component";
+import RatingStatistics from "../../components/ui/rating-statistics";
+import "./style/all-product-reviews-mobile.css";
 
 const menuButtons = ["foto & video", "rating", "variant", "topik", "urutkan"];
 const sortFilterMenu = ["rating tertinggi", "rating terendah", "paling baru", "paling membantu"];
