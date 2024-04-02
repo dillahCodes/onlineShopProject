@@ -3,10 +3,10 @@ import MainLayout from "../layouts/main-layout";
 import HomePage from "../pages/home-page/home-page";
 import DetailsProductLayout from "../layouts/details-product-layout";
 import DetailsProductPage from "../pages/details-product-page/details-product-page";
-import AllProductReviewsPage from "../pages/all-product-reviews/all-product-reviews-page";
 import AllProductReviewsLayout from "../layouts/all-product-reviews-layout";
 import LoginPage from "../pages/login-page/login-page";
 import RegisterPage from "../pages/register-page/register-page";
+import AllProductReviewsPage from "../pages/all-product-reviews-page/all-product-reviews-page";
 
 const routers = createBrowserRouter([
   {
