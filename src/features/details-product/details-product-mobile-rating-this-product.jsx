@@ -43,21 +43,23 @@ const DetailsProductMobileRatingThisProduct = ({ productData }) => {
           </ButtonComponent>
         </div>
         {/* star and rating */}
-        <div className="flex w-full mt-3 gap-x-2 font-space-grotesk">
-          <div className="flex items-center text-lg font-bold gap-x-1">
-            <div>
-              <IoIosStar />
+        {reviewData.length !== 0 && (
+          <div className="flex w-full mt-3 gap-x-2 font-space-grotesk">
+            <div className="flex items-center text-lg font-bold gap-x-1">
+              <div>
+                <IoIosStar />
+              </div>
+              <span>{getAverageRating()}</span>
             </div>
-            <span>{getAverageRating()}</span>
+            <div className="flex items-center gap-x-1">
+              <span>{getProductRatingLength()} rating</span>
+              <span>•</span>
+              <span>{getReviewLength()} ulasan</span>
+            </div>
           </div>
-          <div className="flex items-center gap-x-1">
-            <span>{getProductRatingLength()} rating</span>
-            <span>•</span>
-            <span>{getReviewLength()} ulasan</span>
-          </div>
-        </div>
+        )}
         {/* user review image */}
-        <PhotoCommnentsSlider />
+        {reviewData.length !== 0 && <PhotoCommnentsSlider />}
         {/* only 1 best review  for display */}
         {reviewData.length !== 0 && (
           <motion.div
