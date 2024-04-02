@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import FormAuthLogin from "../components/form/form-auth-login";
+import FormAuthLogin from "../../components/form/form-auth-login";
 
 const LoginPage = () => {
   return (

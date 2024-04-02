@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import FormAuthRegister from "../components/form/form-auth-register";
+import FormAuthRegister from "../../components/form/form-auth-register";
 
 const RegisterPage = () => {
   return (
