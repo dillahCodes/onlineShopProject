@@ -3,8 +3,10 @@ import ButtonComponent from "../../components/ui/button-component";
 import { IoIosStar } from "react-icons/io";
 import { AiOutlineCamera } from "react-icons/ai";
 import { TiMessages } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 const DetailsProductMobileButtonsInfo = ({ productData }) => {
+  const navigate = useNavigate();
   const getProductRatingLength = () => {
     return productData && productData?.review?.filter((review) => review.rating !== 0, 0).length;
   };
@@ -22,6 +24,7 @@ const DetailsProductMobileButtonsInfo = ({ productData }) => {
       <span className="capitalize font-space-grotesk">terjual 0 rb+</span>
       <div className="flex flex-wrap w-full gap-x-3">
         <ButtonComponent
+          onClick={() => navigate(`/product/${productData.product_id}/reviews`)}
           icon={<IoIosStar className="text-xl" />}
           className={"flex items-center gap-x-1"}
         >
