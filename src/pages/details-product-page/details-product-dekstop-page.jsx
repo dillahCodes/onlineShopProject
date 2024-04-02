@@ -16,7 +16,7 @@ const DetailsProductDekstopPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(`http://localhost:8080/v1/products/${productId}`)
+        .get(import.meta.env.VITE_API_URL + `products/${productId}`)
         .then(function (response) {
           setCurrentProduct(response.data.data);
         })
@@ -39,15 +39,21 @@ const DetailsProductDekstopPage = () => {
           <div className="flex gap-x-5">
             <DetailsProductDekstopPhoto photoData={currentProduct?.images} />
             <div className="flex flex-col gap-5">
-              <DetailsProductDekstopInfo currentProductData={currentProduct ? currentProduct : null} />
+              <DetailsProductDekstopInfo
+                currentProductData={currentProduct ? currentProduct : null}
+              />
             </div>
           </div>
           <div className="flex flex-col w-full gap-y-5">
-            <DetailsProductDekstopRatingThisProduct currentProductData={currentProduct} />
+            <DetailsProductDekstopRatingThisProduct
+              currentProductData={currentProduct}
+            />
           </div>
         </div>
         <div className="sticky top-5 h-fit border-[2px] rounded-md p-5">
-          <DetailsProductDekstopProductCountAndMessage currentProductData={currentProduct} />
+          <DetailsProductDekstopProductCountAndMessage
+            currentProductData={currentProduct}
+          />
         </div>
       </div>
       <div className="w-full rounded-md h-fit">

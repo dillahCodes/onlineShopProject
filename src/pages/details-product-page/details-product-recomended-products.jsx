@@ -19,7 +19,9 @@ const DetailsProductRecomendedProducts = ({ currentProductId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:8080/v1/products?limit=${limitValue}`);
+        const { data } = await axios.get(
+          import.meta.env.VITE_API_URL + `products?limit=${limitValue}`
+        );
         setProductData(data.data);
       } catch (error) {
         console.log(error);
@@ -38,7 +40,9 @@ const DetailsProductRecomendedProducts = ({ currentProductId }) => {
 
   return (
     <div className="flex flex-col w-full gap-y-5 ">
-      <h1 className="text-2xl font-bold capitalize font-space-grotesk">produk serupa untukmu</h1>
+      <h1 className="text-2xl font-bold capitalize font-space-grotesk">
+        produk serupa untukmu
+      </h1>
       <div className="flex flex-wrap w-full gap-5">
         {productData &&
           productData.map((item) => (
@@ -48,7 +52,8 @@ const DetailsProductRecomendedProducts = ({ currentProductId }) => {
               productTitle={item.name}
               price={item.price}
               rating={(
-                item.review.reduce((acc, curr) => acc + curr.rating, 0) / item.review.length
+                item.review.reduce((acc, curr) => acc + curr.rating, 0) /
+                item.review.length
               ).toFixed(1)}
               totalSold={item.total_sold}
               imageUrl={item.images[0].img_url}

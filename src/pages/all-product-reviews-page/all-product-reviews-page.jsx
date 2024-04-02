@@ -12,7 +12,7 @@ const AllProductReviewsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(`http://localhost:8080/v1/products/${productId}`)
+        .get(import.meta.env.VITE_API_URL + `products/${productId}`)
         .then(function (response) {
           setCurrentProductData(response.data.data);
         })
