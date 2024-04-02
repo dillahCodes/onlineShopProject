@@ -1,8 +1,8 @@
 import DetailsProductSkelekton from "../../components/ui/details-product-skelekton";
 import DetailsProductImageSkeleton from "../../components/ui/details-product-image-skelekton";
-import DetailsProductProductCountAndMessage from "../../components/ui/details-product-product-count-and-message";
 import DetailsProudctRatingThisProductSkelekton from "../../components/ui/details-product-rating-this-product-skelekton";
 import PropTypes from "prop-types";
+import DetailsProductProductCountAndMessageSkelekton from "../../components/ui/details-product-product-count-and-message-skelekton";
 
 const PageLoader = ({ currentProduct }) => {
   return (
@@ -21,7 +21,7 @@ const PageLoader = ({ currentProduct }) => {
           </div>
         </div>
         <div className="sticky top-5 w-[30%] h-fit border-[2px] rounded-md p-5">
-          <DetailsProductProductCountAndMessage active={!currentProduct} />
+          <DetailsProductProductCountAndMessageSkelekton active={!currentProduct} />
         </div>
       </div>
       <div className="w-full rounded-md h-fit">

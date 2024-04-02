@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Skeleton } from "antd";
 import { isMobile } from "react-device-detect";
 
-const DetailsProductProductCountAndMessage = ({ active }) => {
+const DetailsProductProductCountAndMessageSkelekton = ({ active }) => {
   return (
     !isMobile && (
       <div className="w-full">
@@ -21,8 +21,8 @@ const DetailsProductProductCountAndMessage = ({ active }) => {
   );
 };
 
-export default DetailsProductProductCountAndMessage;
+export default DetailsProductProductCountAndMessageSkelekton;
 
-DetailsProductProductCountAndMessage.propTypes = {
+DetailsProductProductCountAndMessageSkelekton.propTypes = {
   active: PropTypes.bool,
 };
