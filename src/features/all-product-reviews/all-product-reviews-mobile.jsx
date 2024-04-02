@@ -165,6 +165,7 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
             {menuButtons.map((item, index) => (
               <ButtonComponent
                 key={index}
+                disabled={currentProductData?.review.length === 0}
                 icon={<IoIosArrowDown />}
                 className={` w-full flex items-center  capitalize ${
                   filterSelected[item] && "border border-black"

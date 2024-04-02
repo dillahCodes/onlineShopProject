@@ -22,7 +22,7 @@ const CommnetsComponent = ({ comentData, sortTo }) => {
 
   if (comentData?.length === 0)
     return (
-      <div className="flex justify-center w-full p-5 mt-10 border border-black rounded-md gap-x-20">
+      <div className="flex flex-wrap justify-center w-full p-5 mt-10 border border-black rounded-md gap-x-20">
         <img src={noComent} width={170} alt="" />
         <div className="flex flex-col">
           <h1 className="text-xl font-bold capitalize font-space-grotesk">sorry...</h1>
