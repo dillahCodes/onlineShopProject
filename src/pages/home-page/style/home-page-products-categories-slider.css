@@ -1,0 +1,4 @@
+/* this css for change slider margin each elemet */
+#sliderProductsCategories .slick-slide {
+  padding: 5px !important;
+}

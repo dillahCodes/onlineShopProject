@@ -1,0 +1,4 @@
+/* this css for disable more tabs  */
+.ant-tabs-nav-operations {
+  display: none !important;
+}
