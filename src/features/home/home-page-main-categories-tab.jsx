@@ -31,7 +31,7 @@ const HomePageMainCategoriesTab = () => {
       <NavigationCategoriesTabComponent currCategory={setCurrCategory} />
       <div className="w-[90%]  mx-auto   mt-5  flex flex-col items-center gap-y-10">
         {/* card product display */}
-        <div className={`flex flex-wrap w-full gap-5 ${isMobile <= 1024 && "justify-center"} `}>
+        <div className={`flex flex-wrap w-full gap-5 ${isMobile <= 1024 && "justify-between"} `}>
           {productData &&
             productData.map((item) => (
               <CardProductDisplay

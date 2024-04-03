@@ -52,14 +52,14 @@ const HomePageProdutcsCategoriesSlider = () => {
         {carouselFakeImageDisplayData2.map((item) => (
           <div
             key={item.id}
-            className="p-1 rounded-md shadow-sm outline-none w-fit h-[160px] border-[2px] border-black "
+            className="p-1 rounded-md shadow-sm outline-none w-fit max-h-[130px] md:h-[160px] border-[2px] border-black "
           >
             <img
               src={item.image}
               className={`object-cover rounded-md ${isMobile ? "h-[80px]" : "h-[100px]"}`}
               alt=""
             />
-            <h1 className={` font-medium text-center font-space-grotesk  mt-2 `}>{item.text}</h1>
+            <h1 className={` font-medium text-center font-space-grotesk pb-3 mt-2 `}>{item.text}</h1>
           </div>
         ))}
       </Slider>

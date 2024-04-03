@@ -88,7 +88,7 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
   };
 
   return (
-    <Layout>
+    <Layout className="">
       <Header className="fixed top-0 left-0 right-0 z-20 flex p-5 bg-white ">
         <div className="flex items-center gap-x-5">
           <div className="text-4xl text-gray-400" onClick={handleBack}>
@@ -97,7 +97,7 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
           <h1 className="text-xl font-bold capitalize font-space-grotesk">ulasan pembeli</h1>
         </div>
       </Header>
-      <Layout className={`pt-[60px]   border border-orange-600`}>
+      <Layout className={`pt-[60px] bg-white  `}>
         <section className="flex w-full p-5 bg-white gap-x-5">
           {/* average rating  */}
           <div className="flex items-center gap-x-2 font-space-grotesk">

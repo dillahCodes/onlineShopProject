@@ -28,7 +28,7 @@ const CardProductDisplay = ({
   }
   return (
     <div
-      className={`w-[45%] cursor-pointer  sm:w-[30%] md:w-[25%]  lg:w-[18%] xl:w-[15%] border-[2px] rounded-md border-black  `}
+      className={`w-[45%] cursor-pointer  sm:w-[30%]   lg:w-[18%] xl:w-[15%] border-[2px] rounded-md border-black  `}
       onClick={onClick}
     >
       <div className="w-full rounded-[inherit]">

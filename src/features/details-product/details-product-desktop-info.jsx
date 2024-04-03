@@ -31,7 +31,7 @@ const items = [
 
 const DetailsProductDekstopInfo = ({ currentProductData }) => {
   return (
-    <div className="border-b rounded-md h-fit">
+    <div className="border-b rounded-md ">
       {/* product name and price */}
       <DetailsProductDekstopTitle currentProductData={currentProductData} />
       {/* option product */}

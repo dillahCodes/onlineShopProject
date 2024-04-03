@@ -37,7 +37,11 @@ const HeroPageSelider = () => {
       >
         {carouselFakeImageDisplayData.map((item) => (
           <div key={item.id} className={`outline-none ${!isMobile && "h-fit"}`}>
-            <img src={item.image} className={`object-cover w-full ${isMobile && "h-[150px]"}`} alt="" />
+            <img
+              src={item.image}
+              className={`object-cover w-full ${isMobile && "md:h-[250px] h-[150px]"}`}
+              alt=""
+            />
           </div>
         ))}
       </Slider>
