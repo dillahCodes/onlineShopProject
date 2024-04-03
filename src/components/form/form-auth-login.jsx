@@ -1,22 +1,37 @@
-import { Checkbox, Input } from "antd";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Checkbox, Input } from "antd";
+
+import PropTypes from "prop-types";
 import ButtonComponent from "../ui/button-component";
 import FormHelpDropdown from "./form-help-dropdown";
-import { Link } from "react-router-dom";
 
-const FormAuthLogin = () => {
+const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="w-full">
-      <h1 className="mb-5 text-2xl font-bold capitalize font-space-grotesk">Log in</h1>
-      <form action="" className="flex flex-col w-full gap-y-5">
+      <h1 className="mb-5 text-2xl font-bold capitalize font-space-grotesk">
+        Log in
+      </h1>
+      <form
+        onSubmit={handleLoginSubmit}
+        action=""
+        className="flex flex-col w-full gap-y-5"
+      >
         {/* email */}
         <div className="w-full">
           <label htmlFor="email" className="capitalize">
             email: <span className="text-red-600">*</span>
           </label>
 
-          <Input id="email" placeholder="example@gmail.com" size="large" className="mt-1" />
+          <Input
+            id="email"
+            placeholder="example@gmail.com"
+            size="large"
+            className="mt-1"
+            value={loginData.email}
+            onChange={handleInputChange}
+          />
         </div>
 
         {/* password */}
@@ -33,6 +48,8 @@ const FormAuthLogin = () => {
               visible: showPassword,
               onVisibleChange: setShowPassword,
             }}
+            value={loginData.password}
+            onChange={handleInputChange}
           />
         </div>
         {/* remember me */}
@@ -46,12 +63,19 @@ const FormAuthLogin = () => {
         <div className="flex flex-wrap items-center justify-between w-full">
           <FormHelpDropdown />
           <Link to={"/signup"} className="text-black">
-            belum punya akun? <span className="font-bold underline capitalize">daftar</span>
+            belum punya akun?{" "}
+            <span className="font-bold underline capitalize">daftar</span>
           </Link>
         </div>
       </form>
     </div>
   );
+};
+
+FormAuthLogin.propTypes = {
+  handleInputChange: PropTypes.func.isRequired,
+  handleLoginSubmit: PropTypes.func.isRequired,
+  loginData: PropTypes.object.isRequired,
 };
 
 export default FormAuthLogin;
