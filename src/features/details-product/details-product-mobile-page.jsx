@@ -7,6 +7,7 @@ import DetailsProductMobileButtonsInfo from "./details-product-mobile-buttons-in
 import DetailsProductMobileDescriptionProduct from "./details-product-mobile-description-product";
 import DetailsProductMobileOwnerProductProfile from "./details-product-mobile-owner-product-profile";
 import DetailsProductMobileRatingThisProduct from "./details-product-mobile-rating-this-product";
+import DetailsProductMobilePageLoader from "../../pages/details-product-page/details-product-mobile-page-loader";
 
 const DetailsProductMobilePage = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -27,7 +28,7 @@ const DetailsProductMobilePage = () => {
     if (productId) fetchData();
   }, [productId]);
 
-  if (!currentProduct) return <div>loading...</div>;
+  if (!currentProduct) return <DetailsProductMobilePageLoader active={!currentProduct} />;
 
   return (
     <div className="w-full">

@@ -7,7 +7,7 @@ import DetailsProductDekstopInfo from "./details-product-desktop-info";
 import DetailsProductDekstopProductCountAndMessage from "./details-product-dekstop-product-count-and-message";
 import DetailsProductDekstopRatingThisProduct from "./details-product-desktop-rating-this-product";
 import DetailsProductRecomendedProducts from "./details-product-recomended-products";
-import PageLoader from "../../pages/details-product-page/page-loader";
+import DetailsProductDesktopPageLoader from "../../pages/details-product-page/details-product-dekstop-page-loader";
 
 const DetailsProductDekstopPage = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -28,7 +28,7 @@ const DetailsProductDekstopPage = () => {
     if (productId) fetchData();
   }, [productId]);
 
-  if (!currentProduct) return <PageLoader currentProduct={currentProduct} />;
+  if (!currentProduct) return <DetailsProductDesktopPageLoader currentProduct={currentProduct} />;
 
   return (
     // main container for product details, product image, product count

@@ -4,7 +4,7 @@ import DetailsProudctRatingThisProductSkelekton from "../../components/ui/detail
 import PropTypes from "prop-types";
 import DetailsProductProductCountAndMessageSkelekton from "../../components/ui/details-product-product-count-and-message-skelekton";
 
-const PageLoader = ({ currentProduct }) => {
+const DetailsProductDesktopPageLoader = ({ currentProduct }) => {
   return (
     <div className="flex flex-col w-full gap-y-5">
       {/* product image and count */}
@@ -31,7 +31,7 @@ const PageLoader = ({ currentProduct }) => {
   );
 };
 
-export default PageLoader;
-PageLoader.propTypes = {
+export default DetailsProductDesktopPageLoader;
+DetailsProductDesktopPageLoader.propTypes = {
   currentProduct: PropTypes.object,
 };

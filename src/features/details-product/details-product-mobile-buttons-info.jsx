@@ -22,7 +22,7 @@ const DetailsProductMobileButtonsInfo = ({ productData }) => {
   return (
     <div className="flex flex-wrap items-center w-full gap-2 p-5 mt-2 bg-white gap-x-5">
       <span className="capitalize font-space-grotesk">terjual 0 rb+</span>
-      <div className="flex flex-wrap w-full gap-x-3">
+      <div className="flex flex-wrap gap-x-3">
         <ButtonComponent
           onClick={() => navigate(`/product/${productData.product_id}/reviews`)}
           icon={<IoIosStar className="text-xl" />}
