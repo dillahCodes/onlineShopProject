@@ -17,12 +17,10 @@ const LoginPage = () => {
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
+    console.log("dijalankan");
 
     try {
-      const response = await axios.post(
-        import.meta.env.VITE_API_URL + "users/login",
-        loginData
-      );
+      const response = await axios.post(import.meta.env.VITE_API_URL + "users/login", loginData);
       console.log("Login Successful:", response.data);
       localStorage.setItem("token", response.data.token);
     } catch (error) {

@@ -8,16 +8,11 @@ import FormHelpDropdown from "./form-help-dropdown";
 
 const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="w-full">
-      <h1 className="mb-5 text-2xl font-bold capitalize font-space-grotesk">
-        Log in
-      </h1>
-      <form
-        onSubmit={handleLoginSubmit}
-        action=""
-        className="flex flex-col w-full gap-y-5"
-      >
+      <h1 className="mb-5 text-2xl font-bold capitalize font-space-grotesk">Log in</h1>
+      <form onSubmit={handleLoginSubmit} action="" className="flex flex-col w-full gap-y-5">
         {/* email */}
         <div className="w-full">
           <label htmlFor="email" className="capitalize">
@@ -26,10 +21,11 @@ const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
 
           <Input
             id="email"
+            name="email"
             placeholder="example@gmail.com"
             size="large"
             className="mt-1"
-            value={loginData.email}
+            defaultValue={loginData.email}
             onChange={handleInputChange}
           />
         </div>
@@ -41,6 +37,7 @@ const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
           </label>
           <Input.Password
             className="mt-1"
+            name="password"
             size="large"
             id="password"
             placeholder="****"
@@ -48,14 +45,14 @@ const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
               visible: showPassword,
               onVisibleChange: setShowPassword,
             }}
-            value={loginData.password}
+            defaultValue={loginData.password}
             onChange={handleInputChange}
           />
         </div>
         {/* remember me */}
         <Checkbox>Remember me</Checkbox>
         {/* submit button */}
-        <ButtonComponent className={"w-full"} type="primary" size="large">
+        <ButtonComponent className={"w-full"} type="primary" htmlType="submit" size="large">
           <span className="capitalize">Log in</span>
         </ButtonComponent>
 
@@ -63,8 +60,7 @@ const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
         <div className="flex flex-wrap items-center justify-between w-full">
           <FormHelpDropdown />
           <Link to={"/signup"} className="text-black">
-            belum punya akun?{" "}
-            <span className="font-bold underline capitalize">daftar</span>
+            belum punya akun? <span className="font-bold underline capitalize">daftar</span>
           </Link>
         </div>
       </form>
