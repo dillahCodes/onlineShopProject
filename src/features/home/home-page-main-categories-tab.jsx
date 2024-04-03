@@ -5,7 +5,6 @@ import axios from "axios";
 import CardProductDisplay from "../../components/ui/card-product-display";
 import ButtonComponent from "../../components/ui/button-component";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 
 const HomePageMainCategoriesTab = () => {
   const [currCategory, setCurrCategory] = useState(null);
@@ -31,7 +30,7 @@ const HomePageMainCategoriesTab = () => {
       <NavigationCategoriesTabComponent currCategory={setCurrCategory} />
       <div className="w-[90%]  mx-auto   mt-5  flex flex-col items-center gap-y-10">
         {/* card product display */}
-        <div className={`flex flex-wrap w-full gap-5 ${isMobile <= 1024 && "justify-between"} `}>
+        <div className={`flex flex-wrap w-full gap-5 justify-between`}>
           {productData &&
             productData.map((item) => (
               <CardProductDisplay

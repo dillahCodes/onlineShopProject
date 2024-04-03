@@ -1,17 +1,8 @@
 import PropTypes from "prop-types";
 import { IoIosStar } from "react-icons/io";
+import formatCurrencyToIDR from "../../utils/format-currency";
 
 const DetailsProductDekstopTitle = ({ currentProductData }) => {
-  function formatCurrencyToIDR(amount) {
-    const currencyFormatter = new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-
-    return currencyFormatter.format(amount);
-  }
   return (
     <div className="w-full">
       <h1 className="text-xl font-bold font-space-grotesk">{currentProductData.name}</h1>

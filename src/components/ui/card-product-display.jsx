@@ -2,6 +2,8 @@ import defaultimage from "../../assets/defaultimage.jpg";
 import { AiFillShop } from "react-icons/ai";
 import PropTypes from "prop-types";
 import { CiStar } from "react-icons/ci";
+import { isMobile } from "react-device-detect";
+import formatCurrencyToIDR from "../../utils/format-currency";
 
 const CardProductDisplay = ({
   imageUrl,
@@ -16,19 +18,11 @@ const CardProductDisplay = ({
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   }
 
-  function formatCurrencyToIDR(amount) {
-    const currencyFormatter = new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-
-    return currencyFormatter.format(amount);
-  }
   return (
     <div
-      className={`w-[45%] cursor-pointer  sm:w-[30%]   lg:w-[18%] xl:w-[15%] border-[2px] rounded-md border-black  `}
+      className={`w-[45%] cursor-pointer  sm:w-[30%]    ${
+        isMobile ? "xl:w-[25%] lg:w-[23%]" : "xl:w-[15%] lg:w-[20%]"
+      } border-[2px] rounded-md border-black  `}
       onClick={onClick}
     >
       <div className="w-full rounded-[inherit]">

@@ -3,6 +3,7 @@ import { IoHeartOutline } from "react-icons/io5";
 import ButtonComponent from "../../components/ui/button-component";
 import { useState } from "react";
 import { IoMdHeart } from "react-icons/io";
+import formatCurrencyToIDR from "../../utils/format-currency";
 
 const DetailsProductMobileTitleAndPrice = ({ productData }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -10,17 +11,6 @@ const DetailsProductMobileTitleAndPrice = ({ productData }) => {
   const handleWishlistAndUnwishlist = () => {
     setIsWishlisted(!isWishlisted);
   };
-
-  function formatCurrencyToIDR(amount) {
-    const currencyFormatter = new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-
-    return currencyFormatter.format(amount);
-  }
 
   return (
     <div className="w-full p-5 bg-white">
