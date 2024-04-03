@@ -1,7 +1,8 @@
 import { Layout } from "antd";
 import FormAuthRegister from "../../components/form/form-auth-register";
 import { useState } from "react";
-import axios from "axios";
+import registerFunction from "../../features/auth/register-function";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [registerData, setRegisterData] = useState({
@@ -9,20 +10,16 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setRegisterData({ ...registerData, [name]: value });
   };
 
-  const handleLoginSubmit = async (event) => {
+  const handleRegisterSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(import.meta.env.VITE_API_URL + "users/register", registerData);
-      console.log("Login Successful:", response.data);
-    } catch (error) {
-      console.error("Error during login:", error);
-    }
+    registerFunction(registerData).then(() => navigate("/login"));
   };
   return (
     <Layout className="flex items-center justify-center h-screen p-5">
@@ -30,7 +27,7 @@ const RegisterPage = () => {
         <FormAuthRegister
           handleInputChange={handleInputChange}
           registerData={registerData}
-          handleLoginSubmit={handleLoginSubmit}
+          handleRegister={handleRegisterSubmit}
         />
       </div>
     </Layout>

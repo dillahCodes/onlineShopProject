@@ -1,14 +1,15 @@
-import axios from "axios";
 import FormAuthLogin from "../../components/form/form-auth-login";
-
 import { Layout } from "antd";
 import { useState } from "react";
+import loginFunction from "../../features/auth/login-function";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -17,15 +18,7 @@ const LoginPage = () => {
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    console.log("dijalankan");
-
-    try {
-      const response = await axios.post(import.meta.env.VITE_API_URL + "users/login", loginData);
-      console.log("Login Successful:", response.data);
-      localStorage.setItem("token", response.data.token);
-    } catch (error) {
-      console.error("Error during login:", error);
-    }
+    loginFunction(loginData).then(() => navigate("/"));
   };
   return (
     <Layout className="flex items-center justify-center h-screen p-5">

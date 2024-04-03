@@ -66,8 +66,6 @@ const NavbarDekstopComponent = () => {
     }
   };
 
-  console.log(searchBarIsFocused);
-
   return (
     <Header className="relative flex w-full py-5 text-2xl capitalize shadow-sm font-space-grotesk h-fit">
       {/* overlay when search bar is focused for desktop */}

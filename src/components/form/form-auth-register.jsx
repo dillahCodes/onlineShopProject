@@ -5,13 +5,13 @@ import FormHelpDropdown from "./form-help-dropdown";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const FormAuthRegister = ({ handleInputChange, handleLoginSubmit, registerData }) => {
+const FormAuthRegister = ({ handleInputChange, handleRegister, registerData }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="w-full">
       <h1 className="mb-5 text-2xl font-bold capitalize font-space-grotesk">register</h1>
-      <form action="" onSubmit={handleLoginSubmit} className="flex flex-col w-full gap-y-5">
+      <form action="" onSubmit={handleRegister} className="flex flex-col w-full gap-y-5">
         {/* name */}
         <div className="w-full">
           <label htmlFor="name" className="capitalize">
@@ -87,6 +87,6 @@ export default FormAuthRegister;
 
 FormAuthRegister.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
-  handleLoginSubmit: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired,
   registerData: PropTypes.object.isRequired,
 };
