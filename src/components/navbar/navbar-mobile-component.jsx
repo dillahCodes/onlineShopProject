@@ -1,7 +1,7 @@
 import { Header } from "antd/es/layout/layout";
 import InputSearch from "../input/input-search";
 import NavbarMenuMobile from "./navbar-mobile-menu-component";
-import { useSearchBar } from "../../context/search-bar-context/search-bar-context";
+import { useSearchBar } from "../../context/search-bar-context";
 import NavbarMobileSearchResultComponent from "./navbar-mobile-search-result-component";
 import recomendedSearchResult from "../navbar-fake-search-result-data";
 import { isMobile } from "react-device-detect";

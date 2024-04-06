@@ -6,9 +6,12 @@ import { useState } from "react";
 import ModalComponent from "../ui/modal-component";
 import FormAuthLogin from "../form/form-auth-login";
 import FormAuthRegister from "../form/form-auth-register";
-import { useAuth } from "../../context/auth/user-auth-context";
+import { useAuth } from "../../context/user-auth-context";
 import loginFunction from "../../features/auth/login-function";
 import registerFunction from "../../features/auth/register-function";
+import useRegisterPasswordValidation from "../../features/auth/hooks/use-register-password-validation";
+import useRegisterFieldInputValidation from "../../features/auth/hooks/use-register-field-input-validation";
+import useLoginFieldInputValidation from "../../features/auth/hooks/use-login-field-input-validation";
 
 const NavbarUserAuth = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,50 +24,129 @@ const NavbarUserAuth = () => {
     nama: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
-  const { user } = useAuth();
+  const [errorMessage, setErrorMessage] = useState(null);
+  const { validationRegisterInputErrorMessage, validateFieldRegisterInput } = useRegisterFieldInputValidation(registerData);
+  const { validationCheckCondition, resetValidationCheckCondition, validatePassword, validationPasswordErrorMessage } =
+    useRegisterPasswordValidation(registerData);
+  const { validationLoginInputErrorMessage, validateFieldLoginInput } = useLoginFieldInputValidation(loginData);
+  const { user, setUser } = useAuth();
 
-  const handleInputChange = (event, type) => {
-    if (type === "login") {
-      const { name, value } = event.target;
-      setLoginData({ ...loginData, [name]: value });
-    } else if (type === "register") {
-      const { name, value } = event.target;
-      setRegisterData({ ...registerData, [name]: value });
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    setIsLogin(false);
+    setRegisterData({
+      nama: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+    setLoginData({
+      email: "",
+      password: "",
+    });
+    setErrorMessage("");
+    resetValidationCheckCondition();
+  };
+
+  const handleRegisterInputChange = (event) => {
+    const { value, name } = event.target;
+    setRegisterData({ ...registerData, [name]: value });
+
+    if (name === "password") {
+      validatePassword(value, registerData.confirmPassword);
+    } else if (name === "confirmPassword") {
+      validatePassword(registerData.password, value);
     }
+  };
+
+  const handleLoginInputChange = (event) => {
+    const { value, name } = event.target;
+    setLoginData({ ...loginData, [name]: value });
   };
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    loginFunction(loginData);
+
+    validateFieldLoginInput(loginData);
+    if (validationLoginInputErrorMessage) {
+      setErrorMessage(validationLoginInputErrorMessage);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+
+      return;
+    }
+
+    try {
+      const userData = await loginFunction(loginData, setErrorMessage);
+      if (userData) {
+        setIsOpen(false);
+        setIsLogin(false);
+      }
+      setUser(userData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    }
   };
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
-    registerFunction(registerData);
+
+    validateFieldRegisterInput(registerData);
+
+    if (validationRegisterInputErrorMessage) {
+      setErrorMessage(validationRegisterInputErrorMessage);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+
+      return;
+    }
+
+    if (validationPasswordErrorMessage) {
+      setErrorMessage(validationPasswordErrorMessage);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+
+      return;
+    }
+
+    try {
+      const isRegister = await registerFunction(registerData, setErrorMessage);
+      if (isRegister) setIsLogin(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    }
   };
 
   return (
     <div>
       {/* auth modal */}
-      <ModalComponent
-        isModalOpen={isOpen}
-        modalFooter={null}
-        handleCancel={() => {
-          setIsOpen(false);
-          setIsLogin(false);
-        }}
-      >
+      <ModalComponent isModalOpen={isOpen} modalFooter={null} handleCancel={handleCloseModal}>
         {islogin ? (
           <FormAuthLogin
-            handleInputChange={(event) => handleInputChange(event, "login")}
+            handleLoginInputChange={handleLoginInputChange}
             handleLoginSubmit={handleLoginSubmit}
             loginData={loginData}
+            errorMessage={errorMessage}
           />
         ) : (
           <FormAuthRegister
-            handleInputChange={(event) => handleInputChange(event, "register")}
+            handleRegisterInputChange={handleRegisterInputChange}
             handleRegister={handleRegisterSubmit}
+            validationCheckCondition={validationCheckCondition}
+            errorMessage={errorMessage}
             registerData={registerData}
           />
         )}

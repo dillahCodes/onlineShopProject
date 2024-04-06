@@ -1,9 +1,9 @@
 import { Layout } from "antd";
-import NavbarDekstopComponent from "../components/navbar/navbar-desktop-component";
-import NavbarMobileComponent from "../components/navbar/navbar-mobile-component";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
+import NavbarDekstopComponent from "../navbar/navbar-desktop-component";
+import NavbarMobileComponent from "../navbar/navbar-mobile-component";
 
 const DetailsProductLayout = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);

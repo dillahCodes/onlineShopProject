@@ -7,7 +7,7 @@ import NavbarRecomendedProductsComponent from "./navbar-recomended-poducts-compo
 import NavbarShippingToComponent from "./navbar-shipping-to-component";
 import recomendedSearchResult from "../navbar-fake-search-result-data";
 import { useEffect, useRef, useState } from "react";
-import { useSearchBar } from "../../context/search-bar-context/search-bar-context";
+import { useSearchBar } from "../../context/search-bar-context";
 import NavbarDeskstopSearchResult from "./navbar-dekstop-search-result-component";
 
 const NavbarDekstopComponent = () => {

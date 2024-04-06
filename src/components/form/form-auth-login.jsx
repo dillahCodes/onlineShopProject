@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Checkbox, Input } from "antd";
+import { Alert, Checkbox, Input } from "antd";
 
 import PropTypes from "prop-types";
 import ButtonComponent from "../ui/button-component";
 import FormHelpDropdown from "./form-help-dropdown";
 
-const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
+const FormAuthLogin = ({ handleLoginInputChange, handleLoginSubmit, loginData, errorMessage }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="w-full">
       <h1 className="mb-5 text-2xl font-bold capitalize font-space-grotesk">Log in</h1>
+      {errorMessage && <Alert message={errorMessage.error || errorMessage} type="error" className="mb-5" showIcon />}
       <form onSubmit={handleLoginSubmit} action="" className="flex flex-col w-full gap-y-5">
         {/* email */}
         <div className="w-full">
@@ -26,7 +27,7 @@ const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
             size="large"
             className="mt-1"
             defaultValue={loginData.email}
-            onChange={handleInputChange}
+            onChange={handleLoginInputChange}
           />
         </div>
 
@@ -46,7 +47,7 @@ const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
               onVisibleChange: setShowPassword,
             }}
             defaultValue={loginData.password}
-            onChange={handleInputChange}
+            onChange={handleLoginInputChange}
           />
         </div>
         {/* remember me */}
@@ -69,9 +70,10 @@ const FormAuthLogin = ({ handleInputChange, handleLoginSubmit, loginData }) => {
 };
 
 FormAuthLogin.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
+  handleLoginInputChange: PropTypes.func.isRequired,
   handleLoginSubmit: PropTypes.func.isRequired,
   loginData: PropTypes.object.isRequired,
+  errorMessage: PropTypes.any,
 };
 
 export default FormAuthLogin;

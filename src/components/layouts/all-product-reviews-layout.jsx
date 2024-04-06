@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import { isMobile } from "react-device-detect";
-import NavbarDekstopComponent from "../components/navbar/navbar-desktop-component";
 import PropTypes from "prop-types";
+import NavbarDekstopComponent from "../navbar/navbar-desktop-component";
 
 const AllProductReviewsLayout = ({ children }) => {
   return (

@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
+// this component render in mobile view
 const NavbarMobileGreetingComponent = () => {
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
-
   const handleClose = () => setIsOpen(!isOpen);
 
   if (isOpen === false) return null;
