@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 import ButtonComponent from "../ui/button-component";
 import { useState } from "react";
 import ModalComponent from "../ui/modal-component";
-import FormAuthLogin from "../form/form-auth-login";
-import FormAuthRegister from "../form/form-auth-register";
 import { useAuth } from "../../context/user-auth-context";
-import loginFunction from "../../features/auth/login-function";
-import registerFunction from "../../features/auth/register-function";
 import useRegisterPasswordValidation from "../../features/auth/hooks/use-register-password-validation";
 import useRegisterFieldInputValidation from "../../features/auth/hooks/use-register-field-input-validation";
 import useLoginFieldInputValidation from "../../features/auth/hooks/use-login-field-input-validation";
+import FormAuthLogin from "../form-auth/form-auth-login";
+import FormAuthRegister from "../form-auth/form-auth-register";
+import authServices from "../../features/auth/services/auth-services";
+import { jwtDecode } from "jwt-decode";
+import translateLoginErrorMessage from "../../features/auth/services/translate-login-error-message";
+import translateRegisterErrorMessage from "../../features/auth/services/translate-register-error-message";
 
 const NavbarUserAuth = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,10 +29,16 @@ const NavbarUserAuth = () => {
     confirmPassword: "",
   });
   const [errorMessage, setErrorMessage] = useState(null);
-  const { validationRegisterInputErrorMessage, validateFieldRegisterInput } = useRegisterFieldInputValidation(registerData);
-  const { validationCheckCondition, resetValidationCheckCondition, validatePassword, validationPasswordErrorMessage } =
-    useRegisterPasswordValidation(registerData);
-  const { validationLoginInputErrorMessage, validateFieldLoginInput } = useLoginFieldInputValidation(loginData);
+  const { validationRegisterInputErrorMessage, validateFieldRegisterInput } =
+    useRegisterFieldInputValidation(registerData);
+  const {
+    validationCheckCondition,
+    resetValidationCheckCondition,
+    validatePassword,
+    validationPasswordErrorMessage,
+  } = useRegisterPasswordValidation(registerData);
+  const { validationLoginInputErrorMessage, validateFieldLoginInput } =
+    useLoginFieldInputValidation(loginData);
   const { user, setUser } = useAuth();
 
   const handleCloseModal = () => {
@@ -80,14 +88,18 @@ const NavbarUserAuth = () => {
     }
 
     try {
-      const userData = await loginFunction(loginData, setErrorMessage);
-      if (userData) {
-        setIsOpen(false);
-        setIsLogin(false);
-      }
-      setUser(userData);
+      const userLogin = await authServices.login(loginData);
+      const response = userLogin.data;
+      localStorage.setItem("token", response.token);
+      const { userId } = jwtDecode(response.token);
+      const userData = await authServices.getUserById(userId);
+      setUser(userData.data);
+      setIsOpen(false);
+      setIsLogin(false);
     } catch (error) {
-      console.log(error);
+      const errorHasTranslated = translateLoginErrorMessage(error.response.data.error);
+      setErrorMessage(errorHasTranslated);
+      console.error(error);
     } finally {
       setTimeout(() => {
         setErrorMessage("");
@@ -105,7 +117,6 @@ const NavbarUserAuth = () => {
       setTimeout(() => {
         setErrorMessage("");
       }, 3000);
-
       return;
     }
 
@@ -114,14 +125,15 @@ const NavbarUserAuth = () => {
       setTimeout(() => {
         setErrorMessage("");
       }, 3000);
-
       return;
     }
 
     try {
-      const isRegister = await registerFunction(registerData, setErrorMessage);
-      if (isRegister) setIsLogin(true);
+      await authServices.register(registerData);
+      setIsLogin(true);
     } catch (error) {
+      const errorHasTranslated = translateRegisterErrorMessage(error.response.data.error);
+      setErrorMessage(errorHasTranslated);
       console.error(error);
     } finally {
       setTimeout(() => {
@@ -164,7 +176,11 @@ const NavbarUserAuth = () => {
           >
             masuk
           </ButtonComponent>
-          <ButtonComponent type="primary" className={"capitalize"} onClick={() => setIsOpen(true)}>
+          <ButtonComponent
+            type="primary"
+            className={"capitalize"}
+            onClick={() => setIsOpen(true)}
+          >
             daftar
           </ButtonComponent>
         </div>

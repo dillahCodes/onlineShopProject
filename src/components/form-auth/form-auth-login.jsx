@@ -26,6 +26,7 @@ const FormAuthLogin = ({ handleLoginInputChange, handleLoginSubmit, loginData, e
             placeholder="example@gmail.com"
             size="large"
             className="mt-1"
+            type="email"
             defaultValue={loginData.email}
             onChange={handleLoginInputChange}
           />

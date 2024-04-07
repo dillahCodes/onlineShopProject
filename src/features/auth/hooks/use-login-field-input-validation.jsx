@@ -11,17 +11,21 @@ const useLoginFieldInputValidation = (initialInputData) => {
     const { password } = inputData;
     const isEmpty = Object.values(inputData).some((value) => value === "");
     const isMin8char = password.length < 8;
+    const isIncludeBlankSpace = Object.values(inputData).some((value) => /\s/.test(value));
 
-    if (isEmpty) {
+    if (isIncludeBlankSpace)
+      setValidationLoginInputErrorMessage("input tidak boleh berisi spasi");
+    else if (isEmpty)
       setValidationLoginInputErrorMessage("Harap isi semua input yang diperlukan");
-    } else if (isMin8char) {
+    else if (isMin8char)
       setValidationLoginInputErrorMessage("password harus memiliki setidaknya 8 karakter");
-    } else {
-      setValidationLoginInputErrorMessage("");
-    }
+    else setValidationLoginInputErrorMessage("");
   };
 
-  return { validationLoginInputErrorMessage, validateFieldLoginInput };
+  return {
+    validationLoginInputErrorMessage,
+    validateFieldLoginInput,
+  };
 };
 
 export default useLoginFieldInputValidation;

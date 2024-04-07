@@ -1,21 +1,40 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
-import getUserById from "../features/auth/get-user-by-id-function";
 import ScreenLoader from "../components/ui/screen-loader";
+import authServices from "../features/auth/services/auth-services";
 
-const authContext = createContext();
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [Isloading, setIsLoading] = useState(true);
-  const [userToken, setUserToken] = useState(localStorage.getItem("token"));
+  const [isLoading, setIsLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
 
+  // handle set userId by token
+  useEffect(() => {
+    const setUserIdByToken = () => {
+      const getToken = localStorage.getItem("token");
+      if (getToken) {
+        const { userId } = jwtDecode(getToken);
+        setUserId(userId);
+      } else {
+        setUserId(null);
+        setUser(null);
+      }
+    };
+
+    if (!userId) setUserIdByToken();
+  }, [userId, user]);
+
+  // handle watch local storage delete user if token not exist
   useEffect(() => {
     const handleStorageChange = () => {
       const getToken = localStorage.getItem("token");
-      setUserToken(getToken);
-      if (!getToken) setUser(null);
+      if (!getToken) {
+        setUser(null);
+        setUserId(null);
+      }
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -24,17 +43,12 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  // Load user data with user token
+  // handle load user with userId
   useEffect(() => {
     const loadUserData = async () => {
       try {
-        if (userToken) {
-          const { userId } = jwtDecode(userToken);
-          const userData = await getUserById(userId);
-          setUser(userData);
-        } else {
-          setUser(null);
-        }
+        const userData = await authServices.getUserById(userId);
+        setUser(userData.data);
       } catch (error) {
         console.error("Error loading user data:", error);
         setUser(null);
@@ -43,23 +57,24 @@ const AuthProvider = ({ children }) => {
       }
     };
 
-    loadUserData();
-  }, [userToken]);
+    if (userId && !user) loadUserData();
+  }, [userId, user]);
 
+  // loader
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
   }, []);
 
-  if (Isloading) return <ScreenLoader />;
-
   console.log(user);
 
-  return <authContext.Provider value={{ user, setUser }}>{children}</authContext.Provider>;
+  if (isLoading) return <ScreenLoader />;
+
+  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
 };
 
-const useAuth = () => useContext(authContext);
+const useAuth = () => useContext(AuthContext);
 export { AuthProvider, useAuth };
 
 AuthProvider.propTypes = {

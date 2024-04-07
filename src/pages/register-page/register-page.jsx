@@ -1,10 +1,11 @@
 import { Layout } from "antd";
-import FormAuthRegister from "../../components/form/form-auth-register";
 import { useState } from "react";
-import registerFunction from "../../features/auth/register-function";
 import { useNavigate } from "react-router-dom";
 import useRegisterFieldInputValidation from "../../features/auth/hooks/use-register-field-input-validation";
 import useRegisterPasswordValidation from "../../features/auth/hooks/use-register-password-validation";
+import FormAuthRegister from "../../components/form-auth/form-auth-register";
+import authServices from "../../features/auth/services/auth-services";
+import translateRegisterErrorMessage from "../../features/auth/services/translate-register-error-message";
 
 const RegisterPage = () => {
   const [registerData, setRegisterData] = useState({
@@ -14,7 +15,8 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const { validationRegisterInputErrorMessage, validateFieldRegisterInput } = useRegisterFieldInputValidation(registerData);
+  const { validationRegisterInputErrorMessage, validateFieldRegisterInput } =
+    useRegisterFieldInputValidation(registerData);
   const { validationCheckCondition, validatePassword, validationPasswordErrorMessage } =
     useRegisterPasswordValidation(registerData);
   const navigate = useNavigate();
@@ -40,7 +42,6 @@ const RegisterPage = () => {
       setTimeout(() => {
         setErrorMessage("");
       }, 3000);
-
       return;
     }
 
@@ -54,10 +55,12 @@ const RegisterPage = () => {
     }
 
     try {
-      const isRegister = await registerFunction(registerData, setErrorMessage);
-      if (isRegister) navigate("/login");
+      await authServices.register(registerData);
+      navigate("/login");
     } catch (error) {
-      console.error(error);
+      const errorHasTranslated = translateRegisterErrorMessage(error.response.data.error);
+      setErrorMessage(errorHasTranslated);
+      console.error(error.response);
     } finally {
       setTimeout(() => {
         setErrorMessage("");
