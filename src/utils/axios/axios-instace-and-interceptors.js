@@ -5,7 +5,7 @@ const headers = {
   Accept: "application/json",
 };
 
-// the axios instance
+//  axios instance
 // https://axios-http.com/docs/instance
 const instance_axios = axios.create({
   baseURL: import.meta.env.VITE_API_URL,

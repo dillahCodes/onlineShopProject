@@ -2,29 +2,13 @@ import { Layout } from "antd";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
-import NavbarDekstopComponent from "../navbar/navbar-desktop-component";
-import NavbarMobileComponent from "../navbar/navbar-mobile-component";
+import NavbarDekstopComponent from "../navbar-components/navbar-desktop-component";
+import NavbarMobileComponent from "../navbar-components/navbar-mobile-component";
 
 const DetailsProductLayout = ({ children }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  // navbar position change when scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = document.documentElement.scrollTop;
-      setIsScrolled(scrollTop > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
-    <Layout className={`h-screen relative ${isMobile && "max-w-[900px] mx-auto"}`}>
-      <div className={`w-full border-b ${isScrolled ? "bg-white shadow-md fixed border-none" : ""}`}>
+    <Layout className={` relative ${isMobile && "max-w-[900px] mx-auto"}`}>
+      <div className={`w-full border-b`}>
         {!isMobile && <NavbarDekstopComponent />}
         {isMobile && <NavbarMobileComponent />}
       </div>

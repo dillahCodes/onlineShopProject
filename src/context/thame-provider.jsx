@@ -6,7 +6,7 @@ const ThemeProvider = (props) => {
   const { children } = props;
 
   const color = {
-    primary: "#0d0d0d",
+    primary: "#00AA5B",
   };
 
   const themeConfigs = {

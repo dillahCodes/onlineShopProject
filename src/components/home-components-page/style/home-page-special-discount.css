@@ -1,0 +1,9 @@
+/* change  countdown style */
+#countdown .ant-statistic .ant-statistic-content {
+  width: fit-content;
+  font-size: 0.95rem;
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-weight: bold;
+}

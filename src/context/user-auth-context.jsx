@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
-import ScreenLoader from "../components/ui/screen-loader";
+import ScreenLoader from "../components/ui-components/screen-loader";
 import authServices from "../features/auth/services/auth-services";
 
 const AuthContext = createContext();

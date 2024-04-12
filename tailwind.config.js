@@ -21,6 +21,7 @@ export default {
         ".no-scrollbar": {
           "-ms-overflow-style": "none",
           "scrollbar-width": "none",
+          overflow: "-moz-scrollbars-none", // hide scrollbar in firefox
         },
       };
 
