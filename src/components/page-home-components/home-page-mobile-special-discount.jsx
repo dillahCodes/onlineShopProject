@@ -56,7 +56,12 @@ const HomePageMobileSpecialDiscount = () => {
         >
           {/* discount banner */}
           <div className={`h-[237px] min-w-[140px] max-w-[140px] absolute`}>
-            <img src={discountBanner} alt="" className="w-full h-full object-cover" />
+            <img
+              src={discountBanner}
+              loading="lazy"
+              alt=""
+              className="w-full h-full object-cover"
+            />
           </div>
           {/* product list */}
           {productList.map((product, index) =>

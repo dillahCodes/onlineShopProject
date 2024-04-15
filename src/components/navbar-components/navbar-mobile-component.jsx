@@ -10,24 +10,12 @@ import BottomDrawer from "../ui-components/bottom-drawer";
 import useToggle from "../../hooks/use-toggle";
 import { IoCloseOutline } from "react-icons/io5";
 import NavbarMenuListMobileComponent from "./navbar-menu-list-mobile-component";
-import { useEffect } from "react";
+import PropTypes from "prop-types";
 
-const NavbarMobileComponent = () => {
+const NavbarMobileComponent = ({ className }) => {
   const [isFloatingVisible, setIsFloatingVisible] = useState(false);
   const [profileDrawerIsOpen, setProfileDrawerIsOpen] = useToggle();
   const { searchBarIsFocused, setSearchBarIsFocused } = useSearchBar();
-  const [navBgBlur, setNavBgBlur] = useState(true);
-
-  useEffect(() => {
-    const changeNavBg = () => {
-      const initialPosition = 0;
-      Math.round(window.scrollY) > initialPosition ? setNavBgBlur(false) : setNavBgBlur(true);
-    };
-    window.addEventListener("scroll", changeNavBg);
-    return () => {
-      window.removeEventListener("scroll", changeNavBg);
-    };
-  }, []);
 
   // handle display search mobile overlay
   const handleDisplaySearchMobileOverlay = () => {
@@ -44,9 +32,7 @@ const NavbarMobileComponent = () => {
   return (
     <>
       <Header
-        className={`flex items-center w-full px-3 py-6 shadow-sm gap-x-5 fixed z-40   max-w-[900px] ${
-          navBgBlur ? "backdrop-filter bg-transparent backdrop-blur-sm " : "bg-white"
-        }`}
+        className={`flex items-center w-full px-3 py-6 shadow-sm gap-x-5 fixed z-40   max-w-[900px] ${className} `}
       >
         <InputSearch className={"w-full"} onClick={handleDisplaySearchMobileOverlay} />
         <NavbarMenuMobile NavbarHamburgerMenuOnclick={setProfileDrawerIsOpen} />
@@ -83,3 +69,7 @@ const NavbarMobileComponent = () => {
 };
 
 export default NavbarMobileComponent;
+
+NavbarMobileComponent.propTypes = {
+  className: PropTypes.string,
+};

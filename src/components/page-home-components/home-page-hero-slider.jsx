@@ -56,6 +56,7 @@ const HeroPageSelider = () => {
         {sliderImage.map((item) => (
           <div key={item.id} className={`outline-none ${!isMobile && "h-fit"}`}>
             <img
+              loading="lazy"
               src={item.image}
               className={` w-full  ${
                 isMobile ? "md:h-[250px] h-[150px] object-cover" : "h-[340px]"

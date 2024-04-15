@@ -137,7 +137,12 @@ const HomePageFeaturesButton = ({ image, title, ...props }) => {
       {...props}
       className="h-[90px] mb-5 font-medium font-space-grotesk max-w-[60px] flex flex-col items-center gap-2"
     >
-      <img src={image} className="object-cover w-16 h-16 rounded-full" alt={title} />
+      <img
+        src={image}
+        loading="lazy"
+        className="object-cover w-16 h-16 rounded-full"
+        alt={title}
+      />
       <p className="text-xs leading-tight text-center">{title}</p>
     </div>
   );

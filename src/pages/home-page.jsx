@@ -1,6 +1,6 @@
 import { isMobile } from "react-device-detect";
-import HonePageMobile from "../components/home-components-page/home-page-mobile";
-import HomePageDekstop from "../components/home-components-page/home-page-desktop";
+import HonePageMobile from "../components/page-home-components/home-page-mobile";
+import HomePageDekstop from "../components/page-home-components/home-page-desktop";
 
 const HomePage = () => {
   return (
