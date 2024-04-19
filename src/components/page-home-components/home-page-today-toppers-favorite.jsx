@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "antd";
 
-const HomePageTodayToppersFavorite = () => {
+const HomePageMobileTodayToppersFavorite = () => {
   // state for slider button navigate
   const [buttonSliderIndex, setButtonSliderIndex] = useState(0);
   const filterDataBySliderButtonNavigateIndex =
@@ -145,7 +145,7 @@ const HomePageTodayToppersFavorite = () => {
   );
 };
 
-export default HomePageTodayToppersFavorite;
+export default HomePageMobileTodayToppersFavorite;
 
 const SliderNavigation = ({ setButtonSliderIndex, buttonSliderIndex }) => {
   let sliderRef = useRef(null);

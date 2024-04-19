@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const YourShoppingInspirationCategory = () => {
+const HomePageMobileYourShoppingInspirationCategory = () => {
   const navigate = useNavigate();
   return (
     <div className="h-[360px] w-full">
@@ -24,7 +24,7 @@ const YourShoppingInspirationCategory = () => {
             <div className="w-full">
               <img src={cardData.image} alt="" className="object-cover" />
             </div>
-            <div className="px-2 py-1 w-full text-center font-bold flex justify-center items-center">
+            <div className="px-2 py-1 w-full text-center font-bold flex justify-center items-center font-space-grotesk">
               <h1>{cardData.title}</h1>
             </div>
           </div>
@@ -34,7 +34,7 @@ const YourShoppingInspirationCategory = () => {
   );
 };
 
-export default YourShoppingInspirationCategory;
+export default HomePageMobileYourShoppingInspirationCategory;
 
 const cardDataList = [
   {
