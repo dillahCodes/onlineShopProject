@@ -4,9 +4,21 @@ import PropTypes from "prop-types";
 const MobileDiscountProductCardComponent = ({ product, onClick }) => {
   return (
     <div
-      className={`h-[237px] min-w-[140px] max-w-[140px] bg-white rounded-md`}
+      className={`h-[237px] min-w-[140px] max-w-[140px] bg-white rounded-md relative`}
       onClick={onClick}
     >
+      {/* ribbon */}
+      <div className="flex flex-col absolute top-2 -left-1 ">
+        <span
+          className="text-[12px] bg-red-500 px-3 py-1 font-bold text-white font-space-grotesk"
+          style={{
+            borderRadius: "500px 999px 999px 0",
+          }}
+        >
+          {product.discount}%
+        </span>
+        <span className="w-1 h-1 bg-red-600 rounded-bl-full mt-[0.1px] " />
+      </div>
       {/* product image */}
       <div className="w-full h-[132px] rounded-[inherit]">
         <img src={product.image} className="rounded-b-none rounded-[inherit]" />

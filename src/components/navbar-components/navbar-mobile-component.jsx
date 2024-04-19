@@ -32,7 +32,7 @@ const NavbarMobileComponent = ({ className }) => {
   return (
     <>
       <Header
-        className={`flex items-center w-full px-3 py-6 shadow-sm gap-x-5 fixed z-40   max-w-[900px] ${className} `}
+        className={`flex items-center w-full px-3 py-6 shadow-sm gap-x-5 fixed z-40    ${className} `}
       >
         <InputSearch className={"w-full"} onClick={handleDisplaySearchMobileOverlay} />
         <NavbarMenuMobile NavbarHamburgerMenuOnclick={setProfileDrawerIsOpen} />

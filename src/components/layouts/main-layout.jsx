@@ -22,14 +22,14 @@ const MainLayout = (props) => {
   }, []);
 
   return (
-    <Layout className={` min-h-screen relative ${isMobile && "max-w-[900px] mx-auto"} `}>
+    <Layout className={` min-h-screen relative ${isMobile && "max-w-[500px] mx-auto"} `}>
       <div className={`w-full border-b `}>
         {!isMobile && <NavbarDekstopComponent />}
         {isMobile && (
           <NavbarMobileComponent
             className={`${
               navBgBlur ? "backdrop-filter bg-transparent backdrop-blur-sm " : "bg-white"
-            }`}
+            } max-w-[500px]`}
           />
         )}
       </div>

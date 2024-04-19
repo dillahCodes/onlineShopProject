@@ -3,6 +3,7 @@ import HomePageMobileAllFeatures from "./home-page-mobile-all-features";
 import HomePageMobileOperatorCredit from "./home-page-mobile-operator-credit";
 import HomePageMobileShopForYou from "./home-page-mobile-shop-for-you";
 import HomePageMobileSpecialDiscount from "./home-page-mobile-special-discount";
+import YourShoppingInspirationCategory from "./home-page-mobile-your-shopping-inspiration-category";
 import HomePageTodayToppersFavorite from "./home-page-today-toppers-favorite";
 
 const HonePageMobile = () => {
@@ -13,6 +14,7 @@ const HonePageMobile = () => {
       <HomePageMobileOperatorCredit />
       <HomePageMobileSpecialDiscount />
       <HomePageMobileShopForYou />
+      <YourShoppingInspirationCategory />
       <HomePageTodayToppersFavorite />
     </div>
   );

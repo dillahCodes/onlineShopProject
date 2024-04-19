@@ -41,11 +41,13 @@ const HeroPageSelider = () => {
     autoplaySpeed: 5000,
   };
   return (
+    // slider container
     <div
       className={`relative w-full ${!isMobile && "max-w-[90%] mx-auto"}`}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
+      {/* slider */}
       <Slider
         ref={(slider) => {
           sliderRef = slider;
@@ -55,14 +57,7 @@ const HeroPageSelider = () => {
       >
         {sliderImage.map((item) => (
           <div key={item.id} className={`outline-none ${!isMobile && "h-fit"}`}>
-            <img
-              loading="lazy"
-              src={item.image}
-              className={` w-full  ${
-                isMobile ? "md:h-[250px] h-[150px] object-cover" : "h-[340px]"
-              }`}
-              alt=""
-            />
+            <img loading="lazy" src={item.image} className={` w-full  h-full`} alt="" />
           </div>
         ))}
       </Slider>
