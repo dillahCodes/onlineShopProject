@@ -1,7 +1,9 @@
 import { Skeleton } from "antd";
 import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const HomePageMobileTodayPromoChoices = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full">
       {/* title */}
@@ -23,6 +25,7 @@ const HomePageMobileTodayPromoChoices = () => {
             <div
               className=" w-[140px] h-[231px] overflow-hidden rounded-md shadow-md"
               key={index}
+              onClick={() => navigate(`/coming-soon`)}
             >
               {cardData.image ? (
                 <img src={cardData.image} alt={`promo ${index}`} className="object-cover" />
@@ -33,6 +36,7 @@ const HomePageMobileTodayPromoChoices = () => {
           ))}
           {/* last card */}
           <div
+            onClick={() => navigate(`/coming-soon`)}
             className=" w-[140px] h-[231px] flex justify-center items-center overflow-hidden rounded-md shadow-md border border-red-500 relative"
             style={{
               background:
