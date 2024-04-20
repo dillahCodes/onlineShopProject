@@ -13,18 +13,18 @@ const HomePageMobileYourShoppingInspirationCategory = () => {
         </div>
       </div>
 
-      <div className="box-border flex items-start no-scrollbar borderw-full gap-2 flex-col  flex-wrap  justify-between leading-[16px] max-h-[320px] overflow-x-auto overflow-y-auto px-4 pb-3 pt-2">
+      <div className="box-border flex items-start no-scrollbar  w-full gap-2 flex-col  flex-wrap  justify-between leading-[16px] max-h-[320px] overflow-x-auto overflow-y-auto px-4 pb-3 pt-2">
         {/* card */}
         {cardDataList.map((cardData, index) => (
           <div
-            className="block leading-[16px] w-[140px] min-h-[135px]  max-h-[140px] border rounded-md overflow-hidden"
+            className="block leading-[16px] w-[150px] min-h-[135px]  max-h-[140px] border rounded-md overflow-hidden"
             key={index}
             onClick={() => navigate(`coming-soon`)}
           >
             <div className="w-full">
               <img src={cardData.image} alt="" className="object-cover" />
             </div>
-            <div className="px-2 py-1 w-full text-center font-bold flex justify-center items-center font-space-grotesk">
+            <div className="px-2 py-1 w-full  font-bold flex justify-center items-center">
               <h1>{cardData.title}</h1>
             </div>
           </div>

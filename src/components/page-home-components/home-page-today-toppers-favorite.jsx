@@ -228,7 +228,7 @@ const Dots = ({
   isLastIndexContentType,
 }) => {
   return (
-    <div className="w-full justify-center items-center flex  gap-x-1">
+    <div className="w-full justify-center  flex items-center  gap-x-1">
       {!isFirstIndexContentType && (
         <div
           onClick={() => setButtonNavigationIndexWithDots((prev) => prev - 1)}

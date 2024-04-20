@@ -23,6 +23,16 @@ export default {
           "scrollbar-width": "none",
           overflow: "-moz-scrollbars-none", // hide scrollbar in firefox
         },
+
+        ".rotate-x-90": {
+          transform: "rotateX(90deg)",
+        },
+        ".rotate-x-0": {
+          transform: "rotateX(0deg)",
+        },
+        ".-rotate-x-90": {
+          transform: "rotateX(-90deg)",
+        },
       };
 
       addUtilities(newUtilities);

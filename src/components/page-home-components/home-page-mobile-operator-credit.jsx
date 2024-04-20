@@ -40,33 +40,34 @@ const HomePageMobileOperatorCredit = () => {
       <div className="p-[16px] text-lg pb-[12px] font-bold font-space-grotesk capitalize">
         <h1>isi pulsa, yuk!</h1>
       </div>
-      <div className="w-full bg-[#00AA5B] ">
+      <div className="w-full bg-[#00AA5B] h-fit  ">
         <img
           loading="lazy"
           src={operatorCreditImg}
           alt="baneroperatorcredit"
           className="w-full"
         />
-        <div className="w-full overflow-x-auto ">
-          <div className="min-w-[360px] h-fit w-full box-border no-scrollbar leading-4 pb-3 gap-3 justify-center flex flex-wrap">
-            {operatorNameList.map((operator, index) => (
-              <div
-                onClick={() => navigate(`/coming-soon`)}
-                key={index}
-                className="min-w-[110px]  max-h-[90px] rounded-lg bg-white p-3 flex flex-col gap-y-2 items-center"
-              >
-                <div className="w-14 h-14 flex justify-center items-center rounded-xl shadow-md">
-                  <img
-                    src={operator.image}
-                    loading="lazy"
-                    className="w-11"
-                    alt={operator.name}
-                  />
-                </div>
-                <p>{operator.name}</p>
+        <div
+          className="box-border flex  no-scrollbar  p-2
+          w-full gap-2  flex-col  flex-wrap  justify-between  max-h-[310px] overflow-x-auto overflow-y-auto "
+        >
+          {operatorNameList.map((operator, index) => (
+            <div
+              onClick={() => navigate(`/coming-soon`)}
+              key={index}
+              className=" min-w-[130px] min-h-[100px] rounded-lg bg-white p-2 flex flex-col gap-y-2 items-center"
+            >
+              <div className="w-14 h-14 flex justify-center items-center rounded-xl shadow-md">
+                <img
+                  src={operator.image}
+                  loading="lazy"
+                  className="w-11"
+                  alt={operator.name}
+                />
               </div>
-            ))}
-          </div>
+              <p>{operator.name}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

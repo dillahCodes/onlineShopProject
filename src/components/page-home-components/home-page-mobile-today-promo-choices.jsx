@@ -23,7 +23,7 @@ const HomePageMobileTodayPromoChoices = () => {
           {/* card */}
           {cardDataaList.map((cardData, index) => (
             <div
-              className=" w-[140px] h-[231px] overflow-hidden rounded-md shadow-md"
+              className=" w-[140px] h-[231px] overflow-hidden rounded-md shadow-md cursor-pointer"
               key={index}
               onClick={() => navigate(`/coming-soon`)}
             >
@@ -37,7 +37,7 @@ const HomePageMobileTodayPromoChoices = () => {
           {/* last card */}
           <div
             onClick={() => navigate(`/coming-soon`)}
-            className=" w-[140px] h-[231px] flex justify-center items-center overflow-hidden rounded-md shadow-md border border-red-500 relative"
+            className=" w-[140px] cursor-pointer h-[231px] flex justify-center items-center overflow-hidden rounded-md shadow-md  relative"
             style={{
               background:
                 "url(https://assets.tokopedia.net/assets-tokopedia-lite/v2/phoenix/kratos/e65f5df7.svg) no-repeat right top,var(--NN0,#FFFFFF)",

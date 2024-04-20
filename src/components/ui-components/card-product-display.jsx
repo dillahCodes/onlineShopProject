@@ -1,9 +1,8 @@
 import defaultimage from "../../assets/defaultimage.jpg";
-import { AiFillShop } from "react-icons/ai";
 import PropTypes from "prop-types";
-import { CiStar } from "react-icons/ci";
-import { isMobile } from "react-device-detect";
+
 import formatCurrencyToIDR from "../../utils/format-currency";
+import { TiStarFullOutline } from "react-icons/ti";
 
 const CardProductDisplay = ({
   imageUrl,
@@ -12,19 +11,16 @@ const CardProductDisplay = ({
   rating,
   totalSold,
   onClick,
-  productOwnerName,
+  productLocationFrom,
+  className,
 }) => {
   function truncateString(text, maxLength) {
-    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    return maxLength && text?.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   }
 
   return (
-    <div
-      className={`w-[45%] cursor-pointer  sm:w-[30%]    ${
-        isMobile ? "xl:w-[25%] lg:w-[23%]" : "xl:w-[15%] lg:w-[20%]"
-      } border-[2px] rounded-md border-black  `}
-      onClick={onClick}
-    >
+    <div className={className} onClick={onClick}>
+      {/* image card */}
       <div className="w-full rounded-[inherit]">
         <img
           src={imageUrl ? imageUrl : defaultimage}
@@ -34,18 +30,34 @@ const CardProductDisplay = ({
         />
       </div>
       <div className="w-full p-2">
+        {/* title */}
         <h1 className="font-medium font-space-grotesk">{truncateString(productTitle, 40)}</h1>
-        <h2 className="my-2 text-base font-bold font-space-grotesk">{formatCurrencyToIDR(price)}</h2>
-        <span className="flex items-center gap-x-2">
-          <AiFillShop />
-          {productOwnerName ? productOwnerName : "unknown"}
-        </span>
-        <span className="flex items-center w-full mt-2 gap-x-3">
-          <span className="flex items-center gap-x-1">
-            <CiStar /> {rating > 0 ? rating : "0.0"}
+        {/* price */}
+        <h2 className=" text-base font-bold font-space-grotesk">
+          {formatCurrencyToIDR(price)}
+        </h2>
+
+        {/* rating */}
+        <span className="flex  items-center w-full  gap-x-1 text-[#6d7588] ">
+          <span className="flex items-center gap-x-1 ">
+            <TiStarFullOutline className="text-[#FFC400]" />
+            <span className="text-sm">{rating > 0 ? rating : "0.0"}</span>
           </span>
-          <div className="inline-block rounded-full  w-[1px] h-[15px] bg-black" />
-          <span>{totalSold ? totalSold : 0} terjual</span>
+          <span>•</span>
+          <span className="truncate">{totalSold ? totalSold : 0} terjual</span>
+        </span>
+
+        <span className="">
+          <span className="flex items-center gap-x-2 ">
+            <span
+              className="h-5 w-5"
+              style={{
+                background: `url("https://images.tokopedia.net/img/official_store_badge.png")`,
+                backgroundSize: "cover",
+              }}
+            />
+            <span>{productLocationFrom ? productLocationFrom : "Indonesia"}</span>
+          </span>
         </span>
       </div>
     </div>
@@ -61,5 +73,6 @@ CardProductDisplay.propTypes = {
   rating: PropTypes.string,
   totalSold: PropTypes.number,
   onClick: PropTypes.func,
-  productOwnerName: PropTypes.string,
+  className: PropTypes.string,
+  productLocationFrom: PropTypes.string,
 };
