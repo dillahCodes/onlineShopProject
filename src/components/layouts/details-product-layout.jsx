@@ -9,9 +9,13 @@ const DetailsProductLayout = ({ children }) => {
     <Layout className={` h-screen relative ${isMobile && "max-w-[900px] mx-auto"}`}>
       <div className={`w-full border-b`}>
         {!isMobile && <NavbarDekstopComponent />}
-        {isMobile && <NavbarMobileComponent />}
+        {isMobile && <NavbarMobileComponent className={`bg-white`} />}
       </div>
-      <Layout className={`relative overflow-y-scroll no-scrollbar mt-20`}>{children}</Layout>
+      <Layout
+        className={`relative overflow-y-scroll no-scrollbar mt-[65px] border border-red-600`}
+      >
+        {children}
+      </Layout>
     </Layout>
   );
 };
