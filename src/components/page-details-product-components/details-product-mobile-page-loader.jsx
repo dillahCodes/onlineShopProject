@@ -2,7 +2,6 @@ import { Skeleton } from "antd";
 import PropTypes from "prop-types";
 
 const DetailsProductMobilePageLoader = ({ active }) => {
-  console.log(active);
   return (
     <div className="w-full">
       {/* details image skelekton */}
@@ -20,7 +19,12 @@ const DetailsProductMobilePageLoader = ({ active }) => {
         <Skeleton.Input size="small" className="w-[50%] h-7" active={active} />
         <div className="flex w-full gap-3 overflow-x-scroll">
           {[...Array(3)].map((_, index) => (
-            <Skeleton.Input key={index} size="small" className={` max-w-sm h-7`} active={active} />
+            <Skeleton.Input
+              key={index}
+              size="small"
+              className={` max-w-sm h-7`}
+              active={active}
+            />
           ))}
         </div>
       </div>
