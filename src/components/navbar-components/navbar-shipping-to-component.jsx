@@ -9,7 +9,7 @@ const NavbarShippingToComponent = () => {
         dikirim ke
       </span>
       <div className="flex items-center">
-        <span className="font-bold "> rajeg, tangerang banten</span>
+        <span className="font-bold "> jakarta pusat</span>
         <MdKeyboardArrowDown className="text-xl" />
       </div>
     </div>

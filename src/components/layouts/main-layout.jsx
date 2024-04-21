@@ -1,7 +1,5 @@
 import { Layout } from "antd";
 import PropTypes from "prop-types";
-import { isMobile } from "react-device-detect";
-import NavbarDekstopComponent from "../navbar-components/navbar-desktop-component";
 import NavbarMobileComponent from "../navbar-components/navbar-mobile-component";
 import NavbarMobileGreetingComponent from "../navbar-components/navbar-mobile-greeting-component";
 import { useEffect, useState } from "react";
@@ -22,20 +20,17 @@ const MainLayout = (props) => {
   }, []);
 
   return (
-    <Layout className={` min-h-screen relative ${isMobile && "max-w-[500px] mx-auto"} `}>
+    <Layout className={` min-h-screen relative max-w-[500px] mx-auto `}>
       <div className={`w-full border-b `}>
-        {!isMobile && <NavbarDekstopComponent />}
-        {isMobile && (
-          <NavbarMobileComponent
-            className={`${
-              navBgBlur ? "backdrop-filter bg-transparent backdrop-blur-sm " : "bg-white"
-            } max-w-[500px]`}
-          />
-        )}
+        <NavbarMobileComponent
+          className={`${
+            navBgBlur ? "backdrop-filter bg-transparent backdrop-blur-sm " : "bg-white"
+          } max-w-[500px]`}
+        />
       </div>
       <Layout className="relative  no-scrollbar ">
         {/* mobile greeting */}
-        {isMobile === true && <NavbarMobileGreetingComponent />}
+        <NavbarMobileGreetingComponent />
         {children}
       </Layout>
     </Layout>

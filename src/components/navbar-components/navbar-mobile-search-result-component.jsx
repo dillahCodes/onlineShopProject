@@ -8,7 +8,7 @@ const NavbarMobileSearchResultComponent = ({ onClick, recomendedSearch }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="absolute inset-0 z-50 w-full h-full p-5 bg-[#f7f7f7]">
+    <div className="fixed inset-0 z-[99999] w-full h-full p-5 bg-[#f7f7f7]">
       <div className="flex items-center w-full gap-x-5">
         <IoIosArrowRoundBack className="text-5xl" onClick={onClick} />
         <InputSearch autoFocus />

@@ -4,12 +4,16 @@ import { IoCartOutline } from "react-icons/io5";
 
 const NavbarCartComponent = ({ size }) => {
   return (
-    <Badge count={1}>
+    <Badge count={1} size="small">
       <Avatar
         size={size}
         shape="square"
-        className={` text-black bg-transparent cursor-pointer`}
-        icon={<IoCartOutline className="text-2xl" />}
+        className={`text-black bg-transparent cursor-pointer`}
+        icon={
+          <div className="text-2xl">
+            <IoCartOutline />
+          </div>
+        }
       />
     </Badge>
   );

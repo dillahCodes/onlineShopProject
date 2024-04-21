@@ -1,9 +1,7 @@
-import { isMobile } from "react-device-detect";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AllProductReviewsMobile from "../components/page-all-product-reviews-components/all-product-reviews-mobile";
-import AllProductReviewsDesktop from "../components/page-all-product-reviews-components/all-product-reviews-desktop";
 
 const AllProductReviewsPage = () => {
   const [currentProductData, setCurrentProductData] = useState(null);
@@ -24,15 +22,7 @@ const AllProductReviewsPage = () => {
     if (productId) fetchData();
   }, [productId]);
 
-  return (
-    <>
-      {isMobile ? (
-        <AllProductReviewsMobile currentProductData={currentProductData} />
-      ) : (
-        <AllProductReviewsDesktop />
-      )}
-    </>
-  );
+  return <AllProductReviewsMobile currentProductData={currentProductData} />;
 };
 
 export default AllProductReviewsPage;

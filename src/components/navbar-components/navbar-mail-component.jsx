@@ -4,12 +4,16 @@ import PropTypes from "prop-types";
 
 const NavbarMailComponent = ({ size }) => {
   return (
-    <Badge count={1}>
+    <Badge count={1} size="small">
       <Avatar
         size={size}
         shape="square"
         className={`text-black bg-transparent cursor-pointer`}
-        icon={<IoMailOutline className="text-2xl" />}
+        icon={
+          <div className="text-2xl">
+            <IoMailOutline />
+          </div>
+        }
       />
     </Badge>
   );

@@ -35,7 +35,7 @@ const FavouriteToppersTodayCardWidget = ({ ProductData, className, onClick, ...r
 
       {/* details */}
       <div
-        className={`w-full h-full ${
+        className={`w-full h-fit  ${
           isTextOverflow(name, 80) && "truncate"
         } flex flex-col select-none `}
         onClick={onClick}

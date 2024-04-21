@@ -3,8 +3,6 @@ import InputSearch from "../input-components/input-search";
 import NavbarMenuMobile from "./navbar-mobile-menu-component";
 import { useSearchBar } from "../../context/search-bar-context";
 import NavbarMobileSearchResultComponent from "./navbar-mobile-search-result-component";
-import recomendedSearchResult from "../navbar-fake-search-result-data";
-import { isMobile } from "react-device-detect";
 import { useState } from "react";
 import BottomDrawer from "../ui-components/bottom-drawer";
 import useToggle from "../../hooks/use-toggle";
@@ -58,7 +56,7 @@ const NavbarMobileComponent = ({ className }) => {
       </BottomDrawer>
 
       {/*  overlay when search bar mobile is focused */}
-      {searchBarIsFocused && isMobile && (
+      {searchBarIsFocused && (
         <NavbarMobileSearchResultComponent
           recomendedSearch={recomendedSearchResult}
           onClick={closeSearchBarMobile}
@@ -73,3 +71,56 @@ export default NavbarMobileComponent;
 NavbarMobileComponent.propTypes = {
   className: PropTypes.string,
 };
+
+const recomendedSearchResult = [
+  {
+    id: 1,
+    title: "hp samsung",
+    to: "/hpsamsung",
+  },
+  {
+    id: 2,
+    title: "hp xiaomi",
+    to: "/hpxiaomi",
+  },
+  {
+    id: 3,
+    title: "hp gaming",
+    to: "/hpgaming",
+  },
+  {
+    id: 4,
+    title: "hp iphone",
+    to: "/hpiphone",
+  },
+  {
+    id: 5,
+    title: "hp oppo",
+    to: "/hpoppo",
+  },
+  {
+    id: 6,
+    title: "hp vivo",
+    to: "/hpvivo",
+  },
+  {
+    id: 7,
+    title: "laptop asus",
+    to: "/laptopasus",
+  },
+  {
+    id: 8,
+    title: "laptop acer",
+    to: "/laptopacer",
+  },
+  {
+    id: 9,
+    title: "laptop dell",
+    to: "/laptopdell",
+  },
+  {
+    id: 10,
+    title: "laptop lenovo",
+    to: "/laptoplenovo",
+  },
+];
