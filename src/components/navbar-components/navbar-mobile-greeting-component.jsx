@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import userImage from "../../assets/home-page/user-greeting-image.png";
 import { useAuth } from "../../context/user-auth-context";
 import formatCurrencyToIDR from "../../utils/format-currency";
+import headerImage from "../../assets/home-page/greeting.png";
 
 // this component render in mobile view
 const NavbarMobileGreetingComponent = () => {
@@ -13,9 +14,12 @@ const NavbarMobileGreetingComponent = () => {
 
   return (
     <div
-      className={` p-3 pt-[70px] bg-[url('./assets/home-page/greeting.png')] text-slate-100 font-space-grotesk`}
+      className={` p-3 pt-[70px]  text-slate-100 font-space-grotesk`}
+      style={{
+        backgroundImage: `url('${headerImage}')`,
+      }}
     >
-      <div className="flex items-center justify-between w-full text-black border">
+      <div className="flex items-center justify-between w-full text-black ">
         <NavbarShippingToComponent />
       </div>
       {user ? (
