@@ -9,6 +9,8 @@ const productServices = {
     instance_axios.patch(`products/${productId}`, productData),
   deleteProduct: (productId) => instance_axios.delete(`products/${productId}/delete`),
   searchProduct: (search) => instance_axios.get(`products/search?q=${search}`),
+  searchProductWithLimit: (search, limit) =>
+    instance_axios.get(`products/search?q=${search}&limit=${limit}`),
 };
 
 export default productServices;

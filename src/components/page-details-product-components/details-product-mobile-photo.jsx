@@ -15,7 +15,12 @@ const DetailsProductMobilePhoto = ({ imageProductData }) => {
       <Slider {...settings} id="sliderProductsCategories">
         {imageProductData?.map((item) => (
           <div className="w-full h-full " key={item.img_id}>
-            <img src={item.img_url} width={100} className="w-full object-contain max-h-[400px]" alt="" />
+            <img
+              src={item.img_url}
+              width={100}
+              className="w-full object-contain max-h-[400px]"
+              alt=""
+            />
           </div>
         ))}
       </Slider>

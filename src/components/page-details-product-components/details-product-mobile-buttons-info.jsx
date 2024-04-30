@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import ButtonComponent from "../ui-components/button-component";
-import { IoIosStar } from "react-icons/io";
 import { AiOutlineCamera } from "react-icons/ai";
-import { TiMessages } from "react-icons/ti";
+import { TiMessages, TiStarFullOutline } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
+import productSoldCountFormatter from "../../utils/product-sold-count-formatter";
 
 const DetailsProductMobileButtonsInfo = ({ productData }) => {
   const navigate = useNavigate();
@@ -23,12 +23,14 @@ const DetailsProductMobileButtonsInfo = ({ productData }) => {
   };
 
   return (
-    <div className="flex flex-wrap items-center w-full gap-2 p-5 mt-2 bg-white gap-x-5">
-      <span className="capitalize font-space-grotesk">terjual 0 rb+</span>
-      <div className="flex flex-wrap gap-x-3">
+    <div className="flex items-center w-full gap-2 p-3 mt-2 bg-white gap-x-5 overflow-x-auto no-scrollbar">
+      <span className="capitalize font-space-grotesk min-w-fit">
+        {productSoldCountFormatter(productData?.sold_count)} terjual
+      </span>
+      <div className="flex  gap-x-3">
         <ButtonComponent
           onClick={() => navigate(`/product/${productData.product_id}/reviews`)}
-          icon={<IoIosStar className="text-xl" />}
+          icon={<TiStarFullOutline className="text-xl text-[#FFC400]" />}
           className={"flex items-center gap-x-1"}
         >
           <span>

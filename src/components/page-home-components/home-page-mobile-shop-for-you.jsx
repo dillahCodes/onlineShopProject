@@ -1,12 +1,12 @@
-import CardShopForYouComponent from "../ui-components/card-shop-for-you-component";
-
 // shoop for you image mock
 import shhop1 from "../../assets/home-page/shop-mock-for-you.webp";
 import shop1product from "../../assets/home-page/shop-mock-product-for-you.webp";
 import shopbadge1 from "../../assets/shop-badge1.png";
 import { useNavigate } from "react-router-dom";
+// component
+import CardMerchantForYouComponent from "../ui-components/card-merchant-for-you-component";
 
-const shopMockDataList = Array.from({ length: 10 }, () => ({
+const merchantMockDataList = Array.from({ length: 10 }, () => ({
   productHeaderImage: shop1product,
   shopProfileImage: shhop1,
   shopName: "JINISO.ID",
@@ -14,7 +14,7 @@ const shopMockDataList = Array.from({ length: 10 }, () => ({
   shopBadge: shopbadge1,
 }));
 
-const HomePageMobileShopForYou = () => {
+const HomePageMobileRecomendedMerchantForYou = () => {
   const navigate = useNavigate();
   return (
     <div className="w-full ">
@@ -29,9 +29,9 @@ const HomePageMobileShopForYou = () => {
       {/* shop for you */}
       <div className="pl-4 w-full h-[233px] relative overflow-x-auto no-scrollbar">
         <div className="absolute flex gap-x-2 ">
-          {shopMockDataList.map((shopData, index) => {
+          {merchantMockDataList.map((shopData, index) => {
             return (
-              <CardShopForYouComponent
+              <CardMerchantForYouComponent
                 key={index}
                 shop={shopData}
                 onClick={() => navigate(`/coming-soon`)}
@@ -44,4 +44,4 @@ const HomePageMobileShopForYou = () => {
   );
 };
 
-export default HomePageMobileShopForYou;
+export default HomePageMobileRecomendedMerchantForYou;

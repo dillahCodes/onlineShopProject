@@ -1,7 +1,7 @@
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import PropTypes from "prop-types";
 
-const CardShopForYouComponent = ({ shop, onClick }) => {
+const CardMerchantForYouComponent = ({ shop, onClick }) => {
   return (
     <section
       className="h-[216px] w-[132px] shadow-md rounded-md overflow-hidden"
@@ -38,9 +38,9 @@ const CardShopForYouComponent = ({ shop, onClick }) => {
   );
 };
 
-export default CardShopForYouComponent;
+export default CardMerchantForYouComponent;
 
-CardShopForYouComponent.propTypes = {
+CardMerchantForYouComponent.propTypes = {
   shop: PropTypes.object,
   onClick: PropTypes.func.isRequired,
 };

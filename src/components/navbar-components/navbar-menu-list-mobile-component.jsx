@@ -24,10 +24,13 @@ const NavbarMenuListMobileComponent = () => {
       {/* login and register button if user is not login */}
       {!user && (
         <div className="flex w-full p-5 bg-white gap-x-5">
-          <ButtonComponent className={"bg-transparent  border-black capitalize w-full"}>
+          <ButtonComponent
+            onClick={() => navigate("/login")}
+            className={"bg-transparent  border-black capitalize w-full"}
+          >
             masuk
           </ButtonComponent>
-          <ButtonComponent type="primary" className={"capitalize w-full"}>
+          <ButtonComponent type="primary" onClick={() => navigate("/signup")} className={"capitalize w-full"}>
             daftar
           </ButtonComponent>
         </div>
@@ -57,29 +60,29 @@ const NavbarMenuListMobileComponent = () => {
           onClick={goToComingSoonPage}
           className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
         >
-          <RiFileList3Line className="text-2xl" />
-          <span>daftar transaksi</span>
+          <RiFileList3Line className="text-xl" />
+          <span className="text-base">daftar transaksi</span>
         </div>
         <div
           onClick={goToComingSoonPage}
           className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
         >
-          <FaRegStar className="text-2xl" />
-          <span>ulasan</span>
+          <FaRegStar className="text-xl" />
+          <span className="text-base">ulasan</span>
         </div>
         <div
           onClick={goToComingSoonPage}
           className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
         >
-          <FaRegHeart className="text-2xl" />
-          <span>whishlist</span>
+          <FaRegHeart className="text-xl" />
+          <span className="text-base">whishlist</span>
         </div>
         <div
           onClick={goToComingSoonPage}
           className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
         >
-          <AiOutlineShop className="text-2xl" />
-          <span>toko yang di-follow</span>
+          <AiOutlineShop className="text-xl" />
+          <span className="text-base">toko yang di-follow</span>
         </div>
       </div>
 
@@ -89,22 +92,22 @@ const NavbarMenuListMobileComponent = () => {
           onClick={goToComingSoonPage}
           className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
         >
-          <TbUserExclamation className="text-2xl" />
-          <span>pesanan dikomplain</span>
+          <TbUserExclamation className="text-xl" />
+          <span className="text-base">pesanan dikomplain</span>
         </div>
         <div
           onClick={goToComingSoonPage}
           className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
         >
-          <LiaUserAstronautSolid className="text-2xl" />
-          <span>bantuan</span>
+          <LiaUserAstronautSolid className="text-xl" />
+          <span className="text-base">bantuan</span>
         </div>
         <div
           onClick={goToComingSoonPage}
           className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
         >
-          <BsQrCodeScan className="text-2xl" />
-          <span>scan kode qr</span>
+          <BsQrCodeScan className="text-xl" />
+          <span className="text-base">scan kode qr</span>
         </div>
       </div>
     </Layout>

@@ -1,8 +1,8 @@
 import { Avatar } from "antd";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { IoIosSearch } from "react-icons/io";
 import PropTypes from "prop-types";
 
-const NavbarHamburgerMenu = ({ size, onClick }) => {
+const NavbarSearchComponent = ({ size, onClick }) => {
   return (
     <Avatar
       size={size}
@@ -10,7 +10,7 @@ const NavbarHamburgerMenu = ({ size, onClick }) => {
       className={` text-black bg-transparent cursor-pointer`}
       icon={
         <div className="text-2xl">
-          <RxHamburgerMenu />
+          <IoIosSearch />
         </div>
       }
       onClick={onClick}
@@ -18,9 +18,9 @@ const NavbarHamburgerMenu = ({ size, onClick }) => {
   );
 };
 
-export default NavbarHamburgerMenu;
+export default NavbarSearchComponent;
 
-NavbarHamburgerMenu.propTypes = {
+NavbarSearchComponent.propTypes = {
   size: PropTypes.number,
   onClick: PropTypes.func.isRequired,
 };

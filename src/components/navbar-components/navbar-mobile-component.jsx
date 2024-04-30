@@ -1,6 +1,5 @@
 import { Header } from "antd/es/layout/layout";
 import InputSearch from "../input-components/input-search";
-import NavbarMenuMobile from "./navbar-mobile-menu-component";
 import { useSearchBar } from "../../context/search-bar-context";
 import NavbarMobileSearchResultComponent from "./navbar-mobile-search-result-component";
 import { useState } from "react";
@@ -9,11 +8,21 @@ import useToggle from "../../hooks/use-toggle";
 import { IoCloseOutline } from "react-icons/io5";
 import NavbarMenuListMobileComponent from "./navbar-menu-list-mobile-component";
 import PropTypes from "prop-types";
+import NavbarMailComponent from "./navbar-mail-component";
+import NavbarNotificationComponent from "./navbar-notification-component";
+import NavbarCartComponent from "./navbar-cart-component";
+import NavbarHamburgerMenu from "./navbar-hamburger-component";
+import useSearchGetRecomendationProduct from "../../features/search/hooks/use-get-search-recomendation-product";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const NavbarMobileComponent = ({ className }) => {
-  const [isFloatingVisible, setIsFloatingVisible] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isFloatingVisible, setIsFloatingVisible] = useToggle(false);
   const [profileDrawerIsOpen, setProfileDrawerIsOpen] = useToggle();
   const { searchBarIsFocused, setSearchBarIsFocused } = useSearchBar();
+  const [searchBarValue, setSearchBarValue] = useState(searchParams.get("q") || "");
+  const [recomendedSearchResult] = useSearchGetRecomendationProduct();
+  const navigate = useNavigate();
 
   // handle display search mobile overlay
   const handleDisplaySearchMobileOverlay = () => {
@@ -27,20 +36,34 @@ const NavbarMobileComponent = ({ className }) => {
     setIsFloatingVisible(false);
   };
 
+  // handle onchange search bar
+  const handleOnchangeSearchBar = (e) => {
+    setSearchBarValue(e.target.value);
+  };
+
+  // handle submit search bar
+  const handleOnSubmitSearchBar = (e) => {
+    if (e.key === "Enter" && searchBarValue) {
+      setSearchParams({ q: searchBarValue, st: "product" });
+      navigate(`product/search?q=${encodeURIComponent(searchBarValue)}&st=product`, { replace: true });
+    }
+  };
+
   return (
     <>
-      <Header
-        className={`flex items-center w-full px-3 py-6 shadow-sm gap-x-5 fixed z-40    ${className} `}
-      >
+      <Header className={`flex items-center w-full px-3 py-6 shadow-sm gap-x-5 fixed z-40    ${className} `}>
         <InputSearch className={"w-full"} onClick={handleDisplaySearchMobileOverlay} />
-        <NavbarMenuMobile NavbarHamburgerMenuOnclick={setProfileDrawerIsOpen} />
+        <NavbarMailComponent size={25} />
+        <NavbarNotificationComponent size={25} />
+        <NavbarCartComponent size={25} />
+        <NavbarHamburgerMenu size={25} onClick={setProfileDrawerIsOpen} />
       </Header>
 
       {/* menu overlay */}
       <BottomDrawer
         isOpen={profileDrawerIsOpen}
         onClose={setProfileDrawerIsOpen}
-        drawerHeight={"100vh"}
+        drawerHeight={"100%"}
         id="mobileMenuDrawer"
         drawerTitle={
           <div className="flex items-center w-full gap-x-5">
@@ -58,8 +81,10 @@ const NavbarMobileComponent = ({ className }) => {
       {/*  overlay when search bar mobile is focused */}
       {searchBarIsFocused && (
         <NavbarMobileSearchResultComponent
+          onChange={handleOnchangeSearchBar}
           recomendedSearch={recomendedSearchResult}
           onClick={closeSearchBarMobile}
+          onKeyDown={handleOnSubmitSearchBar}
         />
       )}
     </>
@@ -71,56 +96,3 @@ export default NavbarMobileComponent;
 NavbarMobileComponent.propTypes = {
   className: PropTypes.string,
 };
-
-const recomendedSearchResult = [
-  {
-    id: 1,
-    title: "hp samsung",
-    to: "/hpsamsung",
-  },
-  {
-    id: 2,
-    title: "hp xiaomi",
-    to: "/hpxiaomi",
-  },
-  {
-    id: 3,
-    title: "hp gaming",
-    to: "/hpgaming",
-  },
-  {
-    id: 4,
-    title: "hp iphone",
-    to: "/hpiphone",
-  },
-  {
-    id: 5,
-    title: "hp oppo",
-    to: "/hpoppo",
-  },
-  {
-    id: 6,
-    title: "hp vivo",
-    to: "/hpvivo",
-  },
-  {
-    id: 7,
-    title: "laptop asus",
-    to: "/laptopasus",
-  },
-  {
-    id: 8,
-    title: "laptop acer",
-    to: "/laptopacer",
-  },
-  {
-    id: 9,
-    title: "laptop dell",
-    to: "/laptopdell",
-  },
-  {
-    id: 10,
-    title: "laptop lenovo",
-    to: "/laptoplenovo",
-  },
-];

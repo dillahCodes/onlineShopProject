@@ -2,7 +2,7 @@ import HeroPageSelider from "./home-page-hero-slider";
 import HomePageMobileAllFeatures from "./home-page-mobile-all-features";
 import HomePageMobileOperatorCredit from "./home-page-mobile-operator-credit";
 import HomePageMobileRecomendationFeed from "./home-page-mobile-recomendation-feed";
-import HomePageMobileShopForYou from "./home-page-mobile-shop-for-you";
+import HomePageMobileRecomendedMerchantForYou from "./home-page-mobile-shop-for-you";
 import HomePageMobileSpecialDiscount from "./home-page-mobile-special-discount";
 import HomePageMobileTodayPromoChoices from "./home-page-mobile-today-promo-choices";
 import HomePageMobileYourShoppingInspirationCategory from "./home-page-mobile-your-shopping-inspiration-category";
@@ -15,7 +15,7 @@ const HonePageMobile = () => {
       <HomePageMobileAllFeatures />
       <HomePageMobileOperatorCredit />
       <HomePageMobileSpecialDiscount />
-      <HomePageMobileShopForYou />
+      <HomePageMobileRecomendedMerchantForYou />
       <HomePageMobileYourShoppingInspirationCategory />
       <HomePageMobileTodayToppersFavorite />
       <HomePageMobileTodayPromoChoices />

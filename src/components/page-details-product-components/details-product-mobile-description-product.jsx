@@ -3,6 +3,7 @@ import ButtonComponent from "../ui-components/button-component";
 import { useState } from "react";
 import BottomDrawer from "../ui-components/bottom-drawer";
 import { IoClose } from "react-icons/io5";
+import truncateString from "../../utils/truncate-string";
 
 const DetailsProductMobileDescriptionProduct = ({ productData }) => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -10,10 +11,6 @@ const DetailsProductMobileDescriptionProduct = ({ productData }) => {
   const handleOpenAndCloseDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen);
   };
-
-  function truncateString(text, maxLength) {
-    return text.length > maxLength ? text.substring(0, maxLength) + "-..." : text;
-  }
 
   return (
     <>
@@ -25,14 +22,14 @@ const DetailsProductMobileDescriptionProduct = ({ productData }) => {
         onClose={handleOpenAndCloseDrawer}
         drawerHeight="80%"
       />
-      <div className="flex flex-col p-5 mt-2 bg-white gap-y-5">
+      <div className="flex flex-col p-3 mt-2 bg-white gap-y-5">
         <div className="w-full">
           <h1 className="text-lg font-bold font-space-grotesk">Detail Produk</h1>
           {/* etalase */}
           <div className="w-full mt-3">
             <span className="flex items-center justify-between pb-2 border-b gap-x-5 ">
               <span className="capitalize">etalase</span>
-              <span className="font-bold capitalize truncate font-space-grotesk ">
+              <span className="font-bold capitalize truncate font-space-grotesk text-[#00AA5B] ">
                 Lorem ipsum dolor sit amet.
               </span>
             </span>
@@ -40,10 +37,20 @@ const DetailsProductMobileDescriptionProduct = ({ productData }) => {
           {/* kategori */}
           <div className="w-full mt-3">
             <span className="flex items-center justify-between pb-2 border-b gap-x-5 ">
-              <span className="capitalize">kategori</span>
-              <span className="font-bold capitalize truncate font-space-grotesk ">
-                Lorem ipsum dolor sit amet.
-              </span>
+              <span className="capitalize ">kategori</span>
+              <div className="flex items-center gap-x-1 truncate">
+                <span className="font-bold capitalize truncate cursor-pointer font-space-grotesk text-[#00AA5B]">
+                  Home
+                </span>
+                <span className="font-space-grotesk ">&gt;</span>
+                <span className="font-bold capitalize cursor-pointer truncate text-[#00AA5B] font-space-grotesk ">
+                  {productData.category}
+                </span>
+                <span className="font-space-grotesk cursor-pointer ">&gt;</span>
+                <span className="font-bold capitalize cursor-pointer text-[#00AA5B] truncate font-space-grotesk ">
+                  {productData.name}
+                </span>
+              </div>
             </span>
           </div>
         </div>
@@ -53,7 +60,9 @@ const DetailsProductMobileDescriptionProduct = ({ productData }) => {
           <p className="mt-3">{truncateString(productData.description, 150)}</p>
           <ButtonComponent
             onClick={handleOpenAndCloseDrawer}
-            className={"capitalize border-none shadow-none p-0 font-bold font-space-grotesk"}
+            className={
+              "capitalize border-none shadow-none p-0 font-bold font-space-grotesk text-[#00AA5B]"
+            }
           >
             baca selengkap
           </ButtonComponent>
@@ -95,7 +104,9 @@ const ReadMoreDrawer = ({
       drawerHeight={drawerHeight}
       className="rounded-t-lg"
     >
-      <p>{description}</p>
+      <div className="w-full p-3">
+        <span className="">{description}</span>
+      </div>
     </BottomDrawer>
   );
 };

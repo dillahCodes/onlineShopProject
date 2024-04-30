@@ -8,6 +8,7 @@ import RegisterPage from "../pages/register-page";
 import DetailsProductPage from "../pages/details-product-page";
 import AllProductReviewsPage from "../pages/all-product-reviews-page";
 import ComingSoonPage from "../pages/coming-soon-page";
+import ResultSearchPage from "../pages/result-search-page";
 
 const routers = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const routers = createBrowserRouter([
         <AllProductReviewsPage />
       </AllProductReviewsLayout>
     ),
+  },
+  {
+    path: "/product/search",
+    element: <ResultSearchPage />,
   },
 ]);
 

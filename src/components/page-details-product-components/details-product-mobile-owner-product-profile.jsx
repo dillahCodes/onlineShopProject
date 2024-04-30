@@ -17,14 +17,24 @@ const DetailsProductMobileOwnerProductProfile = ({ productData }) => {
   };
 
   return (
-    <div className="w-full p-5 mt-2 bg-white ">
+    <div className="w-full p-3 mt-2 bg-white ">
       {/* owner profile */}
       <div className="flex items-center w-full gap-x-5">
         <div className="text-base">
           <Avatar size={45} icon={<FaRegUser />} />
         </div>
         <div className="flex flex-col w-full">
-          <h1 className="text-base font-bold font-space-grotesk">{productData.owner.name}</h1>
+          <span className="">
+            <img
+              src="https://images.tokopedia.net/img/official_store/badge_os.png"
+              alt="badge"
+              width={20}
+              className="inline"
+            />
+            <span className="text-base font-bold font-space-grotesk">
+              {productData.owner.name}
+            </span>
+          </span>
           <span className="text-sm font-space-grotesk">
             <span>online</span> <span className="font-bold">0 jam lalu</span>
           </span>

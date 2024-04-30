@@ -1,17 +1,17 @@
 import { Layout } from "antd";
 import PropTypes from "prop-types";
-import NavbarMobileComponent from "../navbar-components/navbar-mobile-component";
+import TokopediaFooter from "../ui-components/tokopedia-footer";
+import NavbarMobileDetailsProductComponent from "../navbar-components/navbar-mobile-details-product-component";
 
 const DetailsProductLayout = ({ children }) => {
   return (
-    <Layout className={` h-screen relative max-w-[500px] mx-auto `}>
+    <Layout className={` min-h-screen relative max-w-[500px] mx-auto `}>
       <div className={`w-full border-b`}>
-        <NavbarMobileComponent className={`bg-white max-w-[500px]`} />
+        <NavbarMobileDetailsProductComponent className={`bg-white max-w-[500px]`} />
       </div>
-      <Layout
-        className={`relative overflow-y-scroll no-scrollbar mt-[65px] border border-red-600`}
-      >
+      <Layout className={`relative overflow-y-scroll no-scrollbar mt-[65px]`}>
         {children}
+        <TokopediaFooter />
       </Layout>
     </Layout>
   );

@@ -18,19 +18,22 @@ const HomePageMobileTodayToppersFavorite = () => {
   // state for content display slider
   const [sliderContentIndex, setSliderContentIndex] = useState(0);
 
+  const dragX = useMotionValue(0);
+
+  const navigate = useNavigate();
+
   // if button navigation slider is change the index set slider content index back to 0
   useEffect(() => {
     const backSliderContentIndextoZero = () => setSliderContentIndex(0);
     buttonSliderIndex && backSliderContentIndextoZero();
   }, [buttonSliderIndex]);
 
-  const dragX = useMotionValue(0);
-
-  const navigate = useNavigate();
-
   // slider content slide function
   const onDragEndHandler = () => {
-    const x = dragX.get();
+    const x = Math.round(dragX.get());
+    const isSmallDrag = x === 0 || x === -1 || x === 1;
+
+    if (isSmallDrag) return;
 
     const DRAG_BUFFER = 20;
     const maxIndex = filterDataBySliderButtonNavigateIndex.length - 1;
@@ -222,22 +225,16 @@ SliderNavigation.propTypes = {
 const Dots = ({
   currentDataLength,
   currentContentIndex,
-  setSliderContentIndexWithDots,
-  setButtonNavigationIndexWithDots,
   isFirstIndexContentType,
   isLastIndexContentType,
 }) => {
   return (
     <div className="w-full justify-center  flex items-center  gap-x-1">
       {!isFirstIndexContentType && (
-        <div
-          onClick={() => setButtonNavigationIndexWithDots((prev) => prev - 1)}
-          className={`w-[4px] h-[4px]  bg-[#6d758850] rounded-full cursor-pointer`}
-        />
+        <div className={`w-[4px] h-[4px]  bg-[#6d758850] rounded-full cursor-pointer`} />
       )}
       {[...Array.from({ length: currentDataLength })].map((_, index) => (
         <div
-          onClick={() => setSliderContentIndexWithDots(index)}
           className={`w-[5px] h-[5px]  ${
             currentContentIndex === index ? "bg-[#00AA5B]" : "bg-[#6d758850]"
           } rounded-full cursor-pointer`}
@@ -245,10 +242,7 @@ const Dots = ({
         />
       ))}
       {!isLastIndexContentType && (
-        <div
-          onClick={() => setButtonNavigationIndexWithDots((prev) => prev + 1)}
-          className={`w-[4px] h-[4px]  bg-[#6d758850] rounded-full cursor-pointer`}
-        />
+        <div className={`w-[4px] h-[4px]  bg-[#6d758850] rounded-full cursor-pointer`} />
       )}
     </div>
   );
@@ -257,8 +251,6 @@ const Dots = ({
 Dots.propTypes = {
   currentDataLength: PropTypes.number.isRequired,
   currentContentIndex: PropTypes.number.isRequired,
-  setSliderContentIndexWithDots: PropTypes.func.isRequired,
-  setButtonNavigationIndexWithDots: PropTypes.func.isRequired,
   isFirstIndexContentType: PropTypes.bool.isRequired,
   isLastIndexContentType: PropTypes.bool.isRequired,
 };

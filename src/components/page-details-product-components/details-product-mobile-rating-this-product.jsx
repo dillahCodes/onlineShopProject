@@ -32,13 +32,15 @@ const DetailsProductMobileRatingThisProduct = ({ productData }) => {
 
   return (
     <>
-      <div className="w-full p-5 mt-2 bg-white">
+      <div className="w-full p-3 mt-2 bg-white">
         {/* review title */}
         <div className="flex items-center justify-between w-full">
-          <h1 className="text-lg font-bold capitalize font-space-grotesk">ulasan pembeli</h1>
+          <h1 className="text-lg font-bold capitalize font-space-grotesk ">ulasan pembeli</h1>
           <ButtonComponent
             onClick={handleAllReview}
-            className={"capitalize border-none shadow-none p-0 font-medium font-space-grotesk"}
+            className={
+              "capitalize border-none shadow-none p-0 text-[#00AA5B] font-medium font-space-grotesk"
+            }
           >
             lihat semua
           </ButtonComponent>

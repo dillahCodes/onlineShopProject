@@ -1,5 +1,6 @@
 import { Skeleton } from "antd";
 import PropTypes from "prop-types";
+import SliderProductComponent from "../ui-components/slider-product-component";
 
 const DetailsProductMobilePageLoader = ({ active }) => {
   return (
@@ -76,6 +77,11 @@ const DetailsProductMobilePageLoader = ({ active }) => {
           </div>
         </div>
       </div>
+
+      {/* slider skelekton */}
+      {Array.from({ length: 3 }).map((_, index) => (
+        <SliderProductComponent className={"mt-2  bg-white p-3"} key={index} />
+      ))}
     </div>
   );
 };
