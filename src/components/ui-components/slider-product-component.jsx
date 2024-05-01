@@ -14,7 +14,7 @@ const SliderProductComponent = ({ dataProduct, className, title }) => {
     <section className={className}>
       <section className="flex items-center  justify-between mb-3">
         {dataProduct ? (
-          <h1 className="text-xl font-bold font-space-grotesk">{title}</h1>
+          <h1 className="text-base capitalize font-bold font-space-grotesk">{title}</h1>
         ) : (
           <Skeleton.Input size="small" className="w-[60%] h-4" active={true} />
         )}
@@ -59,10 +59,7 @@ const SliderProductComponent = ({ dataProduct, className, title }) => {
           : Array(5)
               .fill()
               .map((_, index) => (
-                <section
-                  key={index}
-                  className="h-[217px] max-w-[180px] min-w-[160px]  bg-white rounded-md "
-                >
+                <section key={index} className="h-[217px] max-w-[180px] min-w-[160px]  bg-white rounded-md ">
                   <Skeleton.Image className="w-full h-[140px]" active />
                   <div className="w-full p-1">
                     <section className="w-[60px] overflow-hidden h-[10px] rounded-md mt-2">

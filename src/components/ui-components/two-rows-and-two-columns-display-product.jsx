@@ -10,7 +10,7 @@ const TwoRowsAndTwoColumnsDisplayProduct = ({ leftDisplayData, rightDisplayData,
     return (
       <section className="w-full flex mt-2 gap-x-1 overflow-x-auto no-scrollbar">
         <div className="flex flex-col w-full">
-          {Array.from({ length: 3 }).map((_, index) => (
+          {Array.from({ length: 4 }).map((_, index) => (
             <section className=" w-full p-2" key={index}>
               {/* skeleton */}
               <CardProductDisplaySkeleton />
@@ -18,7 +18,7 @@ const TwoRowsAndTwoColumnsDisplayProduct = ({ leftDisplayData, rightDisplayData,
           ))}
         </div>
         <div className="flex flex-col w-full">
-          {Array.from({ length: 3 }).map((_, index) => (
+          {Array.from({ length: 4 }).map((_, index) => (
             <section className=" w-full p-2" key={index}>
               {/* skeleton */}
               <CardProductDisplaySkeleton />
@@ -29,7 +29,7 @@ const TwoRowsAndTwoColumnsDisplayProduct = ({ leftDisplayData, rightDisplayData,
     );
   } else {
     return (
-      <section className="w-full flex mt-2 gap-x-1 ">
+      <section className="w-full flex  gap-x-1 overflow-x-auto no-scrollbar bg-white ">
         <div className="flex flex-col w-full">
           {leftDisplayData?.map((productData, index) => (
             <section className=" w-full p-2" key={index} onClick={() => navigate(`/product/${productData.product_id}`)}>

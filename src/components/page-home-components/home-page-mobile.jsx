@@ -8,7 +8,7 @@ import HomePageMobileTodayPromoChoices from "./home-page-mobile-today-promo-choi
 import HomePageMobileYourShoppingInspirationCategory from "./home-page-mobile-your-shopping-inspiration-category";
 import HomePageMobileTodayToppersFavorite from "./home-page-today-toppers-favorite";
 
-const HonePageMobile = () => {
+const HomePageMobile = () => {
   return (
     <div className="w-full bg-white min-h-screen">
       <HeroPageSelider />
@@ -24,4 +24,4 @@ const HonePageMobile = () => {
   );
 };
 
-export default HonePageMobile;
+export default HomePageMobile;

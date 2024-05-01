@@ -11,7 +11,7 @@ const InputSearch = ({ defaultValue, className, onChange, ...rest }) => {
       className={className}
       placeholder="cari di tokopedia"
       defaultValue={defaultValue}
-      allowClear
+      allowClear={false}
       {...rest}
     />
   );

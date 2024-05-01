@@ -9,6 +9,7 @@ import DetailsProductPage from "../pages/details-product-page";
 import AllProductReviewsPage from "../pages/all-product-reviews-page";
 import ComingSoonPage from "../pages/coming-soon-page";
 import ResultSearchPage from "../pages/result-search-page";
+import SearchResultProductsLayout from "../components/layouts/search-result-products-layout";
 
 const routers = createBrowserRouter([
   {
@@ -49,7 +50,11 @@ const routers = createBrowserRouter([
   },
   {
     path: "/product/search",
-    element: <ResultSearchPage />,
+    element: (
+      <SearchResultProductsLayout>
+        <ResultSearchPage />
+      </SearchResultProductsLayout>
+    ),
   },
 ]);
 

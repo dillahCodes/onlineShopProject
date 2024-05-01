@@ -24,7 +24,7 @@ const DetailsProductMobileDescriptionProduct = ({ productData }) => {
       />
       <div className="flex flex-col p-3 mt-2 bg-white gap-y-5">
         <div className="w-full">
-          <h1 className="text-lg font-bold font-space-grotesk">Detail Produk</h1>
+          <h1 className="text-base font-bold font-space-grotesk">Detail Produk</h1>
           {/* etalase */}
           <div className="w-full mt-3">
             <span className="flex items-center justify-between pb-2 border-b gap-x-5 ">
@@ -56,13 +56,11 @@ const DetailsProductMobileDescriptionProduct = ({ productData }) => {
         </div>
         {/* product description */}
         <div className="w-full">
-          <h1 className="text-lg font-bold font-space-grotesk">Deskripsi Produk</h1>
+          <h1 className="text-base font-bold font-space-grotesk">Deskripsi Produk</h1>
           <p className="mt-3">{truncateString(productData.description, 150)}</p>
           <ButtonComponent
             onClick={handleOpenAndCloseDrawer}
-            className={
-              "capitalize border-none shadow-none p-0 font-bold font-space-grotesk text-[#00AA5B]"
-            }
+            className={"capitalize border-none shadow-none p-0 font-bold font-space-grotesk text-[#00AA5B]"}
           >
             baca selengkap
           </ButtonComponent>
@@ -78,24 +76,13 @@ DetailsProductMobileDescriptionProduct.propTypes = {
   productData: PropTypes.object,
 };
 
-const ReadMoreDrawer = ({
-  drawerTitle,
-  handleOpenAndCloseDrawer,
-  isOpen,
-  onClose,
-  drawerHeight,
-  description,
-}) => {
+const ReadMoreDrawer = ({ drawerTitle, handleOpenAndCloseDrawer, isOpen, onClose, drawerHeight, description }) => {
   return (
     <BottomDrawer
       drawerTitle={
         <div className="flex items-center justify-between w-full ">
           <h1 className="text-lg font-bold font-space-grotesk">{drawerTitle}</h1>
-          <ButtonComponent
-            className="p-0 text-3xl border-none "
-            icon={<IoClose />}
-            onClick={onClose}
-          />
+          <ButtonComponent className="p-0 text-3xl border-none " icon={<IoClose />} onClick={onClose} />
         </div>
       }
       handleOpenAndCloseDrawer={handleOpenAndCloseDrawer}

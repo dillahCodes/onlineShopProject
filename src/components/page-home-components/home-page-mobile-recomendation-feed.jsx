@@ -37,9 +37,10 @@ const HomePageMobileRecomendationFeed = () => {
 
   return (
     <div className="w-full">
+      {/* navigation bar */}
       <section
         ref={sectionRef}
-        className="flex overflow-x-scroll no-scrollbar border-t py-2   bg-white sticky z-50 top-[63px] "
+        className="flex overflow-x-scroll no-scrollbar border-t py-2   bg-white sticky z-50 top-[54px] "
       >
         {homePageNavigationFeed.map((navigationData, index) => (
           <div key={index} className="flex flex-col">
