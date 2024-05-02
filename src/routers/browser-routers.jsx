@@ -10,6 +10,14 @@ import AllProductReviewsPage from "../pages/all-product-reviews-page";
 import ComingSoonPage from "../pages/coming-soon-page";
 import ResultSearchPage from "../pages/result-search-page";
 import SearchResultProductsLayout from "../components/layouts/search-result-products-layout";
+import FeedPageLayout from "../components/layouts/feed-page-layout";
+import FeedPage from "../pages/feed-page";
+import OfficialPageLayout from "../components/layouts/official-page-layout";
+import OfficialStorePage from "../pages/official-store-page";
+import WishListPageLayout from "../components/layouts/wishlist-page-layout";
+import WishlistPage from "../pages/wishlist-page";
+import ReceiptPageLayout from "../components/layouts/receipt-page-layout";
+import ReceiptPage from "../pages/receipt-page";
 
 const routers = createBrowserRouter([
   {
@@ -54,6 +62,38 @@ const routers = createBrowserRouter([
       <SearchResultProductsLayout>
         <ResultSearchPage />
       </SearchResultProductsLayout>
+    ),
+  },
+  {
+    path: "/feed",
+    element: (
+      <FeedPageLayout>
+        <FeedPage />
+      </FeedPageLayout>
+    ),
+  },
+  {
+    path: "/discovery",
+    element: (
+      <OfficialPageLayout>
+        <OfficialStorePage />
+      </OfficialPageLayout>
+    ),
+  },
+  {
+    path: "/wishlist",
+    element: (
+      <WishListPageLayout>
+        <WishlistPage />
+      </WishListPageLayout>
+    ),
+  },
+  {
+    path: "/order-list",
+    element: (
+      <ReceiptPageLayout>
+        <ReceiptPage />
+      </ReceiptPageLayout>
     ),
   },
 ]);

@@ -58,7 +58,7 @@ const NavbarMobileSearchResultPageComponent = ({ className }) => {
         <NavbarBackComponent size={25} onClick={() => history.back()} />
         <section className="flex items-center gap-x-3 w-full">
           <NavbarFakeSearchbarComponent
-            className={"w-full bg-white rounded-md capitalize "}
+            className={"w-full bg-white rounded-md  "}
             fakeSearchbarText={searchBarValue}
             onClick={handleDisplaySearchMobileOverlay}
           />

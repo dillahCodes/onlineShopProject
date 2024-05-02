@@ -3,7 +3,7 @@ import TokopediaFooter from "../components/ui-components/tokopedia-footer";
 
 const HomePage = () => {
   return (
-    <div className={`h-screen "p-5"`}>
+    <div className={`h-screen`}>
       <HomePageMobile />
       <TokopediaFooter />
     </div>

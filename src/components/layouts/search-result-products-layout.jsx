@@ -9,7 +9,7 @@ const SearchResultProductsLayout = ({ children }) => {
       <div className={`w-full border-b`}>
         <NavbarMobileSearchResultPageComponent className={`bg-white max-w-[500px]`} />
       </div>
-      <Layout className={`relative min-h-screen overflow-y-scroll no-scrollbar mt-[65px] `}>
+      <Layout className={`relative min-h-screen overflow-y-scroll no-scrollbar mt-[65px] bg-white `}>
         {children}
         <TokopediaFooter />
       </Layout>

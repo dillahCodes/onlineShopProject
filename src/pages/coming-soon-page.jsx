@@ -1,15 +1,14 @@
 import ButtonComponent from "../components/ui-components/button-component";
+import PropTypes from "prop-types";
 
-const ComingSoonPage = () => {
+const ComingSoonPage = ({ pageName }) => {
   return (
     <div className="bg-gray-100 dark:bg-gray-800">
       <div className="flex items-center justify-center min-h-screen">
         <div className="w-full max-w-2xl px-4 font-space-grotesk">
-          <h1 className="mb-8 text-4xl font-bold text-center text-gray-900 dark:text-white">
-            Coming Soon!
-          </h1>
+          <h1 className="mb-8 text-4xl font-bold text-center text-gray-900 dark:text-white">Coming Soon!</h1>
           <p className="mb-12 text-lg text-center text-gray-600 dark:text-gray-300 font-space-grotesk">
-            Our website is under construction. We&apos;ll be back soon!
+            {pageName || "Our website"} is under construction. We&apos;ll be back soon!
           </p>
           <form className="flex flex-col items-center justify-center gap-4 md:flex-row">
             <input
@@ -17,11 +16,7 @@ const ComingSoonPage = () => {
               type="email"
               placeholder="Enter your email address"
             />
-            <ButtonComponent
-              type="primary"
-              className={"capitalize font-space-grotesk "}
-              size="large"
-            >
+            <ButtonComponent type="primary" className={"capitalize font-space-grotesk "} size="large">
               Notify Me
             </ButtonComponent>
           </form>
@@ -32,3 +27,6 @@ const ComingSoonPage = () => {
 };
 
 export default ComingSoonPage;
+ComingSoonPage.propTypes = {
+  pageName: PropTypes.string,
+};

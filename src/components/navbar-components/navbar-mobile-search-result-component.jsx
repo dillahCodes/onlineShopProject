@@ -27,7 +27,7 @@ const NavbarMobileSearchResultComponent = ({ onClick, recomendedSearch, onChange
     } else if (location.pathname === "/product/search") {
       setSearchParams({ q: to, st: "product" });
     } else {
-      navigate(`product/search?q=${encodeURIComponent(to)}&st=product`, { replace: true });
+      navigate(`/product/search?q=${encodeURIComponent(to)}&st=product`, { replace: true });
     }
   };
 

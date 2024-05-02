@@ -3,12 +3,12 @@ import CardProductDisplay from "./card-product-display";
 import CardProductDisplaySkeleton from "./card-product-display-skeleton";
 import PropTypes from "prop-types";
 
-const TwoRowsAndTwoColumnsDisplayProduct = ({ leftDisplayData, rightDisplayData, isLoading }) => {
+const TwoRowsAndTwoColumnsDisplayProduct = ({ leftDisplayData, rightDisplayData, isLoading, className }) => {
   const navigate = useNavigate();
 
   if (isLoading) {
     return (
-      <section className="w-full flex mt-2 gap-x-1 overflow-x-auto no-scrollbar">
+      <section className={`w-full flex ${className} gap-x-1 overflow-x-auto no-scrollbar`}>
         <div className="flex flex-col w-full">
           {Array.from({ length: 4 }).map((_, index) => (
             <section className=" w-full p-2" key={index}>
@@ -65,4 +65,5 @@ TwoRowsAndTwoColumnsDisplayProduct.propTypes = {
   leftDisplayData: PropTypes.array,
   rightDisplayData: PropTypes.array,
   isLoading: PropTypes.bool,
+  className: PropTypes.string,
 };

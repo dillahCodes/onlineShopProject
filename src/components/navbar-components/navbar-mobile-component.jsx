@@ -44,14 +44,14 @@ const NavbarMobileComponent = ({ className }) => {
   const handleOnSubmitSearchBar = (e) => {
     if (e.key === "Enter" && searchBarValue) {
       setSearchParams({ q: searchBarValue, st: "product" });
-      navigate(`product/search?q=${encodeURIComponent(searchBarValue)}&st=product`, { replace: true });
+      navigate(`/product/search?q=${encodeURIComponent(searchBarValue)}&st=product`, { replace: true });
       closeSearchBarMobile();
     }
   };
 
   return (
     <>
-      <header className={`flex items-center w-full px-3 py-2 shadow-sm gap-x-5 fixed z-40    ${className} `}>
+      <header className={`flex items-center w-full px-3 py-2 shadow-sm gap-x-4 fixed z-40    ${className} `}>
         <NavbarFakeSearchbarComponent
           className={"w-full bg-white rounded-md capitalize text-gray-400"}
           fakeSearchbarText={"cari di tokopedia"}

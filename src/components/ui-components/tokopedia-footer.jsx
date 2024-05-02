@@ -1,6 +1,6 @@
 const TokopediaFooter = () => {
   return (
-    <section className="w-full bg-white p-3 ">
+    <section className="w-full bg-white p-3 pb-[80px] ">
       <h1 className="font-bold font-space-grotesk capitalize">gunakan aplikasi tokopedia</h1>
       <div className="flex mt-2 w-full flex-wrap">
         <div

@@ -9,7 +9,7 @@ const DetailsProductLayout = ({ children }) => {
       <div className={`w-full border-b`}>
         <NavbarMobileDetailsProductPageComponent className={`bg-white max-w-[500px]`} />
       </div>
-      <Layout className={`relative overflow-y-scroll no-scrollbar mt-[65px]`}>
+      <Layout className={`relative overflow-y-scroll no-scrollbar mt-[65px] `}>
         {children}
         <TokopediaFooter />
       </Layout>
