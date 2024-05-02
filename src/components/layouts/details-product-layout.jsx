@@ -2,6 +2,7 @@ import { Layout } from "antd";
 import PropTypes from "prop-types";
 import TokopediaFooter from "../ui-components/tokopedia-footer";
 import NavbarMobileDetailsProductPageComponent from "../navbar-components/navbar-mobile-details-product-page-component";
+import BottomBarMobileNavDetailProduct from "../bottombar-navigation-components/bottombar-mobile-nav-detail-product-component";
 
 const DetailsProductLayout = ({ children }) => {
   return (
@@ -11,6 +12,7 @@ const DetailsProductLayout = ({ children }) => {
       </div>
       <Layout className={`relative overflow-y-scroll no-scrollbar mt-[65px] `}>
         {children}
+        <BottomBarMobileNavDetailProduct />
         <TokopediaFooter />
       </Layout>
     </Layout>
