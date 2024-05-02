@@ -7,7 +7,6 @@ const FeedPageLayout = ({ children }) => {
     <Layout className={` min-h-screen relative max-w-[500px] mx-auto `}>
       <div className={`w-full border-b `}></div>
       <Layout className="relative  no-scrollbar ">
-        {/* mobile greeting */}
         {children}
         <BottombarMobileNavHomePage active={"feed"} />
       </Layout>
