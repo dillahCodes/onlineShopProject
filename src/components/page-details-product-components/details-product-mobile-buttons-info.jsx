@@ -8,17 +8,12 @@ import productSoldCountFormatter from "../../utils/product-sold-count-formatter"
 const DetailsProductMobileButtonsInfo = ({ productData }) => {
   const navigate = useNavigate();
   const getProductRatingLength = () => {
-    return (
-      productData && productData?.review?.filter((review) => review.rating !== 0, 0).length
-    );
+    return productData && productData?.review?.filter((review) => review.rating !== 0, 0).length;
   };
   const getProductRatingAverage = () => {
     return (
       productData &&
-      (
-        productData.review.reduce((acc, curr) => acc + curr.rating, 0) /
-        productData.review.length
-      ).toFixed(1)
+      (productData.review.reduce((acc, curr) => acc + curr.rating, 0) / productData.review.length).toFixed(1)
     );
   };
 
@@ -38,13 +33,11 @@ const DetailsProductMobileButtonsInfo = ({ productData }) => {
             <span> ({getProductRatingLength()})</span>
           </span>
         </ButtonComponent>
-        <ButtonComponent
-          icon={<AiOutlineCamera className="text-xl" />}
-          className={"flex items-center gap-x-1"}
-        >
+        <ButtonComponent icon={<AiOutlineCamera className="text-xl" />} className={"flex items-center gap-x-1"}>
           <span>0</span>
         </ButtonComponent>
         <ButtonComponent
+          onClick={() => navigate(`/product/${productData.product_id}/talk`)}
           icon={<TiMessages className="text-xl" />}
           className={"flex items-center gap-x-1"}
         >

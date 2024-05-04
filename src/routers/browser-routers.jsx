@@ -18,6 +18,8 @@ import WishListPageLayout from "../components/layouts/wishlist-page-layout";
 import WishlistPage from "../pages/wishlist-page";
 import ReceiptPageLayout from "../components/layouts/receipt-page-layout";
 import ReceiptPage from "../pages/receipt-page";
+import DetailsProductDiscussLayout from "../components/layouts/details-product-discuss-layout";
+import DetailsProductDiscussionPage from "../pages/details-product-discussion-page";
 
 const routers = createBrowserRouter([
   {
@@ -94,6 +96,14 @@ const routers = createBrowserRouter([
       <ReceiptPageLayout>
         <ReceiptPage />
       </ReceiptPageLayout>
+    ),
+  },
+  {
+    path: "/product/:productId/talk",
+    element: (
+      <DetailsProductDiscussLayout>
+        <DetailsProductDiscussionPage />
+      </DetailsProductDiscussLayout>
     ),
   },
 ]);
