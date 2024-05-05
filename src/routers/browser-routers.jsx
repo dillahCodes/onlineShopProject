@@ -20,6 +20,8 @@ import ReceiptPageLayout from "../components/layouts/receipt-page-layout";
 import ReceiptPage from "../pages/receipt-page";
 import DetailsProductDiscussLayout from "../components/layouts/details-product-discuss-layout";
 import DetailsProductDiscussionPage from "../pages/details-product-discussion-page";
+import DetailsProductDetailsDiscussLayout from "../components/layouts/details-product-details-discuss-layout";
+import DetailsProductDetailsDiscussionPage from "../pages/details-product-details-discussion-page";
 
 const routers = createBrowserRouter([
   {
@@ -104,6 +106,14 @@ const routers = createBrowserRouter([
       <DetailsProductDiscussLayout>
         <DetailsProductDiscussionPage />
       </DetailsProductDiscussLayout>
+    ),
+  },
+  {
+    path: "/product/:productId/talk/:discussionId",
+    element: (
+      <DetailsProductDetailsDiscussLayout>
+        <DetailsProductDetailsDiscussionPage />
+      </DetailsProductDetailsDiscussLayout>
     ),
   },
 ]);

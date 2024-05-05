@@ -15,9 +15,9 @@ const useAddProductDiscussion = (discussMessage, discussCategory, productId) => 
 
   const addProductDiscussion = async () => {
     const { user_id } = user;
-    if (!discussMessage || !discussCategory || !productId || !user_id) return;
+    if (!discussMessage || !discussCategory || !productId || !user) return;
     try {
-      await detailsProductDiscussion.addDiscussion(user_id, productId, data);
+      await detailsProductDiscussion.addDiscussion(productId, user_id, data);
     } catch (error) {
       console.error("Error adding product discussion:", error);
     }

@@ -19,7 +19,8 @@ const DetailsProductMobileCreateDiscuss = ({ isDrawerOpen, handleOpenAndCloseDra
   const [textCount, setTextCount] = useState(0);
   const { productId } = useParams();
   const { addProductDiscussion } = useAddProductDiscussion(discussContent, selectedCategoryDiscuss, productId);
-  const maxTextCount = 30;
+  const maxTextCount = 200;
+  const minTextCount = 5;
 
   // reset state
   useEffect(() => {
@@ -38,8 +39,8 @@ const DetailsProductMobileCreateDiscuss = ({ isDrawerOpen, handleOpenAndCloseDra
 
     if (textLength > maxTextCount) {
       setErrorMessage(`oops, maksimal ${maxTextCount} karakter`);
-    } else if (textLength < 5) {
-      setErrorMessage("oops, minimal 5 karakter");
+    } else if (textLength < minTextCount) {
+      setErrorMessage(`oops, minimal ${minTextCount} karakter`);
     } else {
       setErrorMessage("");
     }
@@ -48,8 +49,12 @@ const DetailsProductMobileCreateDiscuss = ({ isDrawerOpen, handleOpenAndCloseDra
   const handleSubmit = () => {
     if (!discussContent) return setErrorMessage("oops, silahkan isi pertanyaan terlebih dahulu");
     if (textCount >= maxTextCount) return setErrorMessage(`oops, maksimal ${maxTextCount} karakter`);
-
-    addProductDiscussion();
+    addProductDiscussion().then(() => {
+      handleOpenAndCloseDrawer();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    });
   };
 
   return (
@@ -65,7 +70,12 @@ const DetailsProductMobileCreateDiscuss = ({ isDrawerOpen, handleOpenAndCloseDra
             <a className="font-bold text-[#00AA5B]">baca S&amp;K</a>
           </p>
 
-          <ButtonComponent onClick={handleSubmit} type="primary" className="w-full">
+          <ButtonComponent
+            disabled={!discussContent || discussContent.length < minTextCount}
+            onClick={handleSubmit}
+            type="primary"
+            className="w-full"
+          >
             Kirim
           </ButtonComponent>
         </section>
