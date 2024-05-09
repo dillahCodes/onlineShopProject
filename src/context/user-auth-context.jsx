@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
     const loadUserData = async () => {
       try {
         const userData = await authServices.getUserById(userId);
-        setUser(userData.data);
+        setUser(userData.data.data);
       } catch (error) {
         console.error("Error loading user data:", error);
         setUser(null);

@@ -14,7 +14,7 @@ const useGetProductWithMerchantAndSameCategory = (ownerId, category) => {
 
       const userId = await authServices.getUserById(ownerId);
 
-      const dataProductIdWithSameCategory = userId.data.products
+      const dataProductIdWithSameCategory = userId.data.data.products
         .filter((product) => product.category === category)
         .map((product) => product.product_id);
 
@@ -28,7 +28,7 @@ const useGetProductWithMerchantAndSameCategory = (ownerId, category) => {
       setCurrentProductData(getProductWithSameCategoryById);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsLoading(false);
     }
   }, [ownerId, category]);
