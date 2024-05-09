@@ -18,7 +18,7 @@ const DetailsProductMobileCreateDiscuss = ({ isDrawerOpen, handleOpenAndCloseDra
   const [errorMessage, setErrorMessage] = useState("");
   const [textCount, setTextCount] = useState(0);
   const { productId } = useParams();
-  const { addProductDiscussion } = useAddProductDiscussion(discussContent, selectedCategoryDiscuss, productId);
+  const { addProductDiscussion } = useAddProductDiscussion();
   const maxTextCount = 200;
   const minTextCount = 5;
 
@@ -46,14 +46,13 @@ const DetailsProductMobileCreateDiscuss = ({ isDrawerOpen, handleOpenAndCloseDra
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!discussContent) return setErrorMessage("oops, silahkan isi pertanyaan terlebih dahulu");
     if (textCount >= maxTextCount) return setErrorMessage(`oops, maksimal ${maxTextCount} karakter`);
-    addProductDiscussion().then(() => {
+    await addProductDiscussion(discussContent, selectedCategoryDiscuss, productId).then(() => {
+      setDiscussContent("");
+      setSelectedCategoryDiscuss(null);
       handleOpenAndCloseDrawer();
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
     });
   };
 
@@ -61,7 +60,6 @@ const DetailsProductMobileCreateDiscuss = ({ isDrawerOpen, handleOpenAndCloseDra
     <BottomDrawer
       isOpen={isDrawerOpen}
       id="create-discuss-bottom-drawer"
-      className={`rounded-t-lg`}
       drawerHeight={"100%"}
       footer={
         <section className={`w-full`}>

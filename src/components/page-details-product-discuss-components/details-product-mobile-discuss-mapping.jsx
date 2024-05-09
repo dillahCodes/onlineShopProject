@@ -6,7 +6,6 @@ import truncateString from "../../utils/truncate-string";
 const DetailsProductMobileDiscussMapping = ({ discussData, productOwnerId }) => {
   const navigate = useNavigate();
   const { productId } = useParams();
-
   const handleNavigateToDetailDiscuss = (item) => navigate(`/product/${productId}/talk/${item.discus_id}`);
 
   return (
@@ -33,7 +32,7 @@ const DetailsProductMobileDiscussMapping = ({ discussData, productOwnerId }) => 
                 penjual
               </span>
             ) : (
-              <span className="font-bold font-space-grotesk">null</span>
+              <span className="font-bold font-space-grotesk">{item?.name}</span>
             )}
             <span className="h-1 w-1 bg-gray-400 rounded-full"></span>
             <span className="font-space-grotesk text-gray-400 rounded-full">
@@ -43,9 +42,8 @@ const DetailsProductMobileDiscussMapping = ({ discussData, productOwnerId }) => 
           <section className="w-full py-1">
             <p>{item.discus_message}</p>
           </section>
-
           {/* reply section */}
-          {item.discus_reply[0] && (
+          {item.discus_reply.find((reply) => reply.user_id === productOwnerId) ? (
             <section className="w-full border-l-[2px] pl-4 my-3" key={index}>
               <div className="w-full flex items-center gap-x-2">
                 <div className="w-6 h-6 border border-black rounded-full">
@@ -56,20 +54,29 @@ const DetailsProductMobileDiscussMapping = ({ discussData, productOwnerId }) => 
                 </span>
                 <span className="h-1 w-1 bg-gray-400 rounded-full"></span>
                 <span className="font-space-grotesk text-gray-400 rounded-full">
-                  {getMonthAndYearFromDate(item.discus_reply[0].created_at)}
+                  {getMonthAndYearFromDate(item.discus_reply.find((reply) => reply.user_id === productOwnerId))}
                 </span>
               </div>
               <section className="w-full">
-                <p>{truncateString(item.discus_reply[0].reply_message, 100)}</p>
-                {item.discus_reply.length > 1 ? (
-                  <span className="capitalize  block mt-3  font-bold font-space-grotesk">
+                <p>
+                  {truncateString(
+                    item.discus_reply.find((reply) => reply.user_id === productOwnerId).reply_message,
+                    100
+                  )}
+                </p>
+                {item.discus_reply.length > 0 && (
+                  <span className="capitalize  block mt-3 text-xs font-bold font-space-grotesk">
                     lihat {item.discus_reply.length} jawaban lainnya
                   </span>
-                ) : (
-                  <span className="capitalize  block mt-3  font-bold font-space-grotesk">balas jawaban</span>
                 )}
               </section>
             </section>
+          ) : item.discus_reply.length > 0 ? (
+            <span className="capitalize  block mt-3  font-bold font-space-grotesk text-xs">
+              lihat {item.discus_reply.length} jawaban lainnya
+            </span>
+          ) : (
+            <span className="capitalize  block mt-3  font-bold font-space-grotesk text-xs">balas jawaban</span>
           )}
         </div>
       ))}

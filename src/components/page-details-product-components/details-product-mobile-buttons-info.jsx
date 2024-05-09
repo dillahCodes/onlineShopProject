@@ -17,8 +17,6 @@ const DetailsProductMobileButtonsInfo = ({ productData }) => {
     );
   };
 
-  console.log(productData);
-
   return (
     <div className="flex items-center w-full gap-2 p-3 mt-2 bg-white gap-x-5 overflow-x-auto no-scrollbar">
       <span className="capitalize font-space-grotesk min-w-fit">

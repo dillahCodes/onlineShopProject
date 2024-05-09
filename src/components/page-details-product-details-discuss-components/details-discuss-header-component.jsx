@@ -2,7 +2,13 @@ import PropTypes from "prop-types";
 import getMonthAndYearFromDate from "../../utils/get-month-and-year-from-date";
 import ButtonComponent from "../ui-components/button-component";
 
-const DetailsDiscussHeaderComponent = ({ discussUserID, productOwnerId, created_at, discus_message }) => {
+const DetailsDiscussHeaderComponent = ({
+  discussUserID,
+  productOwnerId,
+  created_at,
+  discus_message,
+  discussUserName,
+}) => {
   return (
     <>
       <div className="w-full flex items-center gap-x-2 p-3 pb-2">
@@ -21,7 +27,7 @@ const DetailsDiscussHeaderComponent = ({ discussUserID, productOwnerId, created_
             penjual
           </span>
         ) : (
-          <span className="font-bold font-space-grotesk">null</span>
+          <span className="font-bold font-space-grotesk">{discussUserName}</span>
         )}
         <span className="h-1 w-1 bg-gray-400 rounded-full"></span>
         <span className="font-space-grotesk text-gray-400 rounded-full">{getMonthAndYearFromDate(created_at)}</span>
@@ -51,6 +57,7 @@ DetailsDiscussHeaderComponent.propTypes = {
   productOwnerId: PropTypes.string,
   created_at: PropTypes.string,
   discus_message: PropTypes.string,
+  discussUserName: PropTypes.string,
 };
 
 export default DetailsDiscussHeaderComponent;

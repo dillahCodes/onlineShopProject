@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Input } from "antd";
 const { TextArea } = Input;
 
-const DetailsDiscussReplyComponent = ({ onChange, onSend }) => {
+const DetailsDiscussReplyComponent = ({ onChange, onSend, inputDevaultValue }) => {
   return (
     <section className="w-full fixed bottom-0 max-w-[500px] bg-white  gap-x-2 flex items-center justify-between box-border p-2">
       <div className="w-full rounded-full gap-x-2  border overflow-hidden flex items-center  p-1">
@@ -16,6 +16,7 @@ const DetailsDiscussReplyComponent = ({ onChange, onSend }) => {
         />
         <TextArea
           onChange={onChange}
+          value={inputDevaultValue}
           placeholder="tulis komentarmu..."
           size="small"
           className="border-none  rounded-full  max-h-[30px] flex items-center justify-center focus:outline-none focus:border-none outline-none"
@@ -39,4 +40,5 @@ export default DetailsDiscussReplyComponent;
 DetailsDiscussReplyComponent.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSend: PropTypes.func.isRequired,
+  inputDevaultValue: PropTypes.string.isRequired,
 };

@@ -32,9 +32,9 @@ const DetailsProductMobileDisplayDiscuss = () => {
   });
   const [sortDrawerOpen, setSortDrawerOpen] = useToggle();
   const [createDiscussDrawerIsOpen, setCreateDiscussDrawerIsOpen] = useToggle();
-  const [disscussionProductList] = useGetProductDiscussion(currentProduct?.product_id);
+  const { data } = useGetProductDiscussion(currentProduct?.product_id);
 
-  let filteredDiscussionList = disscussionProductList?.filter((discussion) => {
+  let filteredDiscussionList = data?.filter((discussion) => {
     if (sortCategory.other.includes(discussion.discus_type[0].name)) {
       return discussion;
     }
@@ -109,7 +109,7 @@ const DetailsProductMobileDisplayDiscuss = () => {
 
         {/* discuss list display */}
         <DetailsProductMobileDiscussMapping
-          discussData={filteredDiscussionList?.length === 0 ? disscussionProductList : filteredDiscussionList}
+          discussData={filteredDiscussionList?.length === 0 ? data : filteredDiscussionList}
           productOwnerId={currentProduct.owner.owner_id}
         />
       </div>
@@ -134,7 +134,7 @@ const DetailsProductMobileDisplayDiscuss = () => {
       <BottomDrawer
         id="discuss-sort-bottom-drawer"
         isOpen={sortDrawerOpen}
-        className={`rounded-t-lg "}`}
+        className={`rounded-t-lg`}
         drawerHeight={"auto"}
         onClose={handleOpenAndCloseDrawer}
         drawerTitle={

@@ -28,7 +28,7 @@ const DetailsDiscussMappingComponent = ({ discussReplyData, productOwnerId }) =>
               </div>
               <div className="w-full">
                 <div className="flex items-center gap-x-2">
-                  <h1 className="text-base font-bold font-space-grotesk">null</h1>
+                  <h1 className="text-base font-bold font-space-grotesk">{data.name}</h1>
                   {data.user_id === productOwnerId && (
                     <span className="font-bold bg-[#C9FDE0] text-[#00AA5B] px-1 py-0.5 rounded-md font-space-grotesk">
                       penjual

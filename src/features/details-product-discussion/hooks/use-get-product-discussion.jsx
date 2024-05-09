@@ -1,26 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from "react";
 import detailsProductDiscussion from "../services/details-product-disscussion";
+import useSWR from "swr";
 
 const useGetProductDiscussion = (productId) => {
-  const [productDiscussion, setProductDiscussion] = useState(null);
-  const renderCount = useRef(0);
-
-  const getProductDiscussion = useCallback(async () => {
+  // Mendefinisikan fungsi untuk mendapatkan data diskusi produk
+  const getProductDiscussion = async () => {
     if (!productId) return;
-    try {
-      const res = await detailsProductDiscussion.getProductDiscussionWithProductId(productId);
-      setProductDiscussion(res.data.data);
-    } catch (error) {
-      console.error("Error getting product discussion:", error);
-    }
-  }, [productId]);
+    const res = await detailsProductDiscussion.getProductDiscussionWithProductId(productId);
+    return res.data.data;
+  };
 
-  useEffect(() => {
-    renderCount.current > 0 && getProductDiscussion();
-    return () => (renderCount.current += 1);
-  }, [getProductDiscussion]);
+  // using SWR for update discussion data (argument 1 should be same as argument in useAddProductDiscussion hooks)
+  const { data, error, isValidating } = useSWR(["product-discussion", productId], getProductDiscussion);
 
-  return [productDiscussion];
+  // Kembalikan data, error, dan status loading
+  return { data, error, isLoading: isValidating };
 };
 
 export default useGetProductDiscussion;

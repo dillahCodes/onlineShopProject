@@ -22,6 +22,8 @@ import DetailsProductDiscussLayout from "../components/layouts/details-product-d
 import DetailsProductDiscussionPage from "../pages/details-product-discussion-page";
 import DetailsProductDetailsDiscussLayout from "../components/layouts/details-product-details-discuss-layout";
 import DetailsProductDetailsDiscussionPage from "../pages/details-product-details-discussion-page";
+import UserPageLayout from "../components/layouts/user-page-layout";
+import UserPage from "../pages/user-page";
 
 const routers = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const routers = createBrowserRouter([
   {
     path: "/signup",
     element: <RegisterPage />,
+  },
+  {
+    path: "/user",
+    element: (
+      <UserPageLayout>
+        <UserPage />
+      </UserPageLayout>
+    ),
   },
   {
     path: "/coming-soon",

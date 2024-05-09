@@ -6,18 +6,20 @@ import { AiOutlineShop } from "react-icons/ai";
 import { TbUserExclamation } from "react-icons/tb";
 import { LiaUserAstronautSolid } from "react-icons/lia";
 import { BsQrCodeScan } from "react-icons/bs";
-import { Avatar, Layout } from "antd";
+import { Layout } from "antd";
 import { useAuth } from "../../context/user-auth-context";
 import ButtonComponent from "../ui-components/button-component";
 import { useNavigate } from "react-router-dom";
+import formatCurrencyToIDR from "../../utils/format-currency";
+import { IoIosArrowForward } from "react-icons/io";
+import MobileTokopediaPlusOffer from "../ui-components/mobile-tokopedia-plus-offer";
 
 const NavbarMenuListMobileComponent = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const goToComingSoonPage = () => {
-    navigate("/coming-soon");
-  };
+  const goToComingSoonPage = () => navigate("/coming-soon");
+  const goToUserProfile = () => navigate("/user");
 
   return (
     <Layout className="w-full h-full ">
@@ -38,20 +40,68 @@ const NavbarMenuListMobileComponent = () => {
 
       {/* user profile preview */}
       {user && (
-        <div className="flex items-center w-full p-5 bg-white gap-x-5 ">
-          <div>
-            <Avatar className="text-xl capitalize bg-black" size={55}>
-              {user?.name[0]}
-            </Avatar>
+        <section className="bg-white p-5 flex flex-col gap-y-2 ">
+          <div className="flex items-center w-full gap-x-5 ">
+            <div className="max-w-[50px] max-h-[50px] min-h-[50px] min-w-[50px]">
+              <img
+                src="https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg.webp?ect=4g"
+                alt=""
+                className="object-cover w-full h-full rounded-full"
+              />
+            </div>
+            <div className="w-full">
+              {/* username */}
+              <div className="flex items-center gap-x-1">
+                <img
+                  src="https://images.tokopedia.net/img/img/HThbdi/2023/01/13/pakai_promo_member_silver.png"
+                  alt="user badge"
+                  className="w-4 h-4"
+                />
+                <h1 className="text-xl font-bold font-space-grotesk">{user?.name}</h1>
+              </div>
+              {/* gopay */}
+              <div className="flex items-center gap-x-1" onClick={goToComingSoonPage}>
+                <img
+                  src="https://assets.tokopedia.net/asts/navigation-v2/global-menu/icon/gopay.svg"
+                  alt="user badge"
+                  className="w-4 h-4"
+                />
+                <span className="text-xs font-semibold text-gray-500 font-space-grotesk">
+                  {formatCurrencyToIDR(0)} • Top-Up GoPay
+                </span>
+              </div>
+              {/* saldo */}
+              <div className="flex items-center gap-x-1 mt-1" onClick={goToComingSoonPage}>
+                <img
+                  src="https://assets.tokopedia.net/asts/navigation-v2/global-menu/icon/saldo_icon.svg"
+                  alt="user badge"
+                  className="w-4 h-4"
+                />
+                <span className="text-xs font-semibold text-gray-500 font-space-grotesk">
+                  Saldo {formatCurrencyToIDR(0)}
+                </span>
+              </div>
+            </div>
+            <div className="ml-auto text-2xl" onClick={goToUserProfile}>
+              <IoSettingsOutline />
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold font-space-grotesk">{user?.name}</h1>
-            <p className="text-base font-space-grotesk">{user?.email}</p>
-          </div>
-          <div className="ml-auto text-2xl">
-            <IoSettingsOutline />
-          </div>
-        </div>
+          {/* tokopedia plus */}
+          <MobileTokopediaPlusOffer />
+          <section className="w-full flex gap-x-2">
+            {/* toko saya */}
+            <div className="w-full p-2 border rounded-lg flex items-center gap-x-0.5" onClick={goToComingSoonPage}>
+              <span className="font-bold capitalize">toko saya</span>
+              <span className="text-xs font-bold">({user?.name})</span>
+              <IoIosArrowForward className="ml-auto text-lg" />
+            </div>
+            {/* daftar afiliate */}
+            <div className="w-full p-2 border flex rounded-lg" onClick={goToComingSoonPage}>
+              <span className=" font-semibold capitalize">daftar afiliate</span>
+              <IoIosArrowForward className="ml-auto text-lg" />
+            </div>
+          </section>
+        </section>
       )}
 
       {/* menu list */}

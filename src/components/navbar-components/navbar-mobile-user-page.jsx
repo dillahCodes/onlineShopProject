@@ -1,24 +1,26 @@
-import PropTypes from "prop-types";
-import NavbarHamburgerMenu from "./navbar-hamburger-component";
-import NavbarCartComponent from "./navbar-cart-component";
-import NavbarNotificationComponent from "./navbar-notification-component";
-import BottomDrawer from "../ui-components/bottom-drawer";
 import { IoCloseOutline } from "react-icons/io5";
+import NavbarBackComponent from "./navbar-back-component";
+import NavbarHamburgerMenu from "./navbar-hamburger-component";
 import NavbarMenuListMobileComponent from "./navbar-menu-list-mobile-component";
+import BottomDrawer from "../ui-components/bottom-drawer";
+import PropTypes from "prop-types";
 import useToggle from "../../hooks/use-toggle";
+import { useNavigate } from "react-router-dom";
 
-const NavbarMobileWishlistPageComponent = ({ className }) => {
+const NavbarUserPage = ({ className }) => {
   const [profileDrawerIsOpen, setProfileDrawerIsOpen] = useToggle();
+  const navigate = useNavigate();
 
   return (
     <>
       <section
-        className={` w-full justify-between  px-3 py-3 shadow-sm  fixed z-40  flex items-center   ${className} `}
+        className={` w-full justify-between  px-3 py-3 shadow-sm  fixed z-40  flex items-center bg-white   ${className} `}
       >
-        <h1 className="text-base font-bold font-space-grotesk">wishlist</h1>
-        <section className="flex items-center gap-x-3">
-          <NavbarNotificationComponent size={25} />
-          <NavbarCartComponent size={25} />
+        <section className="flex items-center gap-x-3  w-full">
+          <div className="flex items-center mr-auto gap-x-5">
+            <NavbarBackComponent size={25} onClick={() => navigate(-1)} />
+            <h1 className="capitalize font-bold">akun saya</h1>
+          </div>
           <NavbarHamburgerMenu size={25} onClick={setProfileDrawerIsOpen} />
         </section>
       </section>
@@ -45,8 +47,8 @@ const NavbarMobileWishlistPageComponent = ({ className }) => {
   );
 };
 
-export default NavbarMobileWishlistPageComponent;
+export default NavbarUserPage;
 
-NavbarMobileWishlistPageComponent.propTypes = {
+NavbarUserPage.propTypes = {
   className: PropTypes.string,
 };

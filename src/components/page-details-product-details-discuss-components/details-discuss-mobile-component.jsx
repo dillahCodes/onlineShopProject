@@ -6,18 +6,17 @@ import DetailsDiscussMappingComponent from "./details-discuss-mapping-component"
 
 import { useState } from "react";
 import DetailsDiscussReplyComponent from "./details-discuss-reply-component";
-import detailsProductDiscussion from "../../features/details-product-discussion/services/details-product-disscussion";
-import { useAuth } from "../../context/user-auth-context";
 import useItShouldLoginFirst from "../../features/auth/hooks/use-it-should-login-first";
+import useReplyProductDiscussion from "../../features/details-product-discussion/hooks/use-reply-product-discussion";
 
 const DetailsDiscussMobileComponent = () => {
   useItShouldLoginFirst();
   const { discussionId, productId } = useParams();
-  const { user } = useAuth();
   const [replyMessage, setReplyMessage] = useState("");
-  const [discussionData] = useGetProductDiscussion(productId);
+  const { data } = useGetProductDiscussion(productId);
   const { currentProduct } = useGetProductById();
-  const discussionDataFiltered = discussionData?.find((data) => data.discus_id === discussionId);
+  const { replyProductDiscussion } = useReplyProductDiscussion();
+  const discussionDataFiltered = data?.find((data) => data.discus_id === discussionId);
   const isEmptyString = !replyMessage || replyMessage.trim() === "" || replyMessage.trim().length === 0;
 
   const handleSendReply = async () => {
@@ -26,12 +25,7 @@ const DetailsDiscussMobileComponent = () => {
     const data = {
       message: replyMessage,
     };
-    try {
-      await detailsProductDiscussion.replyDiscussion(discussionId, user.user_id, data);
-      window.location.reload();
-    } catch (error) {
-      console.error("error during send reply discussion", error);
-    }
+    replyProductDiscussion(discussionId, productId, data).then(() => setReplyMessage(""));
   };
 
   return (
@@ -41,6 +35,7 @@ const DetailsDiscussMobileComponent = () => {
         discussUserID={discussionDataFiltered?.user_id}
         created_at={discussionDataFiltered?.created_at}
         discus_message={discussionDataFiltered?.discus_message}
+        discussUserName={discussionDataFiltered?.name}
       />
       {discussionDataFiltered?.discus_reply.length > 0 && (
         <section className="w-full px-3 mt-5 capitalize">
@@ -51,7 +46,11 @@ const DetailsDiscussMobileComponent = () => {
         discussReplyData={discussionDataFiltered?.discus_reply}
         productOwnerId={currentProduct?.owner.owner_id}
       />
-      <DetailsDiscussReplyComponent onChange={(e) => setReplyMessage(e.target.value)} onSend={handleSendReply} />
+      <DetailsDiscussReplyComponent
+        inputDevaultValue={replyMessage}
+        onChange={(e) => setReplyMessage(e.target.value)}
+        onSend={handleSendReply}
+      />
     </section>
   );
 };
