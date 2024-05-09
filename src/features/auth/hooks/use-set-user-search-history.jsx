@@ -5,22 +5,22 @@ import { useEffect } from "react";
 
 const useSetUserSearchHistory = (currentProduct) => {
   const { user, setUser } = useAuth();
+  const { user_id } = user || {};
+  const { history_search } = user || {};
   const renderCount = useRef(0); // renderCount for componentDidMount and componentDidUpdate
 
   const setHistory = useCallback(async () => {
-    if (!currentProduct || !user || renderCount.current === 0) return;
+    if (!currentProduct || !user || !user_id || !history_search || renderCount.current === 0) return;
 
     const payload = {
       title: currentProduct.name,
       category: currentProduct.category,
     };
 
-    const { history_search } = user;
-    const { user_id } = user;
     const maxHistoryLength = 5;
 
     const isDataExists =
-      history_search.filter((data) => data.title === payload.title && data.category === payload.category).length > 0;
+      history_search?.filter((data) => data.title === payload.title && data.category === payload.category).length > 0;
 
     if (isDataExists) return;
 
@@ -43,14 +43,14 @@ const useSetUserSearchHistory = (currentProduct) => {
     } catch (error) {
       console.error(error);
     }
-  }, [currentProduct, user, setUser]);
+  }, [currentProduct, user, setUser, history_search, user_id]);
 
   // run only once
   useEffect(() => {
     renderCount.current > 0 && currentProduct && setHistory();
 
     return () => (renderCount.current += 1);
-  }, [currentProduct]);
+  }, [currentProduct, setHistory]);
 };
 
 export default useSetUserSearchHistory;

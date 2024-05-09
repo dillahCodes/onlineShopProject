@@ -7,7 +7,7 @@ const useSearchGetRecomendationProduct = () => {
   const { history_search } = user || {};
 
   const getSearchRecomendationProduct = useCallback(async () => {
-    if (!user) {
+    if (!user || !history_search) {
       return setSearchRecomendationProduct([
         {
           title: "webcams",
@@ -28,7 +28,7 @@ const useSearchGetRecomendationProduct = () => {
       ]);
     } else {
       setSearchRecomendationProduct(
-        history_search.slice(0, history_search.length - 1).map((item) => ({
+        history_search?.slice(0, history_search.length - 1).map((item) => ({
           title: item.title,
           to: item.title,
         }))
