@@ -1,8 +1,10 @@
 import { FiEdit2 } from "react-icons/fi";
 import { useAuth } from "../../context/user-auth-context";
+import { useNavigate } from "react-router-dom";
 
 const UserProfileMobileData = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   return (
     <section className="w-full flex items-center gap-x-5">
       <div className="max-w-16 max-h-16">
@@ -16,7 +18,7 @@ const UserProfileMobileData = () => {
         <span className="font-bold">{user?.name}</span>
         <span>62xxxxxxxxxxx</span>
       </div>
-      <div className="text-xl ml-auto">
+      <div className="text-xl ml-auto" onClick={() => navigate("/user/settings")}>
         <FiEdit2 />
       </div>
     </section>

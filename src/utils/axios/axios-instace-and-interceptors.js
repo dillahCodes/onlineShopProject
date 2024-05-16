@@ -10,7 +10,7 @@ const headers = {
 const instance_axios = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers,
-  timeout: 5000,
+  timeout: 10000,
 });
 
 //  axios interceptors

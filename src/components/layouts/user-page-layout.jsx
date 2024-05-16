@@ -8,7 +8,7 @@ const UserPageLayout = ({ children }) => {
       <div className={`w-full border-b `}>
         <NavbarUserPage className={` max-w-[500px]`} />
       </div>
-      <Layout className="relative  no-scrollbar border border-red-600 mt-12 z-10">{children}</Layout>
+      <Layout className="relative  no-scrollbar mt-12 z-10">{children}</Layout>
     </Layout>
   );
 };

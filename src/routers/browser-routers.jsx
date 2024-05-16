@@ -24,6 +24,8 @@ import DetailsProductDetailsDiscussLayout from "../components/layouts/details-pr
 import DetailsProductDetailsDiscussionPage from "../pages/details-product-details-discussion-page";
 import UserPageLayout from "../components/layouts/user-page-layout";
 import UserPage from "../pages/user-page";
+import EditUserProfilePage from "../pages/edit-user-profile-page";
+import EditUserPageLayout from "../components/layouts/edit-user-page-layout";
 
 const routers = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const routers = createBrowserRouter([
       <UserPageLayout>
         <UserPage />
       </UserPageLayout>
+    ),
+  },
+  {
+    path: "/user/settings",
+    element: (
+      <EditUserPageLayout>
+        <EditUserProfilePage />
+      </EditUserPageLayout>
     ),
   },
   {

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const useUserLogin = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const { setUser } = useAuth();
+  const { setUserId } = useAuth();
   const navigate = useNavigate();
 
   const clearErrorMessage = () => setTimeout(() => setErrorMessage(""), 3000);
@@ -48,11 +48,10 @@ const useUserLogin = () => {
       const response = userLogin.data;
       localStorage.setItem("token", response.token);
       const { userId } = jwtDecode(response.token);
-      const userData = await authServices.getUserById(userId);
-      setUser(userData.data.data);
-      navigate("/");
+      setUserId(userId);
+      if (userId) navigate("/");
     } catch (error) {
-      const errorHasTranslated = translateLoginErrorMessage(error.response.data.error);
+      const errorHasTranslated = translateLoginErrorMessage(error.response?.data.error);
       setErrorMessage(errorHasTranslated);
       console.error("error during login", error);
     } finally {

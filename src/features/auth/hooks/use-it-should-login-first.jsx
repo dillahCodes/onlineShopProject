@@ -3,7 +3,7 @@ import { useAuth } from "../../../context/user-auth-context";
 import { useNavigate } from "react-router-dom";
 
 const useItShouldLoginFirst = () => {
-  const { user } = useAuth();
+  const { user } = useAuth() || {};
   const navigate = useNavigate();
 
   useEffect(() => {

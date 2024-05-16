@@ -3,38 +3,43 @@ import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import ScreenLoader from "../components/ui-components/screen-loader";
 import authServices from "../features/auth/services/auth-services";
+import useSWR from "swr";
+import { cache } from "swr/_internal";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
+  // local state for storage user data
+  const [userId, setUserId] = useState(
+    localStorage.getItem("token") ? jwtDecode(localStorage.getItem("token")).userId : null
+  );
 
-  // handle set userId by token
-  useEffect(() => {
-    const setUserIdByToken = () => {
-      const getToken = localStorage.getItem("token");
-      if (getToken) {
-        const { userId } = jwtDecode(getToken);
-        setUserId(userId);
-      } else {
-        setUserId(null);
-        setUser(null);
-      }
-    };
+  const fetcherUserById = async (id) => {
+    try {
+      const res = await authServices.getUserById(id);
+      return res.data.data;
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
 
-    if (!userId) setUserIdByToken();
-  }, [userId, user]);
+  // SWR hook for loading user data
+  const { data: userData, isValidating } = useSWR(userId ? `/api/user/${userId}` : null, () => fetcherUserById(userId));
+
+  // current cache user data
+  const cachedData = cache.get(`/api/user/${userId}`);
+
+  if (cachedData) {
+    console.log("Data from cache:", cachedData.data);
+  } else {
+    console.log("Data not found in cache");
+  }
 
   // handle watch local storage delete user if token not exist
   useEffect(() => {
     const handleStorageChange = () => {
       const getToken = localStorage.getItem("token");
-      if (!getToken) {
-        setUser(null);
-        setUserId(null);
-      }
+      if (!getToken) setUserId(null);
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -43,35 +48,24 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  // handle load user with userId
+  // Loader
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const loadUserData = async () => {
-      try {
-        const userData = await authServices.getUserById(userId);
-        setUser(userData.data.data);
-      } catch (error) {
-        console.error("Error loading user data:", error);
-        setUser(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (userId && !user) loadUserData();
-  }, [userId, user]);
-
-  // loader
-  useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
+    return () => clearTimeout(timeoutId);
   }, []);
 
-  console.log(user);
+  if (isValidating || isLoading) return <ScreenLoader />;
 
-  if (isLoading) return <ScreenLoader />;
+  // Context value
+  const contextValue = {
+    user: userData || null,
+    setUserId,
+  };
 
-  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
 const useAuth = () => useContext(AuthContext);
