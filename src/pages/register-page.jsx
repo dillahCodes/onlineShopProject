@@ -32,8 +32,6 @@ const RegisterPage = () => {
     }
   };
 
-  console.log(registerData);
-
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
 
