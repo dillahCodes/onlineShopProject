@@ -26,16 +26,16 @@ const ChangeUserBirthMobilePage = () => {
     });
   };
 
-  const handleChangeUserBirth = () => {
-    if (Object.values(dateValue).every((value) => value === null)) return;
+  const handleChangeUserBirth = async () => {
+    if (Object.values(dateValue).every((value) => value === null) || !user) return;
 
     const payload = {
       dateOfBirth: { date: dateValue.date, month: dateValue.month, year: dateValue.year },
     };
 
     try {
-      authServices.updateUserData(user?.user_id, payload);
-      mutate(`/api/user/${user?.user_id}`);
+      await authServices.updateUserData(user?.user_id, payload);
+      mutate(`/api/user/${user.user_id}`);
     } catch (error) {
       console.error("Error changing user birth:", error);
     }

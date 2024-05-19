@@ -41,8 +41,6 @@ const AuthProvider = ({ children }) => {
   //   console.log("Data not found in cache");
   // }
 
-  console.log(userData);
-
   // handle watch local storage delete user if token not exist
   useEffect(() => {
     const handleStorageChange = () => {
@@ -63,6 +61,8 @@ const AuthProvider = ({ children }) => {
     user: userData || null,
     setUserId,
   };
+
+  console.log(userData);
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
