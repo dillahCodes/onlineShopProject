@@ -7,16 +7,14 @@ const UserProfileMobileData = () => {
   const navigate = useNavigate();
   return (
     <section className="w-full flex items-center gap-x-5">
-      <div className="max-w-16 max-h-16">
-        <img
-          src="https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg"
-          alt="user default image"
-          className="w-full h-full rounded-full object-cover"
-        />
+      <div className="w-16 h-16 ">
+        <img src={user?.avatar} alt="user default image" className="w-full h-full rounded-full object-cover" />
       </div>
       <div className="flex flex-col">
-        <span className="font-bold">{user?.name}</span>
-        <span>62xxxxxxxxxxx</span>
+        <span className="font-bold text-base">{user?.name}</span>
+        <span onClick={() => navigate("/user/profile/phone?st=consequence-info")}>
+          {user?.phone_number || "masukan nomor hp"}
+        </span>
       </div>
       <div className="text-xl ml-auto" onClick={() => navigate("/user/settings")}>
         <FiEdit2 />

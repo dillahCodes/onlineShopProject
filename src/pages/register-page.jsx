@@ -9,7 +9,7 @@ import translateRegisterErrorMessage from "../features/auth/services/translate-r
 
 const RegisterPage = () => {
   const [registerData, setRegisterData] = useState({
-    nama: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -31,6 +31,8 @@ const RegisterPage = () => {
       validatePassword(registerData.password, value);
     }
   };
+
+  console.log(registerData);
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();

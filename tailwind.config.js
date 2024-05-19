@@ -24,6 +24,18 @@ export default {
           overflow: "-moz-scrollbars-none", // hide scrollbar in firefox
         },
 
+        ".input-no-arrow": {
+          // Hide the default increment/decrement buttons in input fields
+          "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
+            "-webkit-appearance": "none",
+            margin: 0,
+          },
+          // Hides the increment/decrement buttons in Firefox
+          "&[type='number']": {
+            "-moz-appearance": "textfield",
+          },
+        },
+
         ".rotate-x-90": {
           transform: "rotateX(90deg)",
         },

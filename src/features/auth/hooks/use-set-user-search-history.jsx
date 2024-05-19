@@ -51,7 +51,7 @@ const useSetUserSearchHistory = (currentProduct) => {
       if (history_search.length >= maxHistoryLength) {
         await authServices.deleteUserSearchHistory(history_search.shift().history_id).then(async () => {
           if (history_search.length < maxHistoryLength) {
-            const res = await authServices.setUserSearchHistory(user.user_id, payload);
+            const res = await authServices.setUserSearchHistory(user_id, payload);
             mutateCacheData(user, res);
           }
         });

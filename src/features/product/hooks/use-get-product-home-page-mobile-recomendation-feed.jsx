@@ -4,24 +4,12 @@ import productServices from "../services/product-services";
 import shuffleArray from "../../../utils/shuffle-array";
 
 export const homePageNavigationFeed = [
-  {
-    name: "for you",
-  },
-  {
-    name: "beli lokal",
-  },
-  {
-    name: "web cams",
-  },
-  {
-    name: "make up wajah",
-  },
-  {
-    name: "makanan jadi",
-  },
-  {
-    name: "mirip yang kamu cek",
-  },
+  { name: "for you" },
+  { name: "beli lokal" },
+  { name: "web cams" },
+  { name: "make up wajah" },
+  { name: "makanan jadi" },
+  { name: "mirip yang kamu cek" },
 ];
 
 const useGetProductHomePageMobileRecomendationFeed = (categoryFeed, fetchLimit) => {

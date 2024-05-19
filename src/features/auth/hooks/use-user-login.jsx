@@ -4,6 +4,7 @@ import authServices from "../services/auth-services";
 import { useState } from "react";
 import translateLoginErrorMessage from "../services/translate-login-error-message";
 import { useNavigate } from "react-router-dom";
+import { mutate } from "swr";
 
 const useUserLogin = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -49,6 +50,7 @@ const useUserLogin = () => {
       localStorage.setItem("token", response.token);
       const { userId } = jwtDecode(response.token);
       setUserId(userId);
+      mutate(`/api/user/${userId}`);
       if (userId) navigate("/");
     } catch (error) {
       const errorHasTranslated = translateLoginErrorMessage(error.response?.data.error);

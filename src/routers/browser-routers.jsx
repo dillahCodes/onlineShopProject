@@ -26,6 +26,14 @@ import UserPageLayout from "../components/layouts/user-page-layout";
 import UserPage from "../pages/user-page";
 import EditUserProfilePage from "../pages/edit-user-profile-page";
 import EditUserPageLayout from "../components/layouts/edit-user-page-layout";
+import EditUserInfoPageLayout from "../components/layouts/edit-user-info-page-layout";
+import ChangeNamePage from "../pages/change-name-page";
+import ChangeUserNamePage from "../pages/change-username-page";
+import ChangeUserBioPage from "../pages/change-user-bio-page";
+import ChangeUserEmailPage from "../pages/change-user-email-page";
+import ChangeUserPhoneNumberPage from "../pages/change-user-phone-number-page";
+import ChangeUserGenderPage from "../pages/change-user-gender-page";
+import ChangeUserBirthPage from "../pages/change-user-birth-page";
 
 const routers = createBrowserRouter([
   {
@@ -58,6 +66,62 @@ const routers = createBrowserRouter([
       <EditUserPageLayout>
         <EditUserProfilePage />
       </EditUserPageLayout>
+    ),
+  },
+  {
+    path: "/user/profile/name",
+    element: (
+      <EditUserInfoPageLayout>
+        <ChangeNamePage />
+      </EditUserInfoPageLayout>
+    ),
+  },
+  {
+    path: "/user/profile/username",
+    element: (
+      <EditUserInfoPageLayout>
+        <ChangeUserNamePage />
+      </EditUserInfoPageLayout>
+    ),
+  },
+  {
+    path: "/user/profile/bio",
+    element: (
+      <EditUserInfoPageLayout>
+        <ChangeUserBioPage />
+      </EditUserInfoPageLayout>
+    ),
+  },
+  {
+    path: "/user/profile/email",
+    element: (
+      <EditUserInfoPageLayout>
+        <ChangeUserEmailPage />
+      </EditUserInfoPageLayout>
+    ),
+  },
+  {
+    path: "/user/profile/phone",
+    element: (
+      <EditUserInfoPageLayout>
+        <ChangeUserPhoneNumberPage />
+      </EditUserInfoPageLayout>
+    ),
+  },
+  {
+    path: "/user/profile/gender",
+    element: (
+      <EditUserInfoPageLayout>
+        <ChangeUserGenderPage />
+      </EditUserInfoPageLayout>
+    ),
+  },
+  {
+    path: "/user/profile/birth",
+    element: (
+      <EditUserInfoPageLayout>
+        <ChangeUserBirthPage />
+      </EditUserInfoPageLayout>
     ),
   },
   {

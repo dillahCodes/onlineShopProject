@@ -13,6 +13,7 @@
     "@ant-design/happy-work-theme": "^1.0.0",
     "antd": "^5.15.2",
     "axios": "^1.6.8",
+    "date-fns": "^3.6.0",
     "framer-motion": "^11.0.14",
     "js-base64": "^3.7.7",
     "jwt-decode": "^4.0.0",

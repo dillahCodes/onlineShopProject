@@ -9,10 +9,7 @@ const DetailsProductMobileOwnerProductProfile = ({ productData }) => {
   const getProductRatingAverage = () => {
     return (
       productData &&
-      (
-        productData.review.reduce((acc, curr) => acc + curr.rating, 0) /
-        productData.review.length
-      ).toFixed(1)
+      (productData.review.reduce((acc, curr) => acc + curr.rating, 0) / productData.review.length).toFixed(1)
     );
   };
 
@@ -31,9 +28,7 @@ const DetailsProductMobileOwnerProductProfile = ({ productData }) => {
               width={20}
               className="inline"
             />
-            <span className="text-base font-bold font-space-grotesk">
-              {productData.owner.name}
-            </span>
+            <span className="text-base font-bold font-space-grotesk">{productData.owner.name}</span>
           </span>
           <span className="text-sm font-space-grotesk">
             <span>online</span> <span className="font-bold">0 jam lalu</span>
@@ -61,9 +56,7 @@ const DetailsProductMobileOwnerProductProfile = ({ productData }) => {
             </span>
           </div>
         </div>
-        <ButtonComponent className={"border-black font-bold font-space-grotesk capitalize"}>
-          follow
-        </ButtonComponent>
+        <ButtonComponent className={"border-black font-bold font-space-grotesk capitalize"}>follow</ButtonComponent>
       </div>
     </div>
   );

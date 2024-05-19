@@ -42,14 +42,10 @@ const NavbarMenuListMobileComponent = () => {
       {user && (
         <section className="bg-white p-5 flex flex-col gap-y-2 ">
           <div className="flex items-center w-full gap-x-5 ">
-            <div className="max-w-[50px] max-h-[50px] min-h-[50px] min-w-[50px]">
-              <img
-                src="https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg.webp?ect=4g"
-                alt=""
-                className="object-cover w-full h-full rounded-full"
-              />
+            <div className="w-16 h-16 ">
+              <img src={user?.avatar} alt="user default image" className="w-full h-full rounded-full object-cover" />
             </div>
-            <div className="w-full">
+            <div className="">
               {/* username */}
               <div className="flex items-center gap-x-1">
                 <img
@@ -57,7 +53,7 @@ const NavbarMenuListMobileComponent = () => {
                   alt="user badge"
                   className="w-4 h-4"
                 />
-                <h1 className="text-xl font-bold font-space-grotesk">{user?.name}</h1>
+                <h1 className="text-base font-bold font-space-grotesk">{user?.name}</h1>
               </div>
               {/* gopay */}
               <div className="flex items-center gap-x-1" onClick={goToComingSoonPage}>
@@ -91,8 +87,8 @@ const NavbarMenuListMobileComponent = () => {
           <section className="w-full flex gap-x-2">
             {/* toko saya */}
             <div className="w-full p-2 border rounded-lg flex items-center gap-x-0.5" onClick={goToComingSoonPage}>
-              <span className="font-bold capitalize">toko saya</span>
-              <span className="text-xs font-bold">({user?.name})</span>
+              {!user?.username && <span className="font-bold capitalize">toko saya</span>}
+              <span className="text-xs font-bold">{user?.username}</span>
               <IoIosArrowForward className="ml-auto text-lg" />
             </div>
             {/* daftar afiliate */}

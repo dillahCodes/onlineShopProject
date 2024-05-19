@@ -9,7 +9,7 @@ const EditUserPageLayout = ({ children }) => {
     <Layout className={` min-h-screen relative max-w-[500px] mx-auto `}>
       <section className={`w-full py-3 px-2 border-b bg-white flex items-center gap-x-3  `}>
         <NavbarBackComponent size={25} className={"text-gray-400"} onClick={() => navigate(-1)} />
-        <h1 className="font-bold font-space-grotesk capitalize">Ubah Profil</h1>
+        <h1 className="font-bold font-space-grotesk text-base capitalize">Ubah Profil</h1>
       </section>
       <Layout className="relative  no-scrollbar  bg-white  z-10">{children}</Layout>
     </Layout>

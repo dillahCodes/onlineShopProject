@@ -17,19 +17,12 @@ const FormAuthRegister = ({
     password: false,
     confirmPassword: false,
   });
-  const { nama, email, password, confirmPassword } = registerData;
+  const { name, email, password, confirmPassword } = registerData;
 
   return (
     <div className="w-full">
       <h1 className="mb-5 text-2xl font-bold capitalize font-space-grotesk">register</h1>
-      {errorMessage && (
-        <Alert
-          message={errorMessage.error || errorMessage}
-          type="error"
-          className="mb-5"
-          showIcon
-        />
-      )}
+      {errorMessage && <Alert message={errorMessage.error || errorMessage} type="error" className="mb-5" showIcon />}
       <form action="" onSubmit={handleRegister} className="flex flex-col w-full gap-y-5">
         {/* name */}
         <div className="w-full">
@@ -39,12 +32,12 @@ const FormAuthRegister = ({
 
           <Input
             id="name"
-            name="nama"
+            name="name"
             placeholder="jhon doe"
             type="text"
             size="large"
             className="mt-1"
-            defaultValue={nama}
+            defaultValue={name}
             onChange={handleRegisterInputChange}
           />
         </div>
@@ -81,8 +74,7 @@ const FormAuthRegister = ({
             placeholder="****"
             visibilityToggle={{
               visible: showPassword.password,
-              onVisibleChange: (visible) =>
-                setShowPassword({ ...showPassword, password: visible }),
+              onVisibleChange: (visible) => setShowPassword({ ...showPassword, password: visible }),
             }}
           />
         </div>
@@ -102,8 +94,7 @@ const FormAuthRegister = ({
             placeholder="****"
             visibilityToggle={{
               visible: showPassword.confirmPassword,
-              onVisibleChange: (visible) =>
-                setShowPassword({ ...showPassword, confirmPassword: visible }),
+              onVisibleChange: (visible) => setShowPassword({ ...showPassword, confirmPassword: visible }),
             }}
           />
         </div>

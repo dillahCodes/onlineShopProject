@@ -6,7 +6,7 @@ import MobilePhotoProfile from "./mobile-photo-profile";
 const UserEditProfileMobilePage = () => {
   return (
     <section className="w-full flex flex-col ">
-      <MobilePhotoProfile url={null} />
+      <MobilePhotoProfile />
       <MobileInfoProfile />
       <MobilePersonalInfoProfile />
       <ButtonComponent
