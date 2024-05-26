@@ -13,17 +13,11 @@ import RatingStatistics from "../ui-components/rating-statistics";
 import "./style/all-product-reviews-mobile.css";
 
 const menuButtons = ["foto & video", "rating", "variant", "topik", "urutkan"];
-const sortFilterMenu = [
-  "rating tertinggi",
-  "rating terendah",
-  "paling baru",
-  "paling membantu",
-];
+const sortFilterMenu = ["rating tertinggi", "rating terendah", "paling baru", "paling membantu"];
 const getAverageRating = (currentProductData) => {
   if (currentProductData?.review.length === 0 || !currentProductData) return 0;
   return (
-    currentProductData?.review.reduce((acc, curr) => acc + curr.rating, 0) /
-    currentProductData.review.length
+    currentProductData?.review.reduce((acc, curr) => acc + curr.rating, 0) / currentProductData.review.length
   ).toFixed(1);
 };
 
@@ -36,7 +30,6 @@ const getPercentOfRatings = (currentProductData) => {
 };
 
 const AllProductReviewsMobile = ({ currentProductData }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState({
     isOpen: false,
@@ -53,25 +46,9 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
     rating: "",
   });
 
-  useEffect(() => {
-    const initialScroll = 88;
-    const handleScroll = () => {
-      if (Math.round(window.scrollY) >= initialScroll) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const handleBack = () => history.back();
   const handleOpenAndCloseBottomDrawer = () => setIsBottomDrawerOpen(!isBottomDrawerOpen);
+
   const handleFilterDrawerOpen = (name) => {
     setFilterDrawerOpen((prevState) => ({
       ...prevState,
@@ -80,6 +57,7 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
       // if user click photo filter don't open drawer
     }));
   };
+
   const handleFilterDrawerClose = () => {
     setFilterDrawerOpen((prevState) => ({
       ...prevState,
@@ -110,18 +88,14 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
               <IoIosStar />
             </div>
             <div className="font-space-grotesk">
-              <span className="text-2xl font-bold ">
-                {getAverageRating(currentProductData)}
-              </span>
+              <span className="text-2xl font-bold ">{getAverageRating(currentProductData)}</span>
               <span className="text-gray-400">/</span>
               <span className="text-gray-400">5.0</span>
             </div>
           </div>
           {/* percentage of buyer satisfaction */}
           <div className="flex flex-col w-full ">
-            <ButtonComponent
-              className={"w-fit h-fit p-0 shadow-none border-none bg-transparent"}
-            >
+            <ButtonComponent className={"w-fit h-fit p-0 shadow-none border-none bg-transparent"}>
               <span
                 className="self-start text-sm font-bold truncate whitespace-normal sm:text-base md:text-lg font-space-grotesk"
                 onClick={handleOpenAndCloseBottomDrawer}
@@ -144,26 +118,18 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
             >
               <div className="flex flex-col w-full ">
                 <span className="text-lg font-bold font-space-grotesk">
-                  {getPercentOfRatings(currentProductData)} % pembeli merasa puas belanja
-                  barang ini
+                  {getPercentOfRatings(currentProductData)} % pembeli merasa puas belanja barang ini
                 </span>
                 <span className="text-xs font-light capitalize font-space-grotesk">
-                  Dihitung dari jumlah rating positif (bintang 4 dan 5) dibagi dengan total
-                  rating.
+                  Dihitung dari jumlah rating positif (bintang 4 dan 5) dibagi dengan total rating.
                 </span>
               </div>
               <RatingStatistics currentProductData={currentProductData} className={"mt-5"} />
             </BottomDrawer>
             <div className="flex items-center w-full text-sm font-medium gap-x-2 font-space-grotesk">
-              <span>
-                {currentProductData?.review.filter((review) => review.rating).length || 0}{" "}
-                rating
-              </span>
+              <span>{currentProductData?.review.filter((review) => review.rating).length || 0} rating</span>
               <span>•</span>
-              <span>
-                {currentProductData?.review.filter((review) => review.comment).length || 0}{" "}
-                ulasan
-              </span>
+              <span>{currentProductData?.review.filter((review) => review.comment).length || 0} ulasan</span>
             </div>
           </div>
         </section>
@@ -180,9 +146,7 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
                 key={index}
                 disabled={currentProductData?.review.length === 0}
                 icon={<IoIosArrowDown />}
-                className={` w-full flex items-center  capitalize ${
-                  filterSelected[item] && "border border-black"
-                } `}
+                className={` w-full flex items-center  capitalize ${filterSelected[item] && "border border-black"} `}
                 onClick={() => handleFilterDrawerOpen(item)}
               >
                 {item}
@@ -190,10 +154,7 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
             ))}
           </div>
           <div className="z-0 w-full p-5 pt-0">
-            <CommnetsComponent
-              comentData={currentProductData?.review}
-              sortTo={filterSelected.urutkan}
-            />
+            <CommnetsComponent comentData={currentProductData?.review} sortTo={filterSelected.urutkan} />
           </div>
         </section>
         {/* drawer filter */}
@@ -211,10 +172,7 @@ const AllProductReviewsMobile = ({ currentProductData }) => {
           onClose={handleFilterDrawerClose}
         >
           {filterDrawerOpen.urutkan && (
-            <SortFilter
-              setFilterSelected={setFilterSelected}
-              checkedWithSameValue={filterSelected.urutkan}
-            />
+            <SortFilter setFilterSelected={setFilterSelected} checkedWithSameValue={filterSelected.urutkan} />
           )}
 
           {(filterDrawerOpen.rating || filterDrawerOpen.topik || filterDrawerOpen.variant) && (

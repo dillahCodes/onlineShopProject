@@ -28,6 +28,8 @@ const DetailsDiscussMobileComponent = () => {
     replyProductDiscussion(discussionId, productId, data).then(() => setReplyMessage(""));
   };
 
+  console.log("test diskusi", discussionDataFiltered);
+
   return (
     <section className="w-full">
       <DetailsDiscussHeaderComponent
@@ -36,6 +38,7 @@ const DetailsDiscussMobileComponent = () => {
         created_at={discussionDataFiltered?.created_at}
         discus_message={discussionDataFiltered?.discus_message}
         discussUserName={discussionDataFiltered?.name}
+        avatar={discussionDataFiltered?.avatar}
       />
       {discussionDataFiltered?.discus_reply.length > 0 && (
         <section className="w-full px-3 mt-5 capitalize">

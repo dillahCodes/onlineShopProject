@@ -41,10 +41,10 @@ const ChangeUserBirthMobilePage = () => {
     }
   };
 
-  console.log(dateValue);
   return (
     <section className="w-full p-3">
       <div className="w-full  flex flex-col gap-y-3">
+        <p></p>
         <label htmlFor="date" className="flex flex-col">
           <span className="text-sm capitalize font-space-grotesk mb-1">pilih tanggal :</span>
           <DatePicker onChange={onChange} id="date" size="large" format="DD-MM-YYYY" needConfirm />

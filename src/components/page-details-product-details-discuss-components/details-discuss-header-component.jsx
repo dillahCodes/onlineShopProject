@@ -8,19 +8,13 @@ const DetailsDiscussHeaderComponent = ({
   created_at,
   discus_message,
   discussUserName,
+  avatar,
 }) => {
   return (
     <>
       <div className="w-full flex items-center gap-x-2 p-3 pb-2">
         <div className="w-6 h-6 border border-black rounded-full overflow-hidden">
-          {discussUserID === productOwnerId ? (
-            <img src="" alt="" />
-          ) : (
-            <img
-              src="https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg"
-              alt=""
-            />
-          )}
+          <img src={avatar} alt="" />
         </div>
         {discussUserID === productOwnerId ? (
           <span className="font-bold bg-[#C9FDE0] text-[#00AA5B] px-1 py-0.5 rounded-md font-space-grotesk">
@@ -58,6 +52,7 @@ DetailsDiscussHeaderComponent.propTypes = {
   created_at: PropTypes.string,
   discus_message: PropTypes.string,
   discussUserName: PropTypes.string,
+  avatar: PropTypes.string,
 };
 
 export default DetailsDiscussHeaderComponent;

@@ -8,6 +8,8 @@ const DetailsProductMobileDiscussMapping = ({ discussData, productOwnerId }) => 
   const { productId } = useParams();
   const handleNavigateToDetailDiscuss = (item) => navigate(`/product/${productId}/talk/${item.discus_id}`);
 
+  console.log(discussData);
+
   return (
     <section className="w-full p-3 px-3 pt-0">
       {discussData?.map((item, index) => (
@@ -18,14 +20,7 @@ const DetailsProductMobileDiscussMapping = ({ discussData, productOwnerId }) => 
         >
           <div className="w-full flex items-center gap-x-2">
             <div className="w-6 h-6 border border-black rounded-full overflow-hidden">
-              {item.user_id === productOwnerId ? (
-                <img src="" alt="" />
-              ) : (
-                <img
-                  src="https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg"
-                  alt=""
-                />
-              )}
+              <img src={item?.avatar} alt="" />
             </div>
             {item.user_id === productOwnerId ? (
               <span className="font-bold bg-[#C9FDE0] text-[#00AA5B] px-1 py-0.5 rounded-md font-space-grotesk">
