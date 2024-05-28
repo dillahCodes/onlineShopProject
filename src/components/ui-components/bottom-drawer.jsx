@@ -1,13 +1,14 @@
 import { Drawer } from "antd";
 import PropTypes from "prop-types";
 
-const BottomDrawer = ({ isOpen, onClose, children, drawerTitle, drawerHeight, ...props }) => {
+const BottomDrawer = ({ isOpen, onClose, children, drawerTitle, drawerHeight, className, ...props }) => {
   return (
     <Drawer
       styles={{ body: { padding: 0 } }}
       title={drawerTitle}
       height={drawerHeight}
       placement="bottom"
+      className={className}
       closable={false}
       onClose={onClose}
       open={isOpen}
@@ -26,4 +27,5 @@ BottomDrawer.propTypes = {
   children: PropTypes.node,
   drawerTitle: PropTypes.node,
   drawerHeight: PropTypes.string || PropTypes.number,
+  className: PropTypes.string,
 };

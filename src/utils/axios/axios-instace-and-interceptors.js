@@ -13,6 +13,12 @@ const instance_axios = axios.create({
   timeout: 10000,
 });
 
+export const instance_axios_user_address = axios.create({
+  baseURL: import.meta.env.VITE_API_ADDRESS_URL,
+  headers,
+  timeout: 10000,
+});
+
 //  axios interceptors
 // https://axios-http.com/docs/interceptors
 instance_axios.interceptors.request.use(

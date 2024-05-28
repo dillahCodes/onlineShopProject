@@ -4,9 +4,9 @@ import instance_axios from "../../../utils/axios/axios-instace-and-interceptors"
 const authServices = {
   register: (registerData) => instance_axios.post("users/register", registerData),
   login: (loginData) => instance_axios.post("users/login", loginData),
-  getAllUser: () => instance_axios.get("users"),
+  getAllUser: () => instance_axios.get("users"), // gak kepake
   getUserById: (userId) => instance_axios.get(`users/${userId}`),
-  changeUserPassword: (userId, userData) => instance_axios.put(`users/${userId}/change-password`, userData),
+  changeUserPassword: (userId, userData) => instance_axios.put(`users/${userId}/change-password`, userData), // kepake tapi belum dipake
   deleteUser: (userId) => instance_axios.delete(`users/${userId}/delete`),
   setUserSearchHistory: (userId, data) => instance_axios.post(`users/${userId}/history`, data),
   deleteUserSearchHistory: (historyId) => instance_axios.delete(`users/${historyId}/history/delete`),
