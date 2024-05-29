@@ -57,11 +57,7 @@ const ChangeUserBirthMobilePage = () => {
             </span>
           </span>
         )}
-        <ButtonComponent
-          onClick={handleChangeUserBirth}
-          type="primary"
-          className={"capitalize font-bold py-5 w-full mt-2 flex items-center justify-center"}
-        >
+        <ButtonComponent onClick={handleChangeUserBirth} type="primary" className={"capitalize font-bold py-5 w-full mt-2 flex items-center justify-center"}>
           simpan
         </ButtonComponent>
       </div>

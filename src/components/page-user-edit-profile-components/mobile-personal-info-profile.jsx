@@ -4,6 +4,40 @@ import { MdOutlineContentCopy } from "react-icons/md";
 import { useRef, useState } from "react";
 import { Alert } from "antd";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import PropTypes from "prop-types";
+
+const InfoItem = ({ label, value, onClick, isCopyable, textAreaRef, showAlert }) => (
+  <div className="w-full flex items-center gap-x-2 font-space-grotesk">
+    <span className="min-w-[25%] text-[14px] capitalize text-gray-500 truncate">{label}</span>
+    <span className={`w-full text-[14px] ${!value && "text-gray-400"} truncate`}>{value || `masukkan ${label}`}</span>
+    <span className="text-lg" onClick={onClick}>
+      {isCopyable ? <MdOutlineContentCopy /> : <IoIosArrowForward />}
+    </span>
+    {isCopyable && (
+      <>
+        <textarea ref={textAreaRef} value={value} readOnly className="hidden" />
+        {showAlert && (
+          <Alert
+            showIcon
+            message={`${label} berhasil disalin`}
+            type="success"
+            className="fixed z-10 font-space-grotesk bottom-5 left-1/2 transform -translate-x-1/2 w-[90%] capitalize font-medium"
+          />
+        )}
+      </>
+    )}
+  </div>
+);
+
+InfoItem.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onClick: PropTypes.func,
+  isCopyable: PropTypes.bool,
+  textAreaRef: PropTypes.object,
+  showAlert: PropTypes.bool,
+  setShowAlert: PropTypes.func,
+};
 
 const MobilePersonalInfoProfile = () => {
   const [, setSearchParams] = useSearchParams();
@@ -11,15 +45,13 @@ const MobilePersonalInfoProfile = () => {
   const { user } = useAuth();
   const textAreaRef = useRef(null);
   const navigate = useNavigate();
+  const userDateBirth = `${user?.date_of_birth[0].date}/${user?.date_of_birth[0].month}/${user?.date_of_birth[0].year}`;
 
   const copyToClipboard = () => {
     textAreaRef.current.select();
     navigator.clipboard.writeText(textAreaRef.current.value);
     setShowAlert(true);
-
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 3000);
+    setTimeout(() => setShowAlert(false), 3000);
   };
 
   const navigateToEditPhoneNumber = () => {
@@ -36,57 +68,12 @@ const MobilePersonalInfoProfile = () => {
         </div>
       </div>
 
-      <div className="w-full py-3 flex  flex-col gap-y-5">
-        <div className="w-full flex items-center gap-x-2">
-          <span className="min-w-[25%] text-[14px] capitalize text-gray-500 truncate">user ID</span>
-          <span className="w-full text-[14px] truncate">{user.user_id}</span>
-          <span className="text-lg" onClick={copyToClipboard}>
-            <MdOutlineContentCopy />
-          </span>
-          <textarea ref={textAreaRef} value={user?.user_id} readOnly className="hidden" />
-          {showAlert && (
-            <Alert
-              showIcon
-              message="user ID berhasil disalin"
-              type="success"
-              className="fixed z-10 font-space-grotesk bottom-5 left-1/2 transform -translate-x-1/2 w-[90%] capitalize font-medium"
-            />
-          )}
-        </div>
-        <div className="w-full flex items-center gap-x-2">
-          <span className="min-w-[25%] text-[14px] capitalize text-gray-500 truncate">email</span>
-          <span className="w-full text-[14px]  truncate">{user?.email}</span>
-          <span className="text-lg" onClick={() => navigate("/user/profile/email")}>
-            <IoIosArrowForward />
-          </span>
-        </div>
-        <div className="w-full flex items-center gap-x-2">
-          <span className="min-w-[25%] text-[14px] capitalize text-gray-500 truncate">nomor hp</span>
-          <span className={`w-full text-[14px] ${!user.phone_number && "text-gray-400"} truncate`}>
-            {user.phone_number || "masukkan nomor hp"}
-          </span>
-          <span className="text-lg" onClick={navigateToEditPhoneNumber}>
-            <IoIosArrowForward />
-          </span>
-        </div>
-        <div className="w-full flex items-center gap-x-2">
-          <span className="min-w-[25%] text-[14px] capitalize text-gray-500 truncate">jenis kelamin</span>
-          <span className={` w-full text-[14px] ${!user.gender && "text-gray-400"} truncate `}>
-            {user.gender || "pilih jenis kelamin"}
-          </span>
-          <span className="text-lg" onClick={() => navigate("/user/profile/gender")}>
-            <IoIosArrowForward />
-          </span>
-        </div>
-        <div className="w-full flex items-center gap-x-2">
-          <span className="min-w-[25%] text-[14px] capitalize text-gray-500 truncate">tangal lahir</span>
-          <span className={`w-full text-[14px] text-gray-400 ${!user.birth_date && "text-gray-400"} truncate`}>
-            {user.birth_date || "masukkan tanggal lahir"}
-          </span>
-          <span className="text-lg" onClick={() => navigate("/user/profile/birth")}>
-            <IoIosArrowForward />
-          </span>
-        </div>
+      <div className="w-full py-3 flex flex-col gap-y-5">
+        <InfoItem label="user ID" value={user.user_id} onClick={copyToClipboard} isCopyable textAreaRef={textAreaRef} showAlert={showAlert} setShowAlert={setShowAlert} />
+        <InfoItem label="email" value={user?.email} onClick={() => navigate("/user/profile/email")} />
+        <InfoItem label="nomor hp" value={user.phone_number} onClick={navigateToEditPhoneNumber} />
+        <InfoItem label="jenis kelamin" value={user.gender} onClick={() => navigate("/user/profile/gender")} />
+        <InfoItem label="tangal lahir" value={userDateBirth} onClick={() => navigate("/user/profile/birth")} />
       </div>
     </section>
   );

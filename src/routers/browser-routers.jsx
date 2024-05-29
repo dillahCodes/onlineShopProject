@@ -69,88 +69,119 @@ const routers = createBrowserRouter([
     ),
   },
   {
-    path: "/user/profile/name",
-    element: (
-      <EditUserInfoPageLayout>
-        <ChangeNamePage />
-      </EditUserInfoPageLayout>
-    ),
-  },
-  {
-    path: "/user/profile/username",
-    element: (
-      <EditUserInfoPageLayout>
-        <ChangeUserNamePage />
-      </EditUserInfoPageLayout>
-    ),
-  },
-  {
-    path: "/user/profile/bio",
-    element: (
-      <EditUserInfoPageLayout>
-        <ChangeUserBioPage />
-      </EditUserInfoPageLayout>
-    ),
-  },
-  {
-    path: "/user/profile/email",
-    element: (
-      <EditUserInfoPageLayout>
-        <ChangeUserEmailPage />
-      </EditUserInfoPageLayout>
-    ),
-  },
-  {
-    path: "/user/profile/phone",
-    element: (
-      <EditUserInfoPageLayout>
-        <ChangeUserPhoneNumberPage />
-      </EditUserInfoPageLayout>
-    ),
-  },
-  {
-    path: "/user/profile/gender",
-    element: (
-      <EditUserInfoPageLayout>
-        <ChangeUserGenderPage />
-      </EditUserInfoPageLayout>
-    ),
-  },
-  {
-    path: "/user/profile/birth",
-    element: (
-      <EditUserInfoPageLayout>
-        <ChangeUserBirthPage />
-      </EditUserInfoPageLayout>
-    ),
+    path: "/user/profile",
+    children: [
+      {
+        path: "name",
+        element: (
+          <EditUserInfoPageLayout>
+            <ChangeNamePage />
+          </EditUserInfoPageLayout>
+        ),
+      },
+      {
+        path: "username",
+        element: (
+          <EditUserInfoPageLayout>
+            <ChangeUserNamePage />
+          </EditUserInfoPageLayout>
+        ),
+      },
+      {
+        path: "bio",
+        element: (
+          <EditUserInfoPageLayout>
+            <ChangeUserBioPage />
+          </EditUserInfoPageLayout>
+        ),
+      },
+      {
+        path: "email",
+        element: (
+          <EditUserInfoPageLayout>
+            <ChangeUserEmailPage />
+          </EditUserInfoPageLayout>
+        ),
+      },
+      {
+        path: "phone",
+        element: (
+          <EditUserInfoPageLayout>
+            <ChangeUserPhoneNumberPage />
+          </EditUserInfoPageLayout>
+        ),
+      },
+      {
+        path: "gender",
+        element: (
+          <EditUserInfoPageLayout>
+            <ChangeUserGenderPage />
+          </EditUserInfoPageLayout>
+        ),
+      },
+      {
+        path: "birth",
+        element: (
+          <EditUserInfoPageLayout>
+            <ChangeUserBirthPage />
+          </EditUserInfoPageLayout>
+        ),
+      },
+    ],
   },
   {
     path: "/coming-soon",
     element: <ComingSoonPage />,
   },
   {
-    path: "/product/:productId",
-    element: (
-      <DetailsProductLayout>
-        <DetailsProductPage />
-      </DetailsProductLayout>
-    ),
-  },
-  {
-    path: "/product/:productId/reviews",
-    element: (
-      <AllProductReviewsLayout>
-        <AllProductReviewsPage />
-      </AllProductReviewsLayout>
-    ),
-  },
-  {
-    path: "/product/search",
-    element: (
-      <SearchResultProductsLayout>
-        <ResultSearchPage />
-      </SearchResultProductsLayout>
-    ),
+    path: "/product",
+    children: [
+      {
+        path: ":productId",
+        element: (
+          <DetailsProductLayout>
+            <DetailsProductPage />
+          </DetailsProductLayout>
+        ),
+      },
+      {
+        path: ":productId/reviews",
+        element: (
+          <AllProductReviewsLayout>
+            <AllProductReviewsPage />
+          </AllProductReviewsLayout>
+        ),
+      },
+      {
+        path: ":productId/talk",
+        children: [
+          {
+            path: "",
+            element: (
+              <DetailsProductDiscussLayout>
+                <DetailsProductDiscussionPage />
+              </DetailsProductDiscussLayout>
+            ),
+          },
+          {
+            path: ":discussionId",
+            element: (
+              <DetailsProductDetailsDiscussLayout>
+                <DetailsProductDetailsDiscussionPage />
+              </DetailsProductDetailsDiscussLayout>
+            ),
+          },
+        ],
+      },
+      {
+        path: "search",
+        element: (
+          <SearchResultProductsLayout>
+            <ResultSearchPage />
+          </SearchResultProductsLayout>
+        ),
+      },
+    ],
   },
   {
     path: "/feed",
@@ -184,22 +215,5 @@ const routers = createBrowserRouter([
       </ReceiptPageLayout>
     ),
   },
-  {
-    path: "/product/:productId/talk",
-    element: (
-      <DetailsProductDiscussLayout>
-        <DetailsProductDiscussionPage />
-      </DetailsProductDiscussLayout>
-    ),
-  },
-  {
-    path: "/product/:productId/talk/:discussionId",
-    element: (
-      <DetailsProductDetailsDiscussLayout>
-        <DetailsProductDetailsDiscussionPage />
-      </DetailsProductDetailsDiscussLayout>
-    ),
-  },
 ]);
-
 export default routers;
