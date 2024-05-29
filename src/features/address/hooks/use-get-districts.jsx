@@ -9,10 +9,7 @@ const useGetDistricts = (regencies_code) => {
 
   const shouldFetch = regencies_code != null;
 
-  const { data, error, isValidating } = useSWR(
-    shouldFetch ? ["districts", regencies_code] : null,
-    shouldFetch ? getAllDistricts : null
-  );
+  const { data, error, isValidating } = useSWR(shouldFetch ? ["districts", regencies_code] : null, shouldFetch ? getAllDistricts : null, { revalidateOnFocus: false });
 
   return { districtsData: data, error, districtsDataLoading: isValidating };
 };

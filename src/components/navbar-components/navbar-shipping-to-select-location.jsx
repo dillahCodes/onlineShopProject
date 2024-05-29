@@ -26,6 +26,7 @@ const translateOption = (option) => {
   }
 };
 
+// render each items of suggestion
 const renderEachOption = (option) => ({
   label: (
     <div className="w-full flex items-center gap-x-2">
@@ -38,7 +39,16 @@ const renderEachOption = (option) => ({
   value: option,
 });
 
-const NavbarShippingToSelectLocation = ({ isOpen = true, onClose }) => {
+// Utility function to handle filtering and setting options
+const handleFilterAndSetOptions = (field, value, data, setOptions) => {
+  const filteredOptions = value ? data?.filter((item) => item?.name.toUpperCase().includes(value.toUpperCase())) : data || [];
+  setOptions((prev) => ({
+    ...prev,
+    [field]: filteredOptions?.sort((a, b) => a.name.localeCompare(b.name)),
+  }));
+};
+
+const NavbarShippingToSelectLocation = ({ isOpen, onClose }) => {
   const [value, setValue] = useState({
     province: "",
     districtOrCity: "",
@@ -57,75 +67,54 @@ const NavbarShippingToSelectLocation = ({ isOpen = true, onClose }) => {
     subdistrict: [],
     village: [],
   });
+  const [errorMessage, setErrorMessage] = useState({
+    province: "",
+    districtOrCity: "",
+    subdistrict: "",
+    village: "",
+  });
 
-  const { provinceData, provinceDataLoading } = useGetProvinces();
+  const { provinceData, provinceDataLoading } = useGetProvinces(isOpen);
   const { regenciesData, regenciesDataLoading } = useGetRegencies(selectedValueCode?.province);
   const { districtsData, districtsDataLoading } = useGetDistricts(selectedValueCode?.districtOrCity);
   const { villagesData, villagesDataLoading } = useVillages(selectedValueCode?.subdistrict);
 
-  const confirmButtonIsDisabled = () => {
-    return (
-      value?.province === "" ||
-      value?.districtOrCity === "" ||
-      value?.subdistrict === "" ||
-      value?.village === "" ||
-      selectedValueCode?.province === null ||
-      selectedValueCode?.districtOrCity === null ||
-      selectedValueCode?.subdistrict === null ||
-      selectedValueCode?.village === null
-    );
-  };
-
-  // handle display suggestions province
+  // handle reset state if close
   useEffect(() => {
-    const filteredProvinceOptions = value?.province
-      ? provinceData?.filter((province) => province?.name.toUpperCase().includes(value?.province.toUpperCase()))
-      : provinceData;
-    setOptions((prev) => ({
-      ...prev,
-      province: filteredProvinceOptions?.sort((a, b) => a.name.localeCompare(b.name)),
-    }));
+    if (!isOpen) {
+      setValue({
+        province: "",
+        districtOrCity: "",
+        subdistrict: "",
+        village: "",
+      });
+      setSelectedValueCode({
+        province: null,
+        districtOrCity: null,
+        subdistrict: null,
+        village: null,
+      });
+    }
+  }, [isOpen]);
+
+  // useEffect to filter and set options (suggestions)
+  useEffect(() => {
+    handleFilterAndSetOptions("province", value.province, provinceData, setOptions);
   }, [value.province, provinceData]);
 
-  //   handle dispay suggestions districtOrCity
   useEffect(() => {
-    const filteredOptions = value?.districtOrCity
-      ? regenciesData?.filter((districtOrCity) =>
-          districtOrCity?.name.toUpperCase().includes(value?.districtOrCity.toUpperCase())
-        )
-      : regenciesData || [];
-
-    setOptions((prev) => ({
-      ...prev,
-      districtOrCity: filteredOptions?.sort((a, b) => a.name.localeCompare(b.name)),
-    }));
+    handleFilterAndSetOptions("districtOrCity", value.districtOrCity, regenciesData, setOptions);
   }, [value.districtOrCity, regenciesData]);
 
-  //   handle display suggestions subdistrict
   useEffect(() => {
-    const filteredOptions = value?.subdistrict
-      ? districtsData?.filter((subdistrict) =>
-          subdistrict?.name.toUpperCase().includes(value?.subdistrict.toUpperCase())
-        )
-      : districtsData || [];
-    setOptions((prev) => ({
-      ...prev,
-      subdistrict: filteredOptions?.sort((a, b) => a.name.localeCompare(b.name)),
-    }));
+    handleFilterAndSetOptions("subdistrict", value.subdistrict, districtsData, setOptions);
   }, [value.subdistrict, districtsData]);
 
-  //   handle display suggestions village
   useEffect(() => {
-    const filteredOptions = value?.village
-      ? villagesData?.filter((village) => village?.name.toUpperCase().includes(value?.village.toUpperCase()))
-      : villagesData || [];
-    setOptions((prev) => ({
-      ...prev,
-      village: filteredOptions?.sort((a, b) => a.name.localeCompare(b.name)),
-    }));
+    handleFilterAndSetOptions("village", value.village, villagesData, setOptions);
   }, [value.village, villagesData]);
 
-  //   set selected data code
+  //   set selected data value code
   useEffect(() => {
     const updateSelectedValueCode = (field, value, options) => {
       setSelectedValueCode((prev) => ({
@@ -138,31 +127,40 @@ const NavbarShippingToSelectLocation = ({ isOpen = true, onClose }) => {
     updateSelectedValueCode("districtOrCity", value.districtOrCity, options.districtOrCity);
     updateSelectedValueCode("subdistrict", value.subdistrict, options.subdistrict);
     updateSelectedValueCode("village", value.village, options.village);
+  }, [value.province, options.province, value.districtOrCity, options.districtOrCity, value.subdistrict, options.subdistrict, value.village, options.village]);
+
+  // set error message in input field if value is invalid
+  const handleErrorMessage = (field, value, options, selectedValueCode, message) => {
+    const isInvalid = value && options?.find((option) => option.code === selectedValueCode) && options?.find((option) => option.name === value);
+    const errorName = !isInvalid ? message : "";
+    setErrorMessage((prev) => ({ ...prev, [field]: errorName }));
+  };
+
+  useEffect(() => {
+    handleErrorMessage("province", value.province, options.province, selectedValueCode.province, "Silahkan pilih provinsi yang valid.");
+    handleErrorMessage("districtOrCity", value.districtOrCity, options.districtOrCity, selectedValueCode.districtOrCity, "Silahkan pilih kabupaten/kota yang valid.");
+    handleErrorMessage("subdistrict", value.subdistrict, options.subdistrict, selectedValueCode.subdistrict, "Silahkan pilih kecamatan yang valid.");
+    handleErrorMessage("village", value.village, options.village, selectedValueCode.village, "Silahkan pilih desa yang valid.");
   }, [
-    value.province,
     options.province,
-    value.districtOrCity,
-    options.districtOrCity,
+    selectedValueCode.province,
+    value.province,
     value.subdistrict,
     options.subdistrict,
+    selectedValueCode.subdistrict,
+    value.districtOrCity,
+    options.districtOrCity,
+    selectedValueCode.districtOrCity,
     value.village,
+    selectedValueCode.village,
     options.village,
   ]);
 
-  //   const seledtedProvince =
-  //     (provinceData &&
-  //       value.province &&
-  //       options?.province?.find((province) => province?.name === value?.province)?.code) ||
-  //     null;
-  //   const { regenciesData, regenciesDataLoading } = useGetRegencies(seledtedProvince);
-  //   console.log(seledtedProvince);
-
+  // validations to disable input
   const handleDisableInput = (field) => {
     const isProvinceSelected = value.province && options.province?.find((province) => province.name === value.province);
-    const isSubdistrictSelected =
-      value.districtOrCity && options.districtOrCity?.find((district) => district.name === value.districtOrCity);
-    const isDistrictSelected =
-      value.subdistrict && options.subdistrict?.find((subdistrict) => subdistrict.name === value.subdistrict);
+    const isSubdistrictSelected = value.districtOrCity && options.districtOrCity?.find((district) => district.name === value.districtOrCity);
+    const isDistrictSelected = value.subdistrict && options.subdistrict?.find((subdistrict) => subdistrict.name === value.subdistrict);
 
     switch (field) {
       case "districtOrCity":
@@ -176,8 +174,16 @@ const NavbarShippingToSelectLocation = ({ isOpen = true, onClose }) => {
     }
   };
 
+  // validations to disable confirm button
+  const confirmButtonIsDisabled = () => {
+    const isValueEmpty = Object.values(value).some((value) => value === "");
+    const isSelectedValueCodeNull = Object.values(selectedValueCode).some((code) => code === null);
+    return isValueEmpty || isSelectedValueCodeNull;
+  };
+
   const onChange = (data, field) => setValue((prev) => ({ ...prev, [field]: data }));
 
+  // render each option
   const mappedOptionsByField = Object.keys(options).reduce((mappedOptions, key) => {
     mappedOptions[key] = options[key]?.map((option) => renderEachOption(option.name));
     return mappedOptions;
@@ -199,10 +205,12 @@ const NavbarShippingToSelectLocation = ({ isOpen = true, onClose }) => {
         </section>
       }
     >
-      <div className="w-full p-3 flex flex-col gap-y-3">
+      <div className="w-full p-3 flex flex-col gap-y-3 overflow-hidden">
         {addressFields.map((field, index) => {
           const translatedField = translateOption(field);
           const fieldOptions = mappedOptionsByField[translatedField];
+          // const inputErrorMessage = errorMessage[translatedField];
+          // console.log(inputErrorMessage);
           return (
             <label htmlFor={`select-${field}`} key={index}>
               <p className="capitalize text-sm font-space-grotesk py-1 font-bold">
@@ -220,15 +228,11 @@ const NavbarShippingToSelectLocation = ({ isOpen = true, onClose }) => {
                 onChange={(valueInput) => onChange(valueInput, translatedField)}
                 placeholder={<span className="capitalize">`pilih {field} `</span>}
               />
+              <p className="text-red-500">{errorMessage[translatedField]}</p>
             </label>
           );
         })}
-        <ButtonComponent
-          className={"w-full  capitalize font-bold font-space-grotesk"}
-          type="primary"
-          size="large"
-          disabled={confirmButtonIsDisabled()}
-        >
+        <ButtonComponent className={"w-full  capitalize font-bold font-space-grotesk mt-5 p-0 "} type="primary" size="large" disabled={confirmButtonIsDisabled()}>
           simpan
         </ButtonComponent>
       </div>

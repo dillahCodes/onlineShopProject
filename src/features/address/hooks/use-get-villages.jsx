@@ -8,10 +8,9 @@ const useVillages = (districts_code) => {
   };
   const shouldFetch = districts_code != null;
 
-  const { data, error, isValidating } = useSWR(
-    shouldFetch ? ["villages", districts_code] : null,
-    shouldFetch ? getAllVilage : null
-  );
+  const { data, error, isValidating } = useSWR(shouldFetch ? ["villages", districts_code] : null, shouldFetch ? getAllVilage : null, {
+    revalidateOnFocus: false,
+  });
 
   return { villagesData: data, error, villagesDataLoading: isValidating };
 };

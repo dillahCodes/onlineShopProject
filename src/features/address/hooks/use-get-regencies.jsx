@@ -8,10 +8,9 @@ const useGetRegencies = (provinces_code) => {
   };
   const shouldFetch = provinces_code != null;
 
-  const { data, error, isValidating } = useSWR(
-    shouldFetch ? ["regencies", provinces_code] : null,
-    shouldFetch ? getAllRegencies : null
-  );
+  const { data, error, isValidating } = useSWR(shouldFetch ? ["regencies", provinces_code] : null, shouldFetch ? getAllRegencies : null, {
+    revalidateOnFocus: false,
+  });
 
   return { regenciesData: data, error, regenciesDataLoading: isValidating };
 };
