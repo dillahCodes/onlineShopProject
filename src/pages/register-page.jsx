@@ -15,10 +15,8 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const { validationRegisterInputErrorMessage, validateFieldRegisterInput } =
-    useRegisterFieldInputValidation(registerData);
-  const { validationCheckCondition, validatePassword, validationPasswordErrorMessage } =
-    useRegisterPasswordValidation(registerData);
+  const { validationRegisterInputErrorMessage, validateFieldRegisterInput } = useRegisterFieldInputValidation(registerData);
+  const { validationCheckCondition, validatePassword, validationPasswordErrorMessage } = useRegisterPasswordValidation(registerData);
   const navigate = useNavigate();
 
   const handleRegisterInputChange = (event) => {
@@ -58,7 +56,7 @@ const RegisterPage = () => {
       await authServices.register(registerData);
       navigate("/login");
     } catch (error) {
-      const errorHasTranslated = translateRegisterErrorMessage(error.response.data.error);
+      const errorHasTranslated = translateRegisterErrorMessage(error.response.data.errors);
       setErrorMessage(errorHasTranslated);
       console.error(error.response);
     } finally {

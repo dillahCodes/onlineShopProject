@@ -31,7 +31,7 @@ const InfoItem = ({ label, value, onClick, isCopyable, textAreaRef, showAlert })
 
 InfoItem.propTypes = {
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onClick: PropTypes.func,
   isCopyable: PropTypes.bool,
   textAreaRef: PropTypes.object,
@@ -45,7 +45,11 @@ const MobilePersonalInfoProfile = () => {
   const { user } = useAuth();
   const textAreaRef = useRef(null);
   const navigate = useNavigate();
-  const userDateBirth = `${user?.date_of_birth[0].date}/${user?.date_of_birth[0].month}/${user?.date_of_birth[0].year}`;
+
+  const getUserBirth = () => {
+    const { date, month, year } = user?.date_of_birth?.[0] || {};
+    return [date, month, year].every(Boolean) ? `${date}/${month}/${year}` : false;
+  };
 
   const copyToClipboard = () => {
     textAreaRef.current.select();
@@ -73,7 +77,7 @@ const MobilePersonalInfoProfile = () => {
         <InfoItem label="email" value={user?.email} onClick={() => navigate("/user/profile/email")} />
         <InfoItem label="nomor hp" value={user.phone_number} onClick={navigateToEditPhoneNumber} />
         <InfoItem label="jenis kelamin" value={user.gender} onClick={() => navigate("/user/profile/gender")} />
-        <InfoItem label="tangal lahir" value={userDateBirth} onClick={() => navigate("/user/profile/birth")} />
+        <InfoItem label="tangal lahir" value={getUserBirth()} onClick={() => navigate("/user/profile/birth")} />
       </div>
     </section>
   );

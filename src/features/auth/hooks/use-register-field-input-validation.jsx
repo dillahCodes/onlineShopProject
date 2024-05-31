@@ -8,6 +8,7 @@ const useRegisterFieldInputValidation = (initialInputData) => {
   }, [initialInputData]);
 
   const validateFieldRegisterInput = (inputData) => {
+    console.log(inputData);
     const isEmpty = Object.values(inputData).some((value) => value === "");
     const isIncludeBlackSpace = Object.values(inputData).some((value) => /\s/.test(value));
 

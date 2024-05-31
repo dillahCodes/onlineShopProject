@@ -24,7 +24,7 @@ const userProfileSettingsMenuList = [
     icon: "https://assets.tokopedia.net/assets-tokopedia-lite/v2/atreus/kratos/501e63db.svg",
     title: "keamanan akun",
     detail: "kata sandi, PIN , & Verifikasi diri",
-    to: "/coming-soon",
+    to: "/user/settings/security",
   },
   {
     icon: "https://assets.tokopedia.net/assets-tokopedia-lite/v2/atreus/kratos/d2063cbe.svg",

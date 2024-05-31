@@ -6,8 +6,10 @@ const translateLoginErrorMessage = (errorMessage) => {
       return "email atau password salah";
     case "email doesnt exist":
       return "email atau password salah";
+    case "Email & Password not valid":
+      return "email atau password salah";
     default:
-      return "";
+      return errorMessage;
   }
 };
 

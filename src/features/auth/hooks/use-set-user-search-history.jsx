@@ -37,8 +37,7 @@ const useSetUserSearchHistory = (currentProduct) => {
       title: currentProduct.name,
       category: currentProduct.category,
     };
-    const isDataExists =
-      history_search?.filter((data) => data.title === payload.title && data.category === payload.category).length > 0;
+    const isDataExists = history_search?.filter((data) => data.title === payload.title && data.category === payload.category).length > 0;
 
     if (isDataExists) return;
 

@@ -1,14 +1,10 @@
-import { jwtDecode } from "jwt-decode";
-import { useAuth } from "../../../context/user-auth-context";
 import authServices from "../services/auth-services";
 import { useState } from "react";
 import translateLoginErrorMessage from "../services/translate-login-error-message";
 import { useNavigate } from "react-router-dom";
-import { mutate } from "swr";
 
 const useUserLogin = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const { setUserId } = useAuth();
   const navigate = useNavigate();
 
   const clearErrorMessage = () => setTimeout(() => setErrorMessage(""), 3000);
@@ -47,13 +43,16 @@ const useUserLogin = () => {
     try {
       const userLogin = await authServices.login(loginData);
       const response = userLogin.data;
-      localStorage.setItem("token", response.token);
-      const { userId } = jwtDecode(response.token);
-      setUserId(userId);
-      mutate(`/api/user/${userId}`);
-      if (userId) navigate("/");
+      const token = response.token;
+      localStorage.setItem("token", token);
+      const localStorageToken = localStorage.getItem("token");
+
+      if (localStorageToken) {
+        navigate("/", { replace: true });
+        window.location.reload();
+      }
     } catch (error) {
-      const errorHasTranslated = translateLoginErrorMessage(error.response?.data.error);
+      const errorHasTranslated = translateLoginErrorMessage(error.response?.data.errors);
       setErrorMessage(errorHasTranslated);
       console.error("error during login", error);
     } finally {

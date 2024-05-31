@@ -30,7 +30,7 @@ const ChangeUserBirthMobilePage = () => {
     if (Object.values(dateValue).every((value) => value === null) || !user) return;
 
     const payload = {
-      dateOfBirth: { date: dateValue.date, month: dateValue.month, year: dateValue.year },
+      dateOfBirth: [{ date: dateValue.date, month: dateValue.month, year: dateValue.year }],
     };
 
     try {

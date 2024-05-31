@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainLayout from "../components/layouts/main-layout";
 import DetailsProductLayout from "../components/layouts/details-product-layout";
 import AllProductReviewsLayout from "../components/layouts/all-product-reviews-layout";
@@ -34,186 +34,193 @@ import ChangeUserEmailPage from "../pages/change-user-email-page";
 import ChangeUserPhoneNumberPage from "../pages/change-user-phone-number-page";
 import ChangeUserGenderPage from "../pages/change-user-gender-page";
 import ChangeUserBirthPage from "../pages/change-user-birth-page";
+import UserAccountSecurityPage from "../pages/user-account-security-page";
+import UserAccountSecurityChangePasswordPage from "../pages/user-account-security-change-password-page";
 
-const routers = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <MainLayout>
-        <HomePage />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/signup",
-    element: <RegisterPage />,
-  },
-  {
-    path: "/user",
-    element: (
-      <UserPageLayout>
-        <UserPage />
-      </UserPageLayout>
-    ),
-  },
-  {
-    path: "/user/settings",
-    element: (
-      <EditUserPageLayout>
-        <EditUserProfilePage />
-      </EditUserPageLayout>
-    ),
-  },
-  {
-    path: "/user/profile",
-    children: [
-      {
-        path: "name",
-        element: (
+function AppRouter() {
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <MainLayout>
+            <HomePage />
+          </MainLayout>
+        }
+      />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<RegisterPage />} />
+
+      <Route
+        path="/user"
+        element={
+          <UserPageLayout>
+            <UserPage />
+          </UserPageLayout>
+        }
+      />
+      <Route
+        path="/user/settings"
+        element={
+          <EditUserPageLayout>
+            <EditUserProfilePage />
+          </EditUserPageLayout>
+        }
+      />
+
+      <Route
+        path="/user/profile/name"
+        element={
           <EditUserInfoPageLayout>
             <ChangeNamePage />
           </EditUserInfoPageLayout>
-        ),
-      },
-      {
-        path: "username",
-        element: (
+        }
+      />
+      <Route
+        path="/user/profile/username"
+        element={
           <EditUserInfoPageLayout>
             <ChangeUserNamePage />
           </EditUserInfoPageLayout>
-        ),
-      },
-      {
-        path: "bio",
-        element: (
+        }
+      />
+      <Route
+        path="/user/profile/bio"
+        element={
           <EditUserInfoPageLayout>
             <ChangeUserBioPage />
           </EditUserInfoPageLayout>
-        ),
-      },
-      {
-        path: "email",
-        element: (
+        }
+      />
+      <Route
+        path="/user/profile/email"
+        element={
           <EditUserInfoPageLayout>
             <ChangeUserEmailPage />
           </EditUserInfoPageLayout>
-        ),
-      },
-      {
-        path: "phone",
-        element: (
+        }
+      />
+      <Route
+        path="/user/profile/phone"
+        element={
           <EditUserInfoPageLayout>
             <ChangeUserPhoneNumberPage />
           </EditUserInfoPageLayout>
-        ),
-      },
-      {
-        path: "gender",
-        element: (
+        }
+      />
+      <Route
+        path="/user/profile/gender"
+        element={
           <EditUserInfoPageLayout>
             <ChangeUserGenderPage />
           </EditUserInfoPageLayout>
-        ),
-      },
-      {
-        path: "birth",
-        element: (
+        }
+      />
+      <Route
+        path="/user/profile/birth"
+        element={
           <EditUserInfoPageLayout>
             <ChangeUserBirthPage />
           </EditUserInfoPageLayout>
-        ),
-      },
-    ],
-  },
-  {
-    path: "/coming-soon",
-    element: <ComingSoonPage />,
-  },
-  {
-    path: "/product",
-    children: [
-      {
-        path: ":productId",
-        element: (
+        }
+      />
+
+      <Route
+        path="/user/settings/security"
+        element={
+          <EditUserInfoPageLayout>
+            <UserAccountSecurityPage />
+          </EditUserInfoPageLayout>
+        }
+      />
+      <Route
+        path="/user/settings/security/reset-password"
+        element={
+          <EditUserInfoPageLayout>
+            <UserAccountSecurityChangePasswordPage />
+          </EditUserInfoPageLayout>
+        }
+      />
+
+      <Route path="/coming-soon" element={<ComingSoonPage />} />
+
+      <Route
+        path="/product/:productId"
+        element={
           <DetailsProductLayout>
             <DetailsProductPage />
           </DetailsProductLayout>
-        ),
-      },
-      {
-        path: ":productId/reviews",
-        element: (
+        }
+      />
+      <Route
+        path="/product/:productId/reviews"
+        element={
           <AllProductReviewsLayout>
             <AllProductReviewsPage />
           </AllProductReviewsLayout>
-        ),
-      },
-      {
-        path: ":productId/talk",
-        children: [
-          {
-            path: "",
-            element: (
-              <DetailsProductDiscussLayout>
-                <DetailsProductDiscussionPage />
-              </DetailsProductDiscussLayout>
-            ),
-          },
-          {
-            path: ":discussionId",
-            element: (
-              <DetailsProductDetailsDiscussLayout>
-                <DetailsProductDetailsDiscussionPage />
-              </DetailsProductDetailsDiscussLayout>
-            ),
-          },
-        ],
-      },
-      {
-        path: "search",
-        element: (
+        }
+      />
+
+      <Route
+        path="/product/:productId/talk"
+        element={
+          <DetailsProductDiscussLayout>
+            <DetailsProductDiscussionPage />
+          </DetailsProductDiscussLayout>
+        }
+      />
+      <Route
+        path="/product/:productId/talk/:discussionId"
+        element={
+          <DetailsProductDetailsDiscussLayout>
+            <DetailsProductDetailsDiscussionPage />
+          </DetailsProductDetailsDiscussLayout>
+        }
+      />
+
+      <Route
+        path="/product/search"
+        element={
           <SearchResultProductsLayout>
             <ResultSearchPage />
           </SearchResultProductsLayout>
-        ),
-      },
-    ],
-  },
-  {
-    path: "/feed",
-    element: (
-      <FeedPageLayout>
-        <FeedPage />
-      </FeedPageLayout>
-    ),
-  },
-  {
-    path: "/discovery",
-    element: (
-      <OfficialPageLayout>
-        <OfficialStorePage />
-      </OfficialPageLayout>
-    ),
-  },
-  {
-    path: "/wishlist",
-    element: (
-      <WishListPageLayout>
-        <WishlistPage />
-      </WishListPageLayout>
-    ),
-  },
-  {
-    path: "/order-list",
-    element: (
-      <ReceiptPageLayout>
-        <ReceiptPage />
-      </ReceiptPageLayout>
-    ),
-  },
-]);
-export default routers;
+        }
+      />
+
+      <Route
+        path="/feed"
+        element={
+          <FeedPageLayout>
+            <FeedPage />
+          </FeedPageLayout>
+        }
+      />
+      <Route
+        path="/discovery"
+        element={
+          <OfficialPageLayout>
+            <OfficialStorePage />
+          </OfficialPageLayout>
+        }
+      />
+      <Route
+        path="/wishlist"
+        element={
+          <WishListPageLayout>
+            <WishlistPage />
+          </WishListPageLayout>
+        }
+      />
+      <Route
+        path="/order-list"
+        element={
+          <ReceiptPageLayout>
+            <ReceiptPage />
+          </ReceiptPageLayout>
+        }
+      />
+    </Routes>
+  );
+}
+
+export default AppRouter;

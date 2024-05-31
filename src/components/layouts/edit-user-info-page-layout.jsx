@@ -20,6 +20,10 @@ const getLocation = ({ pathname, search }) => {
       return "ubah jenis kelamin";
     case "/user/profile/birth":
       return "ubah tangal lahir";
+    case "/user/settings/security":
+      return "keamanan Akun";
+    case "/user/settings/security/reset-password":
+      return "reset password";
     default:
       return "ubah info";
   }
@@ -32,7 +36,7 @@ const EditUserInfoPageLayout = ({ children }) => {
     <Layout className={` min-h-screen relative max-w-[500px] mx-auto `}>
       <section className={`w-full py-3 px-2 border-b bg-white flex items-center gap-x-3  `}>
         <NavbarBackComponent size={25} className={"text-gray-400"} onClick={() => history.back()} />
-        <h1 className="font-bold text-base font-space-grotesk capitalize">{getLocation(location)}</h1>
+        <h1 className="font-bold text-[18px] font-space-grotesk capitalize">{getLocation(location)}</h1>
       </section>
       <Layout className="relative  no-scrollbar  bg-white  z-10">{children}</Layout>
     </Layout>

@@ -28,8 +28,6 @@ const DetailsDiscussMobileComponent = () => {
     replyProductDiscussion(discussionId, productId, data).then(() => setReplyMessage(""));
   };
 
-  console.log("test diskusi", discussionDataFiltered);
-
   return (
     <section className="w-full">
       <DetailsDiscussHeaderComponent
@@ -45,15 +43,8 @@ const DetailsDiscussMobileComponent = () => {
           <h2 className="font-bold">komentar ({discussionDataFiltered?.discus_reply.length})</h2>
         </section>
       )}
-      <DetailsDiscussMappingComponent
-        discussReplyData={discussionDataFiltered?.discus_reply}
-        productOwnerId={currentProduct?.owner.owner_id}
-      />
-      <DetailsDiscussReplyComponent
-        inputDevaultValue={replyMessage}
-        onChange={(e) => setReplyMessage(e.target.value)}
-        onSend={handleSendReply}
-      />
+      <DetailsDiscussMappingComponent discussReplyData={discussionDataFiltered?.discus_reply} productOwnerId={currentProduct?.owner.owner_id} />
+      <DetailsDiscussReplyComponent inputDevaultValue={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} onSend={handleSendReply} />
     </section>
   );
 };

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const MobilePhotoProfile = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { user } = useAuth();
-  const [userAvatar, setUserAvatar] = useState(user?.avatar);
+  const [userAvatar, setUserAvatar] = useState(user?.avatar === "default_avatar.png" ? "/" + user?.avatar : user?.avatar);
 
   useEffect(() => {
     setUserAvatar(user?.avatar);
