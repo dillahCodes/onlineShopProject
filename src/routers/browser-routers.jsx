@@ -36,6 +36,7 @@ import ChangeUserGenderPage from "../pages/change-user-gender-page";
 import ChangeUserBirthPage from "../pages/change-user-birth-page";
 import UserAccountSecurityPage from "../pages/user-account-security-page";
 import UserAccountSecurityChangePasswordPage from "../pages/user-account-security-change-password-page";
+import UserAccountSetAddressPage from "../pages/user-account-set-address-page";
 
 function AppRouter() {
   return (
@@ -125,6 +126,14 @@ function AppRouter() {
         }
       />
 
+      <Route
+        path="/user/settings/address"
+        element={
+          <EditUserInfoPageLayout>
+            <UserAccountSetAddressPage />
+          </EditUserInfoPageLayout>
+        }
+      />
       <Route
         path="/user/settings/security"
         element={

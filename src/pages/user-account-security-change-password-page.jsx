@@ -1,9 +1,9 @@
 import { useState } from "react";
-import InputComponentWithLabel from "../components/input-components/input-component-with-label";
 import useResetPassword from "../features/auth/hooks/use-reset-password";
 import ButtonComponent from "../components/ui-components/button-component";
 import { useAuth } from "../context/user-auth-context";
 import { Alert } from "antd";
+import InputPasswordComponentWithLabel from "../components/input-components/input-password-component-with-label";
 
 const UserAccountSecurityChangePasswordPage = () => {
   const { user } = useAuth();
@@ -39,19 +39,19 @@ const UserAccountSecurityChangePasswordPage = () => {
   return (
     <section className="w-full px-3 pb-3">
       {isNotificationVisible && <Alert message={<p className="font-bold font-space-grotesk text-base">kata sandi berhasil diperbarui</p>} type="success" showIcon />}
-      <InputComponentWithLabel
+      <InputPasswordComponentWithLabel
         errorMessage={message.currentPassword}
         labelText="Kata Sandi Saat Ini"
         inputValue={passwordData.currentPassword}
         handleOnChange={(e) => onChange(e, "currentPassword")}
       />
-      <InputComponentWithLabel
+      <InputPasswordComponentWithLabel
         errorMessage={message.newPassword}
         labelText="kata Sandi Baru"
         inputValue={passwordData.newPassword}
         handleOnChange={(e) => onChange(e, "newPassword")}
       />
-      <InputComponentWithLabel
+      <InputPasswordComponentWithLabel
         errorMessage={message.confirmPassword}
         labelText="Konfirmasi Kata Sandi Baru"
         inputValue={passwordData.confirmPassword}

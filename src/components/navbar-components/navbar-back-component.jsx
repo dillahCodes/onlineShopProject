@@ -8,7 +8,7 @@ const NavbarBackComponent = ({ size, onClick, className }) => {
       onClick={onClick}
       size={size}
       shape="square"
-      className={`text-black bg-transparent cursor-pointer ${className}`}
+      className={`text-black bg-transparent cursor-pointer flex items-center ${className}`}
       icon={
         <div className="text-4xl">
           <IoIosArrowRoundBack />

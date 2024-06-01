@@ -209,8 +209,6 @@ const NavbarShippingToSelectLocation = ({ isOpen, onClose }) => {
         {addressFields.map((field, index) => {
           const translatedField = translateOption(field);
           const fieldOptions = mappedOptionsByField[translatedField];
-          // const inputErrorMessage = errorMessage[translatedField];
-          // console.log(inputErrorMessage);
           return (
             <label htmlFor={`select-${field}`} key={index}>
               <p className="capitalize text-sm font-space-grotesk py-1 font-bold">

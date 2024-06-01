@@ -2,7 +2,7 @@ import { Input } from "antd";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const InputComponentWithLabel = ({ inputValue, labelText, handleOnChange, errorMessage }) => {
+const InputPasswordComponentWithLabel = ({ inputValue, labelText, handleOnChange, errorMessage }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -39,9 +39,9 @@ const InputComponentWithLabel = ({ inputValue, labelText, handleOnChange, errorM
   );
 };
 
-export default InputComponentWithLabel;
+export default InputPasswordComponentWithLabel;
 
-InputComponentWithLabel.propTypes = {
+InputPasswordComponentWithLabel.propTypes = {
   inputValue: PropTypes.string,
   labelText: PropTypes.string.isRequired,
   handleOnChange: PropTypes.func.isRequired,

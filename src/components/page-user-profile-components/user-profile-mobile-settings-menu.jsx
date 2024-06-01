@@ -6,7 +6,7 @@ const userProfileSettingsMenuList = [
     icon: "https://assets.tokopedia.net/assets-tokopedia-lite/v2/atreus/kratos/d6d41119.svg",
     title: "daftar alamat",
     detail: "atur alamat pengiriman belanjaan",
-    to: "/coming-soon",
+    to: "/user/settings/address",
   },
   {
     icon: "https://assets.tokopedia.net/assets-tokopedia-lite/v2/atreus/kratos/d9e7bae6.svg",
@@ -53,7 +53,7 @@ const UserProfileMobileSettingsMenu = ({ className }) => {
       <h1 className="text-base text-gray-500 mb-5 font-bold font-space-grotesk capitalize">pengaturan akun</h1>
       <div className="w-full flex flex-col gap-y-4">
         {userProfileSettingsMenuList.map((item, index) => (
-          <div key={index} className="flex items-center gap-x-3" onClick={() => navigate(item.to)}>
+          <div key={index} className="flex items-center gap-x-3" onClick={() => navigate(item.to, { replace: true })}>
             <img src={item.icon} className="w-6 h-6" alt={item.title} />
             <div className="flex flex-col">
               <span className="font-bold capitalize text-base">{item.title}</span>
