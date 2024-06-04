@@ -1,8 +1,10 @@
 import { IoIosSearch } from "react-icons/io";
 import ButtonComponent from "../ui-components/button-component";
 import PropTypes from "prop-types";
+import { useSearchAddress } from "./context/search-address-context";
 
 const MobileSetAddressHeaderComponent = ({ addressDataFrom, selectedAddress, setSelectedAddress }) => {
+  const { handleSearchAddress } = useSearchAddress();
   return (
     <header className="w-full border-b border-t sticky top-0 bg-white z-10">
       <div className="w-full p-3">
@@ -10,7 +12,7 @@ const MobileSetAddressHeaderComponent = ({ addressDataFrom, selectedAddress, set
           <span className="text-lg p-1 text-gray-300">
             <IoIosSearch />
           </span>
-          <input type="text" className="w-full px-1 py-1.5 focus:outline-none flex items-center" placeholder="Cari Alamat" />
+          <input type="text" onChange={(e) => handleSearchAddress(e)} className="w-full px-1 py-1.5 focus:outline-none flex items-center" placeholder="Cari Alamat" />
         </div>
       </div>
       {/* address from */}

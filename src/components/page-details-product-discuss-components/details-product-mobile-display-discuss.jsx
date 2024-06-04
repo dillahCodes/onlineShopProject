@@ -11,20 +11,10 @@ import DetailsProductMobileCreateDiscuss from "./details-product-mobile-create-d
 import useToggle from "../../hooks/use-toggle";
 import useGetProductDiscussion from "../../features/details-product-discussion/hooks/use-get-product-discussion";
 import DetailsProductMobileDiscussMapping from "./details-product-mobile-discuss-mapping";
-import useItShouldLoginFirst from "../../features/auth/hooks/use-it-should-login-first";
 
-const discussSortCategories = [
-  "terbaru",
-  "paling relevan",
-  "detail produk",
-  "pengiriman",
-  "variant",
-  "stok",
-  "lainnya",
-];
+const discussSortCategories = ["terbaru", "paling relevan", "detail produk", "pengiriman", "variant", "stok", "lainnya"];
 
 const DetailsProductMobileDisplayDiscuss = () => {
-  useItShouldLoginFirst();
   const { currentProduct } = useGetProductById();
   const [sortCategory, setSortCategory] = useState({
     date: discussSortCategories[0],
@@ -81,11 +71,7 @@ const DetailsProductMobileDisplayDiscuss = () => {
   return (
     <section className="w-full">
       {/* product info */}
-      <DetailsProductMobileDiscussHeader
-        image={currentProduct.images[0].img_url}
-        productName={currentProduct.name}
-        className={"p-2"}
-      />
+      <DetailsProductMobileDiscussHeader image={currentProduct.images[0].img_url} productName={currentProduct.name} className={"p-2"} />
 
       <div className="w-full">
         {/* sort discuss section list */}
@@ -108,10 +94,7 @@ const DetailsProductMobileDisplayDiscuss = () => {
         </section>
 
         {/* discuss list display */}
-        <DetailsProductMobileDiscussMapping
-          discussData={filteredDiscussionList?.length === 0 ? data : filteredDiscussionList}
-          productOwnerId={currentProduct.owner.owner_id}
-        />
+        <DetailsProductMobileDiscussMapping discussData={filteredDiscussionList?.length === 0 ? data : filteredDiscussionList} productOwnerId={currentProduct.owner.owner_id} />
       </div>
 
       {/* add discuss floating button  */}
@@ -147,16 +130,10 @@ const DetailsProductMobileDisplayDiscuss = () => {
         }
       >
         <Radio.Group onChange={handleSelectRadioChange} value={sortCategory.date} className="p-3 flex flex-col gap-y-2">
-          <Radio
-            className="py-3 border-b flex gap-x-5 text-base capitalize font-bold font-space-grotesk"
-            value={discussSortCategories[0]}
-          >
+          <Radio className="py-3 border-b flex gap-x-5 text-base capitalize font-bold font-space-grotesk" value={discussSortCategories[0]}>
             pertanyaan terbaru
           </Radio>
-          <Radio
-            className="py-3 flex gap-x-5 capitalize text-base font-bold font-space-grotesk"
-            value={discussSortCategories[1]}
-          >
+          <Radio className="py-3 flex gap-x-5 capitalize text-base font-bold font-space-grotesk" value={discussSortCategories[1]}>
             pertanyaan paling relevan
           </Radio>
         </Radio.Group>

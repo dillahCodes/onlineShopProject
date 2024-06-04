@@ -8,6 +8,10 @@ import useGetRegencies from "../../features/address/hooks/use-get-regencies";
 import useGetDistricts from "../../features/address/hooks/use-get-districts";
 import useVillages from "../../features/address/hooks/use-get-villages";
 import ButtonComponent from "../ui-components/button-component";
+import { useShippingToContext } from "../../context/address-shipping-to-context";
+import { mutate } from "swr";
+import { useAuth } from "../../context/user-auth-context";
+import authServices from "../../features/auth/services/auth-services";
 
 const addressFields = ["provinsi", "kabupaten/kota", "kecamatan", "desa"];
 
@@ -49,6 +53,7 @@ const handleFilterAndSetOptions = (field, value, data, setOptions) => {
 };
 
 const NavbarShippingToSelectLocation = ({ isOpen, onClose }) => {
+  const { user } = useAuth();
   const [value, setValue] = useState({
     province: "",
     districtOrCity: "",
@@ -73,6 +78,8 @@ const NavbarShippingToSelectLocation = ({ isOpen, onClose }) => {
     subdistrict: "",
     village: "",
   });
+
+  const { setSelectedAddressFromLocal } = useShippingToContext();
 
   const { provinceData, provinceDataLoading } = useGetProvinces(isOpen);
   const { regenciesData, regenciesDataLoading } = useGetRegencies(selectedValueCode?.province);
@@ -156,6 +163,25 @@ const NavbarShippingToSelectLocation = ({ isOpen, onClose }) => {
     options.village,
   ]);
 
+  // const handleSelected value
+  const handleConfirm = async () => {
+    const selectedAddressNew = localStorage.setItem("shippingToData", JSON.stringify({ ...value }));
+    const userSelectedAddress = user?.address.find((address) => address.is_selected === true);
+
+    try {
+      if (userSelectedAddress && user) {
+        await authServices.updateUserAddress(user?.user_id, userSelectedAddress?.address_id, { isSelected: false });
+        mutate(`/api/user/${user.user_id}`);
+      } else {
+        setSelectedAddressFromLocal(selectedAddressNew);
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("error while select address", error);
+    }
+    onClose();
+  };
+
   // validations to disable input
   const handleDisableInput = (field) => {
     const isProvinceSelected = value.province && options.province?.find((province) => province.name === value.province);
@@ -230,7 +256,13 @@ const NavbarShippingToSelectLocation = ({ isOpen, onClose }) => {
             </label>
           );
         })}
-        <ButtonComponent className={"w-full  capitalize font-bold font-space-grotesk mt-5 p-0 "} type="primary" size="large" disabled={confirmButtonIsDisabled()}>
+        <ButtonComponent
+          onClick={handleConfirm}
+          className={"w-full  capitalize font-bold font-space-grotesk mt-5 p-0 "}
+          type="primary"
+          size="large"
+          disabled={confirmButtonIsDisabled()}
+        >
           simpan
         </ButtonComponent>
       </div>

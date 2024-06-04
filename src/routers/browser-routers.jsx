@@ -37,6 +37,8 @@ import ChangeUserBirthPage from "../pages/change-user-birth-page";
 import UserAccountSecurityPage from "../pages/user-account-security-page";
 import UserAccountSecurityChangePasswordPage from "../pages/user-account-security-change-password-page";
 import UserAccountSetAddressPage from "../pages/user-account-set-address-page";
+import { PrivateRouterProvider } from "./private-router";
+import { SearchAddressContextProvider } from "../components/page-user-account-set-address-components/context/search-address-context";
 
 function AppRouter() {
   return (
@@ -55,99 +57,125 @@ function AppRouter() {
       <Route
         path="/user"
         element={
-          <UserPageLayout>
-            <UserPage />
-          </UserPageLayout>
+          <PrivateRouterProvider>
+            <UserPageLayout>
+              <UserPage />
+            </UserPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/settings"
         element={
-          <EditUserPageLayout>
-            <EditUserProfilePage />
-          </EditUserPageLayout>
+          <PrivateRouterProvider>
+            <EditUserPageLayout>
+              <EditUserProfilePage />
+            </EditUserPageLayout>
+          </PrivateRouterProvider>
         }
       />
 
       <Route
         path="/user/profile/name"
         element={
-          <EditUserInfoPageLayout>
-            <ChangeNamePage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <ChangeNamePage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/profile/username"
         element={
-          <EditUserInfoPageLayout>
-            <ChangeUserNamePage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <ChangeUserNamePage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/profile/bio"
         element={
-          <EditUserInfoPageLayout>
-            <ChangeUserBioPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <ChangeUserBioPage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/profile/email"
         element={
-          <EditUserInfoPageLayout>
-            <ChangeUserEmailPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <ChangeUserEmailPage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/profile/phone"
         element={
-          <EditUserInfoPageLayout>
-            <ChangeUserPhoneNumberPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <ChangeUserPhoneNumberPage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/profile/gender"
         element={
-          <EditUserInfoPageLayout>
-            <ChangeUserGenderPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <ChangeUserGenderPage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/profile/birth"
         element={
-          <EditUserInfoPageLayout>
-            <ChangeUserBirthPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <ChangeUserBirthPage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
 
       <Route
         path="/user/settings/address"
         element={
-          <EditUserInfoPageLayout>
-            <UserAccountSetAddressPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <SearchAddressContextProvider>
+              <EditUserInfoPageLayout>
+                <UserAccountSetAddressPage />
+              </EditUserInfoPageLayout>
+            </SearchAddressContextProvider>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/settings/security"
         element={
-          <EditUserInfoPageLayout>
-            <UserAccountSecurityPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <UserAccountSecurityPage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
       <Route
         path="/user/settings/security/reset-password"
         element={
-          <EditUserInfoPageLayout>
-            <UserAccountSecurityChangePasswordPage />
-          </EditUserInfoPageLayout>
+          <PrivateRouterProvider>
+            <EditUserInfoPageLayout>
+              <UserAccountSecurityChangePasswordPage />
+            </EditUserInfoPageLayout>
+          </PrivateRouterProvider>
         }
       />
 

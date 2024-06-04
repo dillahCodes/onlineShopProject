@@ -5,7 +5,8 @@ import { AuthProvider } from "./context/user-auth-context";
 import { SearchBarProvider } from "./context/search-bar-context";
 import AppRouter from "./routers/browser-routers";
 import { BrowserRouter } from "react-router-dom";
-import { AddressProvider } from "./context/add-address-context";
+import { ShippingToProvider } from "./context/address-shipping-to-context";
+import { AddressProvider } from "./components/page-user-account-set-address-components/context/add-address-context";
 
 function App() {
   return (
@@ -13,11 +14,13 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <ThemeProvider>
-            <AddressProvider>
+            <ShippingToProvider>
               <SearchBarProvider>
-                <AppRouter />
+                <AddressProvider>
+                  <AppRouter />
+                </AddressProvider>
               </SearchBarProvider>
-            </AddressProvider>
+            </ShippingToProvider>
           </ThemeProvider>
         </AuthProvider>
       </BrowserRouter>

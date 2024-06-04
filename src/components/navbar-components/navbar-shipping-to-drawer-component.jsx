@@ -1,35 +1,22 @@
-import { IoClose, IoLocationOutline } from "react-icons/io5";
+import { IoCheckmark, IoClose, IoLocationOutline } from "react-icons/io5";
 import BottomDrawer from "../ui-components/bottom-drawer";
 import "./style/navbar-shipping-to-drawer-component.css";
 import truncateString from "../../utils/truncate-string";
 import { IoIosArrowForward } from "react-icons/io";
 import PropTypes from "prop-types";
 import ButtonComponent from "../ui-components/button-component";
-
-const addressMockData = [
-  {
-    onBehalfOf: "Abdillah juniansyah",
-    addressLabel: "rumah",
-    tlp: "098778987675",
-    address: "Jl. Durian Runtuh Malaysia Anaknya Atok Dalang",
-  },
-  {
-    onBehalfOf: "John Doe",
-    addressLabel: "office",
-    tlp: "0123456789",
-    address: "123 Main Street, Suite 101",
-  },
-  {
-    onBehalfOf: "Jane Smith",
-    addressLabel: "apartment",
-    tlp: "9876543210",
-    address: "Apt 567, Park Avenue",
-    isSelected: true,
-  },
-];
-addressMockData.sort((a, b) => (a.isSelected === b.isSelected ? 0 : a.isSelected ? -1 : 1));
+import { useAuth } from "../../context/user-auth-context";
+import { useNavigate } from "react-router-dom";
+import useSelectUserAddress from "../../features/address/hooks/use-select-user-address";
 
 const NavbarShippingToDrawerComponent = ({ isOpen, onClose, onSecondDrawerOpen }) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const { handleSelectedUserAddress } = useSelectUserAddress();
+  const userAddressData = user?.address.sort((a, b) => (a.is_selected === b.is_selected ? 0 : a.is_selected ? -1 : 1)) || [];
+
+  const handleSelectedAddress = async (address_id) => handleSelectedUserAddress(address_id);
+
   return (
     <BottomDrawer
       id="Navbar-Shipping-To-Drawer-Component"
@@ -47,23 +34,22 @@ const NavbarShippingToDrawerComponent = ({ isOpen, onClose, onSecondDrawerOpen }
       }
     >
       <div className="w-full h-fit p-3 font-space-grotesk">
-        <p className="text-gray-400 text-xs capitalize font-medium mb-3">
-          Biar pengalaman belanjamu lebih baik, pilih alamat dulu.
-        </p>
+        <p className="text-gray-400 text-xs capitalize font-medium mb-3">Biar pengalaman belanjamu lebih baik, pilih alamat dulu.</p>
         <div className="w-full overflow-x-auto flex no-scrollbar pb-4 border-b gap-x-3">
           <div className="w-fit flex gap-x-3">
-            {addressMockData.map((data, index) => (
+            {userAddressData.map((data) => (
               <CardAddressComponent
-                key={index}
-                isSelected={data.isSelected}
-                address={data.address}
-                addressLabel={data.addressLabel}
-                onBehalfOf={data.onBehalfOf}
-                tlp={data.tlp}
+                key={data.address_id}
+                isSelected={data.is_selected}
+                address={data.address_complete}
+                addressLabel={data.address_label}
+                onBehalfOf={data.receiper_name}
+                tlp={data.phone_number}
+                onClick={() => handleSelectedAddress(data.address_id)}
               />
             ))}
           </div>
-          <div className=" min-w-[180px] shadow-md rounded-md mr-1 p-3 flex flex-col justify-center items-center gap-y-2">
+          <div className=" min-w-[180px] shadow-md rounded-md mr-1 p-3 flex flex-col justify-center items-center gap-y-2" onClick={() => navigate("/user/settings/address")}>
             <ButtonComponent className="w-fit h-fit p-2 items-center flex rounded-full m-0 border shadow-sm border-[#00AA5B] text-[#00AA5B] font-bold text-2xl">
               <IoIosArrowForward />
             </ButtonComponent>
@@ -83,9 +69,10 @@ NavbarShippingToDrawerComponent.propTypes = {
   onSecondDrawerOpen: PropTypes.func.isRequired,
 };
 
-const CardAddressComponent = ({ addressLabel, address, onBehalfOf, tlp, isSelected }) => {
+const CardAddressComponent = ({ addressLabel, address, onBehalfOf, tlp, isSelected, onClick }) => {
   return (
     <div
+      onClick={onClick}
       className={`max-w-[230px]  min-w-[230px] py-3 px-5 font-space-grotesk  border rounded-md border-b shadow-md relative before:absolute before:w-[4px] before:h-[30px]  before:rounded-r-md before:left-0 before:bg-[#00AA5B] ${
         isSelected && "bg-[#ECFEF4] border-[#00AA5B]"
       }`}
@@ -93,14 +80,19 @@ const CardAddressComponent = ({ addressLabel, address, onBehalfOf, tlp, isSelect
       {/* label */}
       <div className="w-full capitalize flex gap-x-1">
         <span className="font-bold capitalize">{addressLabel}</span>
-        {isSelected && (
-          <span className="bg-gray-200 text-gray-600 p-0.5 px-1 rounded-[4px] font-medium text-xs">utama</span>
-        )}
+        {isSelected && <span className="bg-gray-200 text-gray-600 p-0.5 px-1 rounded-[4px] font-medium text-xs">utama</span>}
       </div>
       {/* onBehalfOf */}
       <div className="w-full flex flex-col">
         <h1 className="font-bold text-base mt-1 capitalize">{truncateString(onBehalfOf, 12)}</h1>
-        <p className="mt-1 text-xs font-light text-gray-500">{tlp}</p>
+        <div className="w-full flex items-center">
+          <p className="mt-1 text-xs font-light text-gray-500">{tlp}</p>
+          {isSelected && (
+            <span className="text-lg ml-auto text-[#00AA5B]">
+              <IoCheckmark />
+            </span>
+          )}
+        </div>
       </div>
       <div className="w-full mt-1">
         <span className="text-gray-600 font-medium">{truncateString(address, 20)}</span>
@@ -115,6 +107,7 @@ CardAddressComponent.propTypes = {
   isSelected: PropTypes.bool,
   onBehalfOf: PropTypes.string.isRequired,
   tlp: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 const AnyMethodComponent = ({ onSecondDrawerOpen }) => {
@@ -127,9 +120,7 @@ const AnyMethodComponent = ({ onSecondDrawerOpen }) => {
         </span>
         <div className="flex flex-col truncate">
           <span className="capitalize font-bold text-sm truncate">pilih kota & kecamatan</span>
-          <span className="capitalize  text-sm text-gray-500 font-semibold truncate">
-            sesuaikan tujuan pengirimanmu
-          </span>
+          <span className="capitalize  text-sm text-gray-500 font-semibold truncate">sesuaikan tujuan pengirimanmu</span>
         </div>
         <span className="text-xl ml-auto">
           <IoIosArrowForward />

@@ -1,16 +1,12 @@
 import { mutate } from "swr";
 import { useAuth } from "../../context/user-auth-context";
 import authServices from "../../features/auth/services/auth-services";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const MobilePhotoProfile = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { user } = useAuth();
-  const [userAvatar, setUserAvatar] = useState(user?.avatar === "default_avatar.png" ? "/" + user?.avatar : user?.avatar);
-
-  useEffect(() => {
-    setUserAvatar(user?.avatar);
-  }, [user]);
+  const avatar = user?.avatar === "default_avatar.png" ? `/${user?.avatar}` : user?.avatar;
 
   const handleResetErrorMessage = () => setTimeout(() => setErrorMessage(""), 5000);
 
@@ -52,10 +48,10 @@ const MobilePhotoProfile = () => {
   };
 
   return (
-    <section className="w-full py-5 border-b" key={userAvatar}>
+    <section className="w-full py-5 border-b">
       <label htmlFor="photo" role="button" className="text-center flex flex-col gap-y-3 w-fit mx-auto">
         <div className="w-16 h-16 mx-auto">
-          <img src={userAvatar} alt="user default image" className="w-full h-full rounded-full object-cover" />
+          <img src={avatar} alt="user default image" className="w-full h-full rounded-full object-cover" />
         </div>
         <h1 className="font-bold text-base capitalize text-[rgb(0,_170,_91)]">ubah foto profil</h1>
         {errorMessage && <p className="text-red-500 text-xs font-bold">{errorMessage}</p>}

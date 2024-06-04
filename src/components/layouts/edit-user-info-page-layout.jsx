@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import NavbarBackComponent from "../navbar-components/navbar-back-component";
 import PropTypes from "prop-types";
 import ButtonComponent from "../ui-components/button-component";
-import { useAddress } from "../../context/add-address-context";
+import { useAddress } from "../page-user-account-set-address-components/context/add-address-context";
 
 const getLocation = ({ pathname, search }) => {
   const state = new URLSearchParams(search);
@@ -35,7 +35,7 @@ const getLocation = ({ pathname, search }) => {
 
 const EditUserInfoPageLayout = ({ children }) => {
   const location = useLocation();
-  const { setIsAddAddress, isAddAdress } = useAddress();
+  const { handleOpenAddressDrawer } = useAddress();
 
   return (
     <Layout className={` min-h-screen relative max-w-[500px] mx-auto `}>
@@ -44,7 +44,7 @@ const EditUserInfoPageLayout = ({ children }) => {
         <h1 className="font-bold text-[18px] font-space-grotesk capitalize">{getLocation(location)}</h1>
         {getLocation(location) === "Detail Alamat" && (
           <ButtonComponent
-            onClick={() => setIsAddAddress(!isAddAdress)}
+            onClick={() => handleOpenAddressDrawer()}
             className="ml-auto p-0 shadow-none border-none text-[#00AA5B] capitalize font-bold font-space-grotesk text-base"
           >
             tambah alamat

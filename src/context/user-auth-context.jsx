@@ -66,9 +66,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const { data: userData, isValidating } = useSWR(userId ? `/api/user/${userId}` : null, () => fetcherUserById(userId), {
-    revalidateOnFocus: true,
-  });
+  const { data: userData, isValidating } = useSWR(userId ? `/api/user/${userId}` : null, () => fetcherUserById(userId), { revalidateOnFocus: false });
 
   const cachedData = cache.get(`/api/user/${userId}`);
 

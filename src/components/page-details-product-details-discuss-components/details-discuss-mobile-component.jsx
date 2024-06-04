@@ -6,11 +6,9 @@ import DetailsDiscussMappingComponent from "./details-discuss-mapping-component"
 
 import { useState } from "react";
 import DetailsDiscussReplyComponent from "./details-discuss-reply-component";
-import useItShouldLoginFirst from "../../features/auth/hooks/use-it-should-login-first";
 import useReplyProductDiscussion from "../../features/details-product-discussion/hooks/use-reply-product-discussion";
 
 const DetailsDiscussMobileComponent = () => {
-  useItShouldLoginFirst();
   const { discussionId, productId } = useParams();
   const [replyMessage, setReplyMessage] = useState("");
   const { data } = useGetProductDiscussion(productId);

@@ -6,6 +6,7 @@ import { Checkbox, Drawer } from "antd";
 import InputTextComponentWithLabel from "../input-components/input-text-component-with-label";
 import { useAuth } from "../../context/user-auth-context";
 import ButtonComponent from "../ui-components/button-component";
+import useAddUserAddress from "../../features/address/hooks/use-add-user-address";
 
 const MobileAddAddressComponent = () => {
   return (
@@ -50,7 +51,7 @@ const UseAnyMethod = () => {
     name: user?.name || "",
     tel: user?.phone_number || "",
     addressLabel: "Rumah",
-    districtOrCity: "",
+    regency: "",
     fullAddress: "",
     courierNote: "",
   });
@@ -58,14 +59,19 @@ const UseAnyMethod = () => {
     isActiveAddress: false,
     privacePolicy: false,
   });
+  const { handleAddAddress } = useAddUserAddress();
 
   const handleOnChange = (e, name) => setFormValue((prev) => ({ ...prev, [name]: e.target.value }));
   const onChangeCheckbox = (e, name) => setCheckboxValue((prev) => ({ ...prev, [name]: e.target.checked }));
 
   const isConfirmButtonDisabled = () => {
-    const { ...otherFields } = formValue;
-    return Object.values(otherFields).some((value) => !value) || !CheckboxValue.privacePolicy;
+    const { name, tel, addressLabel, fullAddress, regency } = formValue;
+    if (!name || !tel || !addressLabel || !fullAddress || !regency || !CheckboxValue.privacePolicy) return true;
+    return false;
   };
+
+  const handleSaveAddress = () =>
+    handleAddAddress(formValue.addressLabel, formValue.name, formValue.tel, formValue.regency, formValue.fullAddress, formValue.courierNote, CheckboxValue.isActiveAddress);
 
   return (
     <div className="w-full p-5  border-b cursor-pointer">
@@ -125,10 +131,10 @@ const UseAnyMethod = () => {
             />
             <InputTextComponentWithLabel
               inputType="text"
-              labelText="Kota/Kabupaten"
+              labelText="Kabupaten/Kota"
               size="small"
-              inputValue={formValue.districtOrCity}
-              handleOnChange={(e) => handleOnChange(e, "districtOrCity")}
+              inputValue={formValue.regency}
+              handleOnChange={(e) => handleOnChange(e, "regency")}
             />
             <InputTextComponentWithLabel
               inputType="text"
@@ -157,11 +163,11 @@ const UseAnyMethod = () => {
           </Checkbox>
           <Checkbox onChange={(e) => onChangeCheckbox(e, "privacePolicy")} className="capitalize font-space-grotesk py-3">
             <p className="capitalize font-space-grotesk">
-              saya menyetujui <span className="text-[#00AA5B]">syarat dan ketentuan </span>
-              serta <span className="text-[#00AA5B]"> kebijakan privasi </span>pengaturan alamat di tokopedia
+              saya menyetujui <span className="text-[#00AA5B] font-bold">syarat dan ketentuan </span>
+              serta <span className="text-[#00AA5B] font-bold"> kebijakan privasi </span>pengaturan alamat di tokopedia
             </p>
           </Checkbox>
-          <ButtonComponent disabled={isConfirmButtonDisabled()} type="primary" size="large" className="w-full font-bold font-space-grotesk">
+          <ButtonComponent onClick={handleSaveAddress} disabled={isConfirmButtonDisabled()} type="primary" size="large" className="w-full font-bold font-space-grotesk">
             Simpan
           </ButtonComponent>
         </div>

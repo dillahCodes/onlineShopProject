@@ -5,7 +5,9 @@ const addressContext = createContext();
 
 const AddressProvider = ({ children }) => {
   const [isAddAdress, setIsAddAddress] = useState(false);
-  return <addressContext.Provider value={{ isAddAdress, setIsAddAddress }}>{children}</addressContext.Provider>;
+
+  const handleOpenAddressDrawer = () => setIsAddAddress(!isAddAdress);
+  return <addressContext.Provider value={{ isAddAdress, handleOpenAddressDrawer }}>{children}</addressContext.Provider>;
 };
 
 const useAddress = () => useContext(addressContext);

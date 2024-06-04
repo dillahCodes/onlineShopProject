@@ -13,3 +13,19 @@
 #drawer-add-address-form .ant-drawer-body {
   padding: 0;
 }
+
+#drawer-address-card-options .ant-drawer-header {
+  padding: 8px;
+}
+
+#drawer-address-card-options .ant-drawer-body {
+  padding: 0;
+}
+
+#drawer-address-card-edit .ant-drawer-header {
+  padding: 8px;
+}
+
+#drawer-address-card-edit .ant-drawer-body {
+  padding: 0;
+}
