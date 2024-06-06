@@ -45,9 +45,23 @@ export default {
         ".-rotate-x-90": {
           transform: "rotateX(-90deg)",
         },
+
+        ".scrollbar-custom::-webkit-scrollbar": {
+          width: "5px",
+        },
+        ".scrollbar-custom::-webkit-scrollbar-track": {
+          background: "#f1f1f1",
+        },
+        ".scrollbar-custom::-webkit-scrollbar-thumb": {
+          background: "#8D96AA",
+          borderRadius: "5px",
+        },
+        ".scrollbar-custom::-webkit-scrollbar-thumb:hover": {
+          background: "#555",
+        },
       };
 
-      addUtilities(newUtilities);
+      addUtilities(newUtilities, ["responsive", "hover"]);
     },
   ],
 };

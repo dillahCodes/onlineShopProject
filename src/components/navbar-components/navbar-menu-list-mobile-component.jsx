@@ -21,15 +21,14 @@ const NavbarMenuListMobileComponent = () => {
   const goToComingSoonPage = () => navigate("/coming-soon");
   const goToUserProfile = () => navigate("/user");
 
+  const goToSellerDashboard = () => navigate("/seller/home");
+
   return (
     <Layout className="w-full h-full ">
       {/* login and register button if user is not login */}
       {!user && (
         <div className="flex w-full p-5 bg-white gap-x-5">
-          <ButtonComponent
-            onClick={() => navigate("/login")}
-            className={"bg-transparent  border-black capitalize w-full"}
-          >
+          <ButtonComponent onClick={() => navigate("/login")} className={"bg-transparent  border-black capitalize w-full"}>
             masuk
           </ButtonComponent>
           <ButtonComponent type="primary" onClick={() => navigate("/signup")} className={"capitalize w-full"}>
@@ -48,34 +47,18 @@ const NavbarMenuListMobileComponent = () => {
             <div className="">
               {/* username */}
               <div className="flex items-center gap-x-1">
-                <img
-                  src="https://images.tokopedia.net/img/img/HThbdi/2023/01/13/pakai_promo_member_silver.png"
-                  alt="user badge"
-                  className="w-4 h-4"
-                />
+                <img src="https://images.tokopedia.net/img/img/HThbdi/2023/01/13/pakai_promo_member_silver.png" alt="user badge" className="w-4 h-4" />
                 <h1 className="text-base font-bold font-space-grotesk">{user?.name}</h1>
               </div>
               {/* gopay */}
               <div className="flex items-center gap-x-1" onClick={goToComingSoonPage}>
-                <img
-                  src="https://assets.tokopedia.net/asts/navigation-v2/global-menu/icon/gopay.svg"
-                  alt="user badge"
-                  className="w-4 h-4"
-                />
-                <span className="text-xs font-semibold text-gray-500 font-space-grotesk">
-                  {formatCurrencyToIDR(0)} • Top-Up GoPay
-                </span>
+                <img src="https://assets.tokopedia.net/asts/navigation-v2/global-menu/icon/gopay.svg" alt="user badge" className="w-4 h-4" />
+                <span className="text-xs font-semibold text-gray-500 font-space-grotesk">{formatCurrencyToIDR(0)} • Top-Up GoPay</span>
               </div>
               {/* saldo */}
               <div className="flex items-center gap-x-1 mt-1" onClick={goToComingSoonPage}>
-                <img
-                  src="https://assets.tokopedia.net/asts/navigation-v2/global-menu/icon/saldo_icon.svg"
-                  alt="user badge"
-                  className="w-4 h-4"
-                />
-                <span className="text-xs font-semibold text-gray-500 font-space-grotesk">
-                  Saldo {formatCurrencyToIDR(0)}
-                </span>
+                <img src="https://assets.tokopedia.net/asts/navigation-v2/global-menu/icon/saldo_icon.svg" alt="user badge" className="w-4 h-4" />
+                <span className="text-xs font-semibold text-gray-500 font-space-grotesk">Saldo {formatCurrencyToIDR(0)}</span>
               </div>
             </div>
             <div className="ml-auto text-2xl" onClick={goToUserProfile}>
@@ -86,7 +69,7 @@ const NavbarMenuListMobileComponent = () => {
           <MobileTokopediaPlusOffer />
           <section className="w-full flex gap-x-2">
             {/* toko saya */}
-            <div className="w-full p-2 border rounded-lg flex items-center gap-x-0.5" onClick={goToComingSoonPage}>
+            <div className="w-full p-2 border rounded-lg flex items-center gap-x-0.5" onClick={goToSellerDashboard}>
               {!user?.username && <span className="font-bold capitalize">toko saya</span>}
               <span className="text-xs font-bold">{user?.username}</span>
               <IoIosArrowForward className="ml-auto text-lg" />
@@ -102,31 +85,19 @@ const NavbarMenuListMobileComponent = () => {
 
       {/* menu list */}
       <div className="flex flex-col w-full p-5 mt-3 bg-white gap-y-5">
-        <div
-          onClick={goToComingSoonPage}
-          className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
-        >
+        <div onClick={goToComingSoonPage} className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5">
           <RiFileList3Line className="text-xl" />
           <span className="text-base">daftar transaksi</span>
         </div>
-        <div
-          onClick={goToComingSoonPage}
-          className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
-        >
+        <div onClick={goToComingSoonPage} className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5">
           <FaRegStar className="text-xl" />
           <span className="text-base">ulasan</span>
         </div>
-        <div
-          onClick={goToComingSoonPage}
-          className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
-        >
+        <div onClick={goToComingSoonPage} className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5">
           <FaRegHeart className="text-xl" />
           <span className="text-base">whishlist</span>
         </div>
-        <div
-          onClick={goToComingSoonPage}
-          className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
-        >
+        <div onClick={goToComingSoonPage} className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5">
           <AiOutlineShop className="text-xl" />
           <span className="text-base">toko yang di-follow</span>
         </div>
@@ -134,24 +105,15 @@ const NavbarMenuListMobileComponent = () => {
 
       {/* help list */}
       <div className="flex flex-col w-full h-full p-5 mt-3 bg-white gap-y-5">
-        <div
-          onClick={goToComingSoonPage}
-          className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
-        >
+        <div onClick={goToComingSoonPage} className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5">
           <TbUserExclamation className="text-xl" />
           <span className="text-base">pesanan dikomplain</span>
         </div>
-        <div
-          onClick={goToComingSoonPage}
-          className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
-        >
+        <div onClick={goToComingSoonPage} className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5">
           <LiaUserAstronautSolid className="text-xl" />
           <span className="text-base">bantuan</span>
         </div>
-        <div
-          onClick={goToComingSoonPage}
-          className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5"
-        >
+        <div onClick={goToComingSoonPage} className="flex items-center w-full text-xl capitalize font-space-grotesk gap-x-5">
           <BsQrCodeScan className="text-xl" />
           <span className="text-base">scan kode qr</span>
         </div>

@@ -39,6 +39,8 @@ import UserAccountSecurityChangePasswordPage from "../pages/user-account-securit
 import UserAccountSetAddressPage from "../pages/user-account-set-address-page";
 import { PrivateRouterProvider } from "./private-router";
 import { SearchAddressContextProvider } from "../components/page-user-account-set-address-components/context/search-address-context";
+import SellerPrivateRouter from "./seller-private-router";
+import SellerHomePage from "../pages/seller-home-page";
 
 function AppRouter() {
   return (
@@ -53,6 +55,13 @@ function AppRouter() {
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<RegisterPage />} />
+
+      {/* seller router */}
+      <Route path="/seller" element={<SellerPrivateRouter />}>
+        <Route path="home" element={<SellerHomePage />} />
+        <Route path="add-product" element={<div>seller add product</div>} />
+        <Route path="manage-product" element={<div>seller manage product</div>} />
+      </Route>
 
       <Route
         path="/user"
