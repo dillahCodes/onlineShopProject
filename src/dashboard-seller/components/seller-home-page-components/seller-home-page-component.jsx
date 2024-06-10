@@ -8,12 +8,18 @@ import SellerVerificationCard from "./seller-verificarion-card";
 import SellerHomePageGuideCard from "./seller-home-page-guide-card";
 import SellerHomePageSellerNewsCard from "./seller-home-page-seller-news-card";
 import SellerHomePageRecomendedInfoCard from "./seller-home-page-recomended-info-card";
+import SellerHomePageHelpFloatingButtons from "./seller-home-page-help-floating-buttons";
+import NavbarOverlay from "../ui/navbar-overlay";
+import { useSellerOverlay } from "../../context/seller-overlay-context";
 
 const SellerHomePageComponent = () => {
+  const { isOperlayOpen } = useSellerOverlay();
+
   return (
     <Layout className="w-full h-screen">
       <NavbarSeller />
       <Layout className="flex">
+        {isOperlayOpen && <NavbarOverlay />}
         <SidebarSeller />
         <Layout
           className="p-3 py-6  overflow-x-auto no-scrollbar"
@@ -48,6 +54,7 @@ const SellerHomePageComponent = () => {
           </section>
         </Layout>
       </Layout>
+      <SellerHomePageHelpFloatingButtons />
     </Layout>
   );
 };

@@ -41,6 +41,7 @@ import { PrivateRouterProvider } from "./private-router";
 import { SearchAddressContextProvider } from "../components/page-user-account-set-address-components/context/search-address-context";
 import SellerPrivateRouter from "./seller-private-router";
 import SellerHomePage from "../pages/seller-home-page";
+import SellerAddProductPage from "../pages/seller-add-product-page";
 
 function AppRouter() {
   return (
@@ -59,10 +60,11 @@ function AppRouter() {
       {/* seller router */}
       <Route path="/seller" element={<SellerPrivateRouter />}>
         <Route path="home" element={<SellerHomePage />} />
-        <Route path="add-product" element={<div>seller add product</div>} />
+        <Route path="add-product" element={<SellerAddProductPage />} />
         <Route path="manage-product" element={<div>seller manage product</div>} />
       </Route>
 
+      {/* user router */}
       <Route
         path="/user"
         element={

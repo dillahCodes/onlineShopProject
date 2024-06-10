@@ -7,6 +7,7 @@ import AppRouter from "./routers/browser-routers";
 import { BrowserRouter } from "react-router-dom";
 import { ShippingToProvider } from "./context/address-shipping-to-context";
 import { AddressProvider } from "./components/page-user-account-set-address-components/context/add-address-context";
+import { SellerOverlayProvider } from "./dashboard-seller/context/seller-overlay-context";
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
             <ShippingToProvider>
               <SearchBarProvider>
                 <AddressProvider>
-                  <AppRouter />
+                  <SellerOverlayProvider>
+                    <AppRouter />
+                  </SellerOverlayProvider>
                 </AddressProvider>
               </SearchBarProvider>
             </ShippingToProvider>

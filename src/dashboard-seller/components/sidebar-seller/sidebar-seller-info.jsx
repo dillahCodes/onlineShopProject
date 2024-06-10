@@ -4,7 +4,7 @@ import { Switch } from "antd";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import PropTypes from "prop-types";
 
-const SidebarUserInfo = ({ isCollapsed }) => {
+const SeideBarSellerInfo = ({ isCollapsed }) => {
   const [isCurrencyVisible, setIsCurrencyVisible] = useState(false);
   const [isInfoCollapsed, setIsInfoCollapsed] = useState(false);
 
@@ -69,8 +69,8 @@ const SidebarUserInfo = ({ isCollapsed }) => {
   );
 };
 
-export default SidebarUserInfo;
+export default SeideBarSellerInfo;
 
-SidebarUserInfo.propTypes = {
+SeideBarSellerInfo.propTypes = {
   isCollapsed: PropTypes.bool,
 };

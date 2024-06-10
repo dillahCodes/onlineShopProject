@@ -3,7 +3,6 @@ import MobileAddressCard from "./mobile-address-card";
 
 const MobileAddressList = () => {
   const { addressFiltered } = useSearchAddress();
-  // .sort((a, b) => (a.is_selected === b.is_selected ? 0 : a.is_selected ? -1 : 1)) || [];
 
   //   map data
   return (
