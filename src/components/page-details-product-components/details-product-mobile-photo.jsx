@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Slider from "react-slick";
+import defaultImage from "../../assets/defaultimage.jpg";
 
 const DetailsProductMobilePhoto = ({ imageProductData }) => {
   const settings = {
@@ -13,12 +14,12 @@ const DetailsProductMobilePhoto = ({ imageProductData }) => {
   return (
     <div className="w-full bg-white">
       <Slider {...settings} id="sliderProductsCategories">
-        {imageProductData?.map((item) => (
-          <div className="w-full h-full " key={item.img_id}>
+        {imageProductData?.map((item, id) => (
+          <div className="h-full w-full" key={id}>
             <img
-              src={item.img_url}
+              src={defaultImage || item}
               width={100}
-              className="w-full object-contain max-h-[400px]"
+              className="max-h-[400px] w-full object-contain"
               alt=""
             />
           </div>

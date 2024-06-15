@@ -21,13 +21,15 @@ const SellerAddProductEtalaseField = () => {
           <input
             type="text"
             value={inputValue}
+            disabled
             className={classNames(
               "w-80 rounded-md border p-2 font-space-grotesk placeholder:capitalize focus:outline-[#00AA5B]",
               {
                 "border-[#00AA5B] outline-[#00AA5B]": inputValue,
               },
             )}
-            placeholder="ketik nama etalasae yang sesuai"
+            // placeholder="ketik nama etalasae yang sesuai"
+            placeholder="coming soon feature"
             onChange={(e) => setInputValue(e.target.value)}
           />
           {inputValue && (

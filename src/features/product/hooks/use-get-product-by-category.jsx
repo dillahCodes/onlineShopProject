@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import productServices from "../services/product-services";
 
 const useGetProductByCategory = (category, limit) => {
   const [currentProductData, setCurrentProductData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const renderCount = useRef(0); // renderCount for componentDidMount and componentDidUpdate
 
   const getProductByCategory = useCallback(
     async (category) => {
@@ -23,15 +22,12 @@ const useGetProductByCategory = (category, limit) => {
         setIsLoading(false);
       }
     },
-    [limit]
+    [limit],
   );
 
   useEffect(() => {
     const fetchData = async () => await getProductByCategory(category);
-
-    if (category && renderCount.current > 0) fetchData();
-
-    return () => (renderCount.current += 1);
+    category && fetchData();
   }, [category, getProductByCategory]);
 
   return [currentProductData, errorMessage, isLoading];

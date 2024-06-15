@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { useSellerAddProductData } from "../../context/seller-add-product-value-data-context";
 
 const SellerAddProductDescriptionField = () => {
+  const { handleSetProductDescription } = useSellerAddProductData();
   const [description, setDescription] = useState("");
   const maxLength = 5000;
 
   const handleOnchange = (e) => {
     const inputValue = e.target.value;
-    if (inputValue.length <= maxLength) setDescription(inputValue);
+    if (inputValue.length <= maxLength) {
+      setDescription(inputValue);
+      handleSetProductDescription(inputValue);
+    }
   };
   return (
     <div className="flex w-full justify-between gap-x-28">

@@ -32,26 +32,50 @@ const NavbarSellerInfoProfileComponent = () => {
   };
 
   return (
-    <div className="min-w-[200px] flex items-center justify-evenly relative">
-      <span className="text-2xl relative p-2 hover:bg-gray-100 transition-all duration-300 rounded-md" onMouseEnter={handleSetIsFocus} onMouseLeave={handleSetIsNotFocus}>
+    <div className="relative flex min-w-[200px] items-center justify-evenly">
+      <span
+        className="relative rounded-md p-2 text-2xl transition-all duration-300 hover:bg-gray-100"
+        onMouseEnter={handleSetIsFocus}
+        onMouseLeave={handleSetIsNotFocus}
+      >
         <IoIosNotificationsOutline />
         {/* notificarion pop up */}
-        <NavbarSellerNotificationComponent isOpen={isFocus && isOperlayOpen} onMouseEnter={handleSetIsFocus} onMouseLeave={handleSetIsNotFocus} />
+        <NavbarSellerNotificationComponent
+          isOpen={isFocus && isOperlayOpen}
+          onMouseEnter={handleSetIsFocus}
+          onMouseLeave={handleSetIsNotFocus}
+        />
       </span>
-      <div className="inline-block h-[25px] w-[1.5px]  bg-gray-200 rounded-b-full rounded-t-full" />
+      <div className="inline-block h-[25px] w-[1.5px] rounded-b-full rounded-t-full bg-gray-200" />
       <div
-        className="text-2xl relative p-2 hover:bg-gray-100 transition-all duration-300 rounded-md"
+        className="relative rounded-md p-2 text-2xl transition-all duration-300 hover:bg-gray-100"
         onMouseEnter={handleSetIsProfileFocus}
         onMouseLeave={handleSetIsProfileNotFocus}
         // onMouseEnter={handleSetIsFocus}
         // onMouseLeave={handleSetIsNotFocus}
       >
-        <div className="w-full flex items-center gap-x-1 ">
-          <Avatar icon={<img src={user?.avatar} alt="avatar" />} size={25} />
-          <span className="text-sm truncate font-medium font-space-grotesk">{truncateString(user?.name, 10)}</span>
+        <div className="flex w-full items-center gap-x-1">
+          <Avatar
+            icon={
+              <img
+                src={
+                  user?.avatar === "default_avatar.png"
+                    ? "/default_avatar.png"
+                    : user?.avatar
+                }
+                alt="avatar"
+              />
+            }
+            size={25}
+          />
+          <span className="truncate font-space-grotesk text-sm font-medium">
+            {truncateString(user?.name, 10)}
+          </span>
         </div>
         {/* notificarion pop up */}
-        <NavbarSellerProfileComponent isOpen={isProfileFocus && isOperlayOpen} />
+        <NavbarSellerProfileComponent
+          isOpen={isProfileFocus && isOperlayOpen}
+        />
       </div>
     </div>
   );

@@ -1,8 +1,20 @@
 import { Radio } from "antd";
 import { useState } from "react";
+import { useSellerAddProductData } from "../../context/seller-add-product-value-data-context";
+import { useEffect } from "react";
 
 const SellerAddProductConditionField = () => {
+  const { setAddProductData } = useSellerAddProductData();
   const [value, setValue] = useState("baru");
+
+  useEffect(() => {
+    setAddProductData((prev) => {
+      return {
+        ...prev,
+        productCondition: value === "baru" ? "new" : "second",
+      };
+    });
+  }, [value, setAddProductData]);
 
   const onChange = (e) => setValue(e.target.value);
 

@@ -5,14 +5,25 @@ import NavbarOverlay from "../ui/navbar-overlay";
 import SellerAddProductTitlePage from "./seller-add-product-title-page";
 import SellerAddProductNameField from "./seller-add-product-name-field";
 import SellerAddProductCategory from "./seller-add-product-category-field";
-import SellerAddProductEtalaseField from "./seller-add-product-etalase-field";
 import SellerAddProductImagesField from "./seller-add-product-images-field";
 import SellerAddProductConditionField from "./seller-add-product-condition-field";
 import SellerAddProductDescriptionField from "./seller-add-product-description-field";
 import ButtonComponent from "../../../components/ui-components/button-component";
+import SellerAddProductVariantField from "./seller-add-product-variant-filed";
+import SellerAddProductQtyField from "./seller-add-product-qty-field";
+import SellerAddProductPriceField from "./seller-add-product-price-field";
+import { useSellerAddProductData } from "../../context/seller-add-product-value-data-context";
+import useAddProduct from "../../../features/product/hooks/use-add-product";
+import SellerAddProcutBrand from "./seller-add-product-brand-field";
+import { useAuth } from "../../../context/user-auth-context";
 
 const SellerAddProduct = () => {
+  const { addProductData } = useSellerAddProductData();
+  const { addProduct } = useAddProduct();
+  const { user } = useAuth();
   const { isOperlayOpen } = useSellerOverlay();
+
+  const handleAddProduct = () => addProduct(addProductData, user?.user_id);
 
   return (
     <Layout className="h-screen w-full">
@@ -28,8 +39,11 @@ const SellerAddProduct = () => {
             </h1>
             <div className="flex w-full flex-col gap-y-8">
               <SellerAddProductNameField />
+              <SellerAddProcutBrand />
               <SellerAddProductCategory />
-              <SellerAddProductEtalaseField />
+              <SellerAddProductQtyField />
+              <SellerAddProductPriceField />
+              {/* <SellerAddProductEtalaseField /> */}
             </div>
           </section>
           <section className="mx-auto mt-5 w-[1168px] rounded-md border p-[32px] shadow-md">
@@ -38,10 +52,14 @@ const SellerAddProduct = () => {
               Detail Produk
             </h1>
             <div className="flex w-full flex-col gap-y-8">
-              <SellerAddProductImagesField />
-              <SellerAddProductConditionField />
               <SellerAddProductDescriptionField />
+              <SellerAddProductConditionField />
+              <SellerAddProductImagesField />
             </div>
+          </section>
+          <section className="mx-auto mt-5 w-[1168px] rounded-md border p-[32px] shadow-md">
+            {/* product variant section */}
+            <SellerAddProductVariantField />
           </section>
           <section className="mx-auto mt-5 flex w-[1168px] rounded-md">
             <div className="ml-auto flex items-center gap-x-2">
@@ -50,9 +68,10 @@ const SellerAddProduct = () => {
               </ButtonComponent>
               <ButtonComponent
                 type="primary"
+                onClick={handleAddProduct}
                 className="px-10 font-space-grotesk font-bold text-white"
               >
-                Simpan
+                Tambahkan Produk
               </ButtonComponent>
             </div>
           </section>

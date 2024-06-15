@@ -13,42 +13,52 @@ const NavbarSellerProfileComponent = ({ isOpen }) => {
   return (
     <div
       className={classNames(
-        "w-[340px] transition-all font-normal duration-300 font-space-grotesk absolute overflow-hidden rounded-b-md shadow-md -left-52 top-[49px]   z-[4] bg-white   text-base ",
+        "absolute -left-52 top-[49px] z-[4] w-[340px] overflow-hidden rounded-b-md bg-white font-space-grotesk text-base font-normal shadow-md transition-all duration-300",
         {
-          "h-0 opacity-0 ": !isOpen,
+          "h-0 opacity-0": !isOpen,
           "h-[280px] opacity-100": isOpen,
-        }
+        },
       )}
     >
       <div className="p-5">
         {/* profile section */}
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col items-center ">
-            <p className="font-bold font-space-grotesk">{user?.name}</p>
-            <span className="flex items-center gap-x-3 pt-3 self-start text-sm">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col items-center">
+            <p className="font-space-grotesk font-bold">{user?.name}</p>
+            <span className="flex items-center gap-x-3 self-start pt-3 text-sm">
               <span>
                 <BsShop />
               </span>
               <span>{user?.username}</span>
             </span>
           </div>
-          <Avatar size={64} src={user?.avatar} />
+          <Avatar
+            size={64}
+            src={
+              user?.avatar === "default_avatar.png"
+                ? "/default_avatar.png"
+                : user?.avatar
+            }
+          />
         </div>
-        <div className="border my-5" />
+        <div className="my-5 border" />
         {/* back to tokopedia */}
-        <div className="w-full  text-sm font-space-grotesk">
+        <div className="w-full font-space-grotesk text-sm">
           <span>Kembali ke Tokopedia</span>
         </div>
-        <div className="border my-5" />
+        <div className="my-5 border" />
         {/* account settings */}
-        <div className="w-full flex flex-col gap-y-3">
-          <div className="w-full flex items-center gap-x-3 font-bold font-space-grotesk text-base cursor-pointer" onClick={() => navigate("/user/settings")}>
+        <div className="flex w-full flex-col gap-y-3">
+          <div
+            className="flex w-full cursor-pointer items-center gap-x-3 font-space-grotesk text-base font-bold"
+            onClick={() => navigate("/user/settings")}
+          >
             <span>
               <IoSettingsOutline />
             </span>
             <span className="capitalize">Pengaturan Akun</span>
           </div>
-          <div className="w-full flex items-center gap-x-3 font-bold font-space-grotesk text-base">
+          <div className="flex w-full items-center gap-x-3 font-space-grotesk text-base font-bold">
             <span>
               <IoLogOutOutline />
             </span>

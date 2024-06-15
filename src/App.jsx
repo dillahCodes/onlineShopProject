@@ -8,24 +8,27 @@ import { BrowserRouter } from "react-router-dom";
 import { ShippingToProvider } from "./context/address-shipping-to-context";
 import { AddressProvider } from "./components/page-user-account-set-address-components/context/add-address-context";
 import { SellerOverlayProvider } from "./dashboard-seller/context/seller-overlay-context";
+import { SellerAddProductValueDataProvider } from "./dashboard-seller/context/seller-add-product-value-data-context";
 
 function App() {
   return (
     <StyleProvider hashPriority="high">
       <BrowserRouter>
-        <AuthProvider>
-          <ThemeProvider>
-            <ShippingToProvider>
-              <SearchBarProvider>
-                <AddressProvider>
-                  <SellerOverlayProvider>
-                    <AppRouter />
-                  </SellerOverlayProvider>
-                </AddressProvider>
-              </SearchBarProvider>
-            </ShippingToProvider>
-          </ThemeProvider>
-        </AuthProvider>
+        <SellerAddProductValueDataProvider>
+          <AuthProvider>
+            <ThemeProvider>
+              <ShippingToProvider>
+                <SearchBarProvider>
+                  <AddressProvider>
+                    <SellerOverlayProvider>
+                      <AppRouter />
+                    </SellerOverlayProvider>
+                  </AddressProvider>
+                </SearchBarProvider>
+              </ShippingToProvider>
+            </ThemeProvider>
+          </AuthProvider>
+        </SellerAddProductValueDataProvider>
       </BrowserRouter>
     </StyleProvider>
   );

@@ -1,4 +1,5 @@
 import { Select } from "antd";
+import { useSellerAddProductData } from "../../context/seller-add-product-value-data-context";
 
 const optios = [
   {
@@ -33,10 +34,16 @@ const optios = [
     value: "Fashion Pria",
     label: "Fashion Pria",
   },
+  {
+    value: "Fashion Wanita",
+    label: "Fashion Wanita",
+  },
 ];
 
 const SellerAddProductCategory = () => {
-  // const handleChange = (value) => console.log(`selected ${value}`);
+  const { handleSetProductCategory } = useSellerAddProductData();
+
+  const handleChange = (value) => handleSetProductCategory(value);
 
   return (
     <div className="flex w-full justify-between gap-x-28">
@@ -66,7 +73,7 @@ const SellerAddProductCategory = () => {
           style={{
             width: 120,
           }}
-          // onChange={handleChange}
+          onChange={handleChange}
           className="w-full font-space-grotesk"
           size="large"
           options={optios}

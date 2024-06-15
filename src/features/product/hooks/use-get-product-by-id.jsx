@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import productServices from "../services/product-services";
 
@@ -8,7 +8,6 @@ const useGetProductById = () => {
   const [isError, setIsError] = useState(false);
   const { productId } = useParams();
   const navigate = useNavigate();
-  const renderCount = useRef(0); // renderCount for componentDidMount and componentDidUpdate
 
   const getProductById = useCallback(
     async (productId) => {
@@ -29,15 +28,13 @@ const useGetProductById = () => {
         }
       }
     },
-    [navigate]
+    [navigate],
   );
 
   useEffect(() => {
     const fetchData = async () => await getProductById(productId);
 
-    productId && renderCount.current > 0 && fetchData();
-
-    return () => (renderCount.current += 1);
+    productId && fetchData();
   }, [getProductById, productId]);
 
   return {

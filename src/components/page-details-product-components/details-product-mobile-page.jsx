@@ -23,16 +23,36 @@ import { useAuth } from "../../context/user-auth-context";
 const detailProductNavList = ["detail produk", "ulasan", "rekomendasi"];
 
 const DetailsProductMobilePage = () => {
+  // Navbar related state
   const [isShow] = useNavbarChangeWhenScroll(30);
-  const [selectedSection, setSelectedSection] = useState(detailProductNavList[0]);
-  const { currentProduct, isLoading } = useGetProductById();
-  const [anotherSamePrductInThisMerchant] = useGetProductWithMerchantAndSameCategory(
-    currentProduct?.owner.owner_id,
-    currentProduct?.category
+
+  // Product detail navigation
+  const [selectedSection, setSelectedSection] = useState(
+    detailProductNavList[0],
   );
-  const [currentProductDataWithSameCategory] = useGetProductByCategory(currentProduct?.category);
+
+  // Fetching current product data
+  const { currentProduct, isLoading } = useGetProductById();
+  const productImages = currentProduct?.images
+    .filter((data) => !data.name && !data.url && !data.quantity)
+    .map((data) => data.img_url);
+  console.log(productImages);
+
+  // Fetching related product data
+  const [anotherSamePrductInThisMerchant] =
+    useGetProductWithMerchantAndSameCategory(
+      currentProduct?.owner.owner_id,
+      currentProduct?.category,
+    );
+  const [currentProductDataWithSameCategory] = useGetProductByCategory(
+    currentProduct?.category,
+  );
   const [currentProductFromYourSearch] = useGetProductFromYourSearch(2);
+
+  // Checking if the product has reviews
   const isReviewNotEmpty = currentProduct?.review?.length > 0;
+
+  // Params and user authentication
   const { productId } = useParams();
   const { user } = useAuth();
 
@@ -56,13 +76,16 @@ const DetailsProductMobilePage = () => {
   };
 
   // skeleton loader
-  if (isLoading || !currentProduct) return <DetailsProductMobilePageLoader active={isLoading || !currentProduct} />;
+  if (isLoading || !currentProduct)
+    return (
+      <DetailsProductMobilePageLoader active={isLoading || !currentProduct} />
+    );
 
   return (
-    <div className="w-full min-h-screen relative">
+    <div className="relative min-h-screen w-full">
       {/* nav detail and review */}
       <section
-        className={`w-full bg-white fixed z-20 mt-[-3px]  -translate-y-full transition-all duration-300 flex max-w-[500px] ${
+        className={`fixed z-20 mt-[-3px] flex w-full max-w-[500px] -translate-y-full bg-white transition-all duration-300 ${
           isShow ? "translate-y-0" : ""
         }`}
       >
@@ -70,16 +93,16 @@ const DetailsProductMobilePage = () => {
           <section
             key={index}
             onClick={() => handleClick(item)}
-            className={`capitalize w-full truncate text-base cursor-pointer text-center font-bold ${
+            className={`w-full cursor-pointer truncate text-center text-base font-bold capitalize ${
               selectedSection === item ? "text-[#00AA5B]" : "text-[#6D7588]"
             } font-space-grotesk`}
           >
-            <span className="py-3 block truncate">{item}</span>
+            <span className="block truncate py-3">{item}</span>
             <LineAnimation isClicked={selectedSection === item} />
           </section>
         ))}
       </section>
-      <DetailsProductMobilePhoto imageProductData={currentProduct.images} />
+      <DetailsProductMobilePhoto imageProductData={productImages} />
       <DetailsProductMobileTitleAndPrice productData={currentProduct} />
       <DetailsProductMobileButtonsInfo productData={currentProduct} />
 
@@ -92,7 +115,7 @@ const DetailsProductMobilePage = () => {
       <SliderProductComponent
         dataProduct={anotherSamePrductInThisMerchant}
         title={"lainnya di toko ini"}
-        className={"mt-2  bg-white p-3"}
+        className={"mt-2 bg-white p-3"}
       />
       {isReviewNotEmpty && (
         <section className="w-full" id="product_review">
@@ -106,7 +129,7 @@ const DetailsProductMobilePage = () => {
         <SliderProductComponent
           title={"pilihan lainnya untukmu"}
           dataProduct={currentProductDataWithSameCategory}
-          className={"mt-2  bg-white p-3"}
+          className={"mt-2 bg-white p-3"}
         />
       </section>
 
@@ -115,7 +138,7 @@ const DetailsProductMobilePage = () => {
         <SliderProductComponent
           title={"dari pencarianmu"}
           dataProduct={currentProductFromYourSearch}
-          className={"mt-2  bg-white p-3"}
+          className={"mt-2 bg-white p-3"}
         />
       )}
     </div>
@@ -132,12 +155,12 @@ const LineAnimation = ({ isClicked }) => {
   }, [isClicked]);
 
   return (
-    <div className="relative w-full h-1 ">
+    <div className="relative h-1 w-full">
       <motion.div
         initial={{ width: animationWidth }}
         animate={{ width: animationWidth }}
         transition={{ duration: 0.2, ease: "linear" }}
-        className="h-full bg-[#00AA5B] rounded-full mx-auto "
+        className="mx-auto h-full rounded-full bg-[#00AA5B]"
       />
     </div>
   );

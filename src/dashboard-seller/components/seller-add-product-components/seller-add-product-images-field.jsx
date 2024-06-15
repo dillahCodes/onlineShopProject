@@ -4,13 +4,17 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { FaRegTrashCan } from "react-icons/fa6";
 import ModalComponent from "../../../components/ui-components/modal-component";
+import { useEffect } from "react";
+import { useSellerAddProductData } from "../../context/seller-add-product-value-data-context";
 
 const SellerAddProductImagesField = () => {
+  const inputFileRef = useRef(null);
+  const { setAddProductData } = useSellerAddProductData();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // image data list
-  const [imageDataList, setImageDataList] = useState(Array(9).fill(null)); // state for store image preview data url
   const [fileList, setFileList] = useState(Array(9).fill(null)); // state for store image file
+  const [imageDataList, setImageDataList] = useState(Array(9).fill(null)); // state for store image preview data url
 
   const [imageIsExist, setImageIsExist] = useState({
     name: "",
@@ -18,7 +22,15 @@ const SellerAddProductImagesField = () => {
   });
   const items = Array.from({ length: 9 }, (_, index) => index); // create array from 0 to 9
 
-  const inputFileRef = useRef(null); // ref for input file
+  // Update state form context
+  useEffect(() => {
+    setAddProductData((prev) => ({
+      ...prev,
+      productImagesPreviewAsUrl: imageDataList,
+      productImagesFiles: fileList,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fileList, imageDataList]);
 
   const handleOpenModalIfFileExist = (file, reader, updatedFileList) => {
     const imagePreviewResult = reader.result;
@@ -175,9 +187,9 @@ const SellerAddProductImagesField = () => {
 
           <p className="mt-3 font-space-grotesk leading-4 text-gray-700">
             Pilih foto produk atau tarik dan letakkan hingga 9 foto sekaligus di
-            sini. Upload min. 5 foto yang menarik dan{" "}
+            sini. Upload min. 1 foto yang menarik dan{" "}
             <span className="font-bold text-gray-500">
-              berbeda satu sama lain
+              berbeda satu sama lain jika ingin lebih dari 1
             </span>{" "}
             untuk menarik perhatian pembeli.
           </p>
