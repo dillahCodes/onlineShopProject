@@ -15,7 +15,9 @@ const CardProductDisplay = ({
   className,
 }) => {
   function truncateString(text, maxLength) {
-    return maxLength && text?.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    return maxLength && text?.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
   }
 
   return (
@@ -23,23 +25,25 @@ const CardProductDisplay = ({
       {/* image card */}
       <div className="w-full rounded-[inherit]">
         <img
-          src={imageUrl ? imageUrl : defaultimage}
+          src={imageUrl || defaultimage}
           width={"200px"}
-          className="object-cover w-full rounded-[inherit] rounded-b-none"
+          className="w-full rounded-[inherit] rounded-b-none object-cover"
           alt=""
         />
       </div>
       <div className="w-full p-2">
         {/* title */}
-        <h1 className="font-medium font-space-grotesk">{truncateString(productTitle, 40)}</h1>
+        <h1 className="font-space-grotesk font-medium">
+          {truncateString(productTitle, 40)}
+        </h1>
         {/* price */}
-        <h2 className=" text-base font-bold font-space-grotesk">
+        <h2 className="font-space-grotesk text-base font-bold">
           {formatCurrencyToIDR(price)}
         </h2>
 
         {/* rating */}
-        <span className="flex  items-center w-full  gap-x-1 text-[#6d7588] ">
-          <span className="flex items-center gap-x-1 ">
+        <span className="flex w-full items-center gap-x-1 text-[#6d7588]">
+          <span className="flex items-center gap-x-1">
             <TiStarFullOutline className="text-[#FFC400]" />
             <span className="text-sm">{rating > 0 ? rating : "0.0"}</span>
           </span>
@@ -48,7 +52,7 @@ const CardProductDisplay = ({
         </span>
 
         <span className="">
-          <span className="flex items-center gap-x-2 ">
+          <span className="flex items-center gap-x-2">
             <span
               className="h-5 w-5"
               style={{
@@ -56,7 +60,9 @@ const CardProductDisplay = ({
                 backgroundSize: "cover",
               }}
             />
-            <span>{productLocationFrom ? productLocationFrom : "Indonesia"}</span>
+            <span>
+              {productLocationFrom ? productLocationFrom : "Indonesia"}
+            </span>
           </span>
         </span>
       </div>

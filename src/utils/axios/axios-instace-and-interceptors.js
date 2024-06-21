@@ -13,7 +13,7 @@ const headers = {
 const instance_axios = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers,
-  timeout: 10000,
+  timeout: 90000000,
 });
 
 export const instance_axios_user_address = axios.create({
@@ -33,7 +33,7 @@ instance_axios.interceptors.request.use(
   (error) => {
     // you can do something if request fails
     return Promise.reject(error);
-  }
+  },
 );
 
 instance_axios.interceptors.response.use(
@@ -44,7 +44,7 @@ instance_axios.interceptors.response.use(
   (error) => {
     // you can do something with response error
     return Promise.reject(error);
-  }
+  },
 );
 
 export default instance_axios;

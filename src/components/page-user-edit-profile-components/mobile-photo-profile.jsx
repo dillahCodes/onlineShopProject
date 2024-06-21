@@ -6,9 +6,11 @@ import { useState } from "react";
 const MobilePhotoProfile = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { user } = useAuth();
-  const avatar = user?.avatar === "default_avatar.png" ? `/${user?.avatar}` : user?.avatar;
+  const avatar =
+    user?.avatar === "default_avatar.png" ? `/${user?.avatar}` : user?.avatar;
 
-  const handleResetErrorMessage = () => setTimeout(() => setErrorMessage(""), 5000);
+  const handleResetErrorMessage = () =>
+    setTimeout(() => setErrorMessage(""), 5000);
 
   const handleChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -48,14 +50,32 @@ const MobilePhotoProfile = () => {
   };
 
   return (
-    <section className="w-full py-5 border-b">
-      <label htmlFor="photo" role="button" className="text-center flex flex-col gap-y-3 w-fit mx-auto">
-        <div className="w-16 h-16 mx-auto">
-          <img src={avatar} alt="user default image" className="w-full h-full rounded-full object-cover" />
+    <section className="w-full border-b py-5">
+      <label
+        htmlFor="photo"
+        role="button"
+        className="mx-auto flex w-fit flex-col gap-y-3 text-center"
+      >
+        <div className="mx-auto h-16 w-16">
+          <img
+            src={avatar}
+            alt="user default image"
+            className="h-full w-full rounded-full object-cover"
+          />
         </div>
-        <h1 className="font-bold text-base capitalize text-[rgb(0,_170,_91)]">ubah foto profil</h1>
-        {errorMessage && <p className="text-red-500 text-xs font-bold">{errorMessage}</p>}
-        <input type="file" name="photo" id="photo" className="hidden" onChange={handleChange} />
+        <h1 className="text-base font-bold capitalize text-[rgb(0,_170,_91)]">
+          ubah foto profil
+        </h1>
+        {errorMessage && (
+          <p className="text-xs font-bold text-red-500">{errorMessage}</p>
+        )}
+        <input
+          type="file"
+          name="photo"
+          id="photo"
+          className="hidden"
+          onChange={handleChange}
+        />
       </label>
     </section>
   );

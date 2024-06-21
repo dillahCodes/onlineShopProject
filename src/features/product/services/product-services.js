@@ -2,8 +2,8 @@ import instance_axios from "../../../utils/axios/axios-instace-and-interceptors"
 
 const productServices = {
   getProductById: (productId) => instance_axios.get(`product/${productId}`),
-  addProduct: (productData, ownerId) =>
-    instance_axios.post(`products/owner/${ownerId}`, productData),
+  addProduct: (productData, ownerId, config) =>
+    instance_axios.post(`products/owner/${ownerId}`, productData, config),
   getAllProducts: () => instance_axios.get("products"),
   getAllProductsWithLimit: (limit) =>
     instance_axios.get(`products?limit=${limit}`),
